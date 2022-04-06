@@ -38,6 +38,7 @@ export function mutationFutureSymbols (state, data) {
     .map(item => {
       if (parseFloat(item.lastPrice)) {
         return {
+          logo: item.logo,
           symbol: item.symbol.replace('1000', ''),
           lastPrice: parseFloat(item.lastPrice),
           priceChangePercent: parseFloat(item.priceChangePercent),
