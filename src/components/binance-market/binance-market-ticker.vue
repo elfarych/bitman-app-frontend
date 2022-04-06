@@ -2,16 +2,15 @@
   <div class="" style="margin-top: 5px">
     <q-item
       clickable
-      class="q-pa-none full-width binance-orders-ticker binance-orders-ticker-card rounded-borders"
+      class="q-pa-none full-width binance-orders-ticker binance-orders-ticker-card rounded-borders overflow-hidden"
       :to="{ name: 'market-ticker-detail', params: { symbol: slicedSymbol } }"
-      :style="`min-height: ${$mobile ? '100px' : '70px'}`"
     >
 
       <div class="row full-width items-center">
         <!--    Name & -->
-        <div class="ticker-token-name col-sm-3 col-6 q-pl-sm">
+        <div class="ticker-token-name col-md-3 col-6 q-pl-sm">
           <div class="flex items-center">
-            <div class="cursor-pointer text-white text-h6 f-w-800">
+            <div class="cursor-pointer text-white text-subtitle1 f-w-800">
               {{ slicedSymbol }}
             </div>
           </div>
@@ -28,7 +27,7 @@
         </div>
 
         <!--        Chart-->
-        <div class="col-sm-4 col-6" v-if="$mobile">
+        <div class="col-md-4 col-6" v-if="$mobile">
           <binance-market-ticker-chart :symbol="slicedSymbol" :chart-key="chartKey" :change="changePercentValue" />
         </div>
 
@@ -48,13 +47,13 @@
         </div>
 
         <!--        Volume-->
-        <div v-if="!$mobile" class="f-w-800 col-sm-2 col-3 binance-orders-ticker-volume" style="line-height: 1.2">
+        <div v-if="!$mobile" class="f-w-800 col-md-2 col-3 binance-orders-ticker-volume" style="line-height: 1.2">
           <small class="block f-w-400 small-text">Объем 24H</small>
           <span class="text-uppercase text-subtitle1 f-w-800">{{ ticker.quoteVolume | tickerVolumeFormatter }}</span>
         </div>
 
         <!--        Chart-->
-        <div class="col-sm-5 col-6" v-if="!$mobile">
+        <div class="col-md-5 col-6 text-right" v-if="!$mobile">
           <binance-market-ticker-chart :symbol="slicedSymbol" :chart-key="chartKey" :change="changePercentValue"/>
         </div>
 
@@ -130,7 +129,7 @@ export default {
 <style lang="sass">
 .binance-orders-ticker-card
   background: $dark
-  padding: 5px
+  padding: 5px 0 5px 5px
 
 @media screen and (max-width: 700px)
   .binance-orders-ticker-volume, .binance-orders-ticker-min

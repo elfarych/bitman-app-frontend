@@ -2,7 +2,15 @@ export function mutationSymbols (state, data) {
   const formattedData = data
     .filter(item => {
       const symbol = item.symbol.replace('USDT', '')
-      return !symbol.endsWith('DOWN') && !symbol.endsWith('UP')
+      return !symbol.endsWith('DOWN') &&
+        !symbol.endsWith('UP') &&
+        !symbol.includes('BTCDOM') &&
+        symbol !== 'BUSD' &&
+        symbol !== 'USDC' &&
+        symbol !== 'USDP' &&
+        symbol !== 'UST' &&
+        symbol !== 'TUSD' &&
+        symbol !== 'SUSD'
     })
     .map(item => {
       if (parseFloat(item.lastPrice)) {
@@ -24,21 +32,26 @@ export function mutationSymbols (state, data) {
 }
 
 export function mutationFutureSymbols (state, data) {
-  const formattedData = data.map(item => {
-    if (parseFloat(item.lastPrice)) {
-      return {
-        symbol: item.symbol.replace('1000', ''),
-        lastPrice: parseFloat(item.lastPrice),
-        priceChange: parseFloat(item.priceChange),
-        priceChangePercent: parseFloat(item.priceChangePercent),
-        volume: parseFloat(item.volume),
-        quoteVolume: parseFloat(item.quoteVolume),
-        lowPrice: parseFloat(item.lowPrice),
-        highPrice: parseFloat(item.highPrice)
+  const formattedData = data
+    .filter(item => {
+      const symbol = item.symbol.replace('USDT', '')
+      return !symbol.includes('BTCDOM')
+    })
+    .map(item => {
+      if (parseFloat(item.lastPrice)) {
+        return {
+          symbol: item.symbol.replace('1000', ''),
+          lastPrice: parseFloat(item.lastPrice),
+          priceChange: parseFloat(item.priceChange),
+          priceChangePercent: parseFloat(item.priceChangePercent),
+          volume: parseFloat(item.volume),
+          quoteVolume: parseFloat(item.quoteVolume),
+          lowPrice: parseFloat(item.lowPrice),
+          highPrice: parseFloat(item.highPrice)
+        }
       }
-    }
-    return null
-  })
+      return null
+    })
 
   state.futureSymbols = formattedData.filter(item => !!item).sort((a, b) => b.quoteVolume - a.quoteVolume)
 }

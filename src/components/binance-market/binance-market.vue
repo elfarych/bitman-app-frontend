@@ -128,13 +128,13 @@ export default {
   },
   computed: {
     ...mapState('binanceMarket', ['symbols', 'futureSymbols']),
-    ...mapState('wishlist', ['wishlist']),
+    ...mapState('wishlist', { wishlistItems: 'wishlist' }),
     filteredTickers () {
       if (this.futures || this.market === 'Futures') {
         return this.futureSymbols.filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()))
       }
       if (this.market === 'Wishlist') {
-        return this.symbols.filter(item => this.wishlist.includes(item.symbol.replace('USDT', '')))
+        return this.symbols.filter(item => this.wishlistItems.includes(item.symbol.replace('USDT', '')))
       }
       return this.symbols.filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()))
     },

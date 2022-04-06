@@ -12,7 +12,7 @@
     <q-tab name="futures" label="Futures" class="rounded-borders"/>
   </q-tabs>
 
-  <q-tab-panels  v-model="tab" animated class="text-white bg-transparent rounded-borders" swipeable>
+  <q-tab-panels  v-model="tab" animated class="text-white bg-transparent rounded-borders">
     <q-tab-panel name="spot" class="q-pa-none">
       <widget-liders :up="up" tabKey="spot"/>
     </q-tab-panel>

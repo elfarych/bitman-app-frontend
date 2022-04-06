@@ -24,12 +24,12 @@
       <div class="row q-col-gutter-sm">
 
         <!--      Chart-->
-        <div class="col-sm-8 col-md-8 col-12 ticker-detail-chart">
+        <div class="col-sm-7 col-md-8 col-12 ticker-detail-chart">
           <ticker-detail-chart class="q-pl-sm"/>
         </div>
 
         <!--      Orders-->
-        <div class="col-sm-4 col-md-4 col-12 full-height">
+        <div class="col-sm-5 col-md-4 col-12 full-height">
           <ticker-detail-orders/>
         </div>
       </div>

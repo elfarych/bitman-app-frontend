@@ -18,7 +18,7 @@ export default {
           this.mutationAddVolatilityTicker(parsedData)
         }
       } catch (e) {
-        this.startStream()
+        this.startVolatilityStream()
         errorHandler(e)
       }
     },

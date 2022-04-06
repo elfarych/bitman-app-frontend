@@ -1,6 +1,6 @@
 <template>
-<div class="binance-market-ticker-chart relative-position" :id="`ticker-chart-${symbol}${chartKey}`">
-  <small class="absolute-top-right">{{ days }} дн.</small>
+<div class="binance-market-ticker-chart relative-position" :id="`ticker-chart-${symbol}${chartKey}`" @click="showChartPopup($event)">
+  <small class="absolute-top-right q-mr-xs">{{ days }} дн.</small>
   <div
     class="binance-market-ticker-chart-overlay"
     @click="showChartPopup($event)"
@@ -9,6 +9,9 @@
       Быстрый просмотр
     </q-tooltip>
   </div>
+  <q-tooltip v-if="!$mobile">
+    Быстрый просмотр
+  </q-tooltip>
 </div>
 </template>
 
@@ -49,7 +52,7 @@ export default {
         return await axios.get(`${config.binanceAPIURI}/api/v3/klines`, {
           params: {
             symbol: `${vm.symbol}USDT`,
-            limit: 90,
+            limit: 100,
             interval: '1d'
           }
         }).then(res => {
@@ -72,8 +75,8 @@ export default {
     const vm = this
     const element = document.getElementById(`ticker-chart-${this.symbol}${this.chartKey}`)
     const chart = createChart(element, {
-      width: element.offsetWidth,
-      height: vm.$mobile ? 100 : 70,
+      width: element.offsetWidth < 590 ? element.offsetWidth : 590,
+      height: vm.$mobile ? 70 : 70,
       layout: {
         backgroundColor: 'transparent',
         textColor: 'rgba(255, 255, 255, 0.9)'
@@ -109,17 +112,24 @@ export default {
     })
     const candles = await this.loadCandles()
     candleSeries.setData(candles)
-    this.days = candles.length
+    this.days = candles ? candles.length : 0
   }
 }
 </script>
 
 <style lang="sass">
+.binance-market-ticker-chart
+  height: 65px
+
+.tv-lightweight-charts
+  position: absolute
+  right: -3px
+
 .binance-market-ticker-chart-overlay
   position: absolute
   top: 0
   left: 0
   right: 0
   bottom: 0
-  z-index: 999
+  z-index: -1
 </style>
