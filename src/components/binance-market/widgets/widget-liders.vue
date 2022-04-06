@@ -1,0 +1,45 @@
+<template>
+<div class="widget-liders">
+    <binance-market-ticker
+      v-for="ticker in sortedSymbols"
+      :key="ticker.symbol"
+      :ticker="ticker"
+      :chart-key="futures.toString()"
+    />
+</div>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+import BinanceMarketTicker from 'components/binance-market/binance-market-ticker'
+
+export default {
+  name: 'widget-liders',
+  components: { BinanceMarketTicker },
+  props: {
+    up: {
+      type: Boolean,
+      default: true
+    },
+    futures: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    ...mapState('binanceMarket', ['symbols', 'futureSymbols']),
+    sortedSymbols () {
+      const sortedSymbols = this.futures ? [...this.futureSymbols] : [...this.symbols]
+
+      if (this.up) {
+        return sortedSymbols.sort((a, b) => b.priceChangePercent - a.priceChangePercent).slice(0, 15)
+      }
+      return sortedSymbols.sort((a, b) => a.priceChangePercent - b.priceChangePercent).slice(0, 15)
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

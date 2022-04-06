@@ -1,0 +1,70 @@
+.ticker-ticker
+  font-size: 10px
+  display: flex
+  align-items: center
+
+.ticker-token-name
+  font-size: 14px
+  font-weight: 900
+
+.ticker-token-price
+  display: flex
+  align-items: center
+
+.ticker-change-value
+  font-size: 20px
+  font-weight: 900
+  display: flex
+  align-items: center
+
+  span
+    font-size: 11px
+    font-weight: 300
+    color: white
+
+.ticker-change-value-24
+  font-size: 16px
+  font-weight: 700
+  display: flex
+  align-items: center
+
+  span
+    font-size: 11px
+    font-weight: 300
+    color: white
+
+.ticker-change-volume-value
+  font-size: 12px
+  font-weight: 500
+
+  span
+    font-size: 11px
+    font-weight: 300
+    color: white
+
+.ticker-market-name
+  font-size: 12px
+  margin-bottom: 5px
+
+
+.new-ticker
+  //animation-name: new-ticker
+  //animation-duration: 5s
+  //animation-fill-mode: forwards
+  box-shadow: 2px 2px 15px 0 rgba(255,255,255,.5)
+
+@keyframes new-ticker
+  0%
+    box-shadow: 2px 2px 15px 0 rgba(255,255,255,.5)
+
+  100%
+    box-shadow: 2px 2px 15px 0 rgba(255,255,255,0)
+
+
+@media screen and (max-width: 1399px)
+  .ticker-token-name
+    font-size: 11px
+
+@media screen and (max-width: 992px)
+  .ticker-token-name
+    font-size: 16px
