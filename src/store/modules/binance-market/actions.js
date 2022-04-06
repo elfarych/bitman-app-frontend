@@ -3,10 +3,36 @@ import errorHandler from 'src/utils/error-handler'
 import config from 'src/config'
 
 export function init ({ dispatch }) {
-  dispatch('loadSymbols')
+  dispatch('startBinanceSpotMarketStream')
+  dispatch('startBinanceFuturesMarketStream')
+  // dispatch('loadSymbols')
   setTimeout(() => {
-    dispatch('loadFutureSymbols')
+    // dispatch('loadFutureSymbols')
   }, 3000)
+}
+
+export function startBinanceSpotMarketStream ({ commit, dispatch }) {
+  try {
+    const stream = new EventSource(`${config.nodeServerURI}/market/binance-spot-stream`)
+    stream.onmessage = (event) => {
+      commit('mutationSymbols', JSON.parse(event.data).filter(item => item.symbol.endsWith('USDT') && !item.symbol.includes('DOWN')))
+    }
+  } catch (e) {
+    errorHandler(e)
+    dispatch('startBinanceSpotMarketStream')
+  }
+}
+
+export function startBinanceFuturesMarketStream ({ commit, dispatch }) {
+  try {
+    const stream = new EventSource(`${config.nodeServerURI}/market/binance-futures-stream`)
+    stream.onmessage = (event) => {
+      commit('mutationFutureSymbols', JSON.parse(event.data).filter(item => item.symbol.endsWith('USDT')))
+    }
+  } catch (e) {
+    errorHandler(e)
+    dispatch('startBinanceFuturesMarketStream')
+  }
 }
 
 export async function loadSymbols ({ commit, dispatch, state }) {

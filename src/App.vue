@@ -39,10 +39,6 @@ export default {
     setTimeout(() => {
       this.startVolatilityStream() // From volatilityTickerMixin
     }, 2000)
-
-    setInterval(() => {
-      this.binanceMarketInit()
-    }, 5000)
   },
   beforeCreate () {
     this.$q.dark.set(true)

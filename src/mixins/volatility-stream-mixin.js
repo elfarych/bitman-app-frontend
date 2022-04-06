@@ -8,10 +8,8 @@ export default {
   },
   methods: {
     startVolatilityStream () {
-      let streamUrl = ''
-      streamUrl = 'binance-tickers-stream'
       try {
-        stream = new EventSource(`${config.nodeServerURI}/market/${streamUrl}`)
+        stream = new EventSource(`${config.nodeServerURI}/volatility/binance-volatility-stream`)
         stream.onmessage = (event) => {
           const parsedData = JSON.parse(event.data)
           this.createNotify(parsedData).then(() => {})

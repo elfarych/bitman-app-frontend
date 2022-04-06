@@ -10,12 +10,25 @@
         <!--    Name & -->
         <div class="ticker-token-name col-md-3 col-6 q-pl-sm">
           <div class="flex items-center">
-            <div class="cursor-pointer text-white text-subtitle1 f-w-800">
+            <q-avatar :size="$mobile ? '20px' : '30px'" class="bg-transparent" square>
+              <q-img
+                v-if="ticker.logo"
+                :src="ticker.logo"
+                contain
+                class="rounded-borders"
+                img-class="white-shadow"
+              >
+                <template v-slot:loading>
+                  <q-skeleton class="fit"/>
+                </template>
+              </q-img>
+            </q-avatar>
+            <div class="cursor-pointer text-white text-subtitle1 f-w-800 q-ml-sm" style="line-height: 0">
               {{ slicedSymbol }}
             </div>
           </div>
 
-          <div>${{ ticker.lastPrice | tickerPriceFormatter }}</div>
+          <div :class="priceClass" class="q-mt-sm">${{ ticker.lastPrice | tickerPriceFormatter }}</div>
 
           <div v-if="$mobile">
             <div :class="changePercentValue > 0 ? 'text-positive' : 'text-negative'" class="f-w-800"
@@ -49,7 +62,7 @@
         <!--        Volume-->
         <div v-if="!$mobile" class="f-w-800 col-md-2 col-3 binance-orders-ticker-volume" style="line-height: 1.2">
           <small class="block f-w-400 small-text">Объем 24H</small>
-          <span class="text-uppercase text-subtitle1 f-w-800">{{ ticker.quoteVolume | tickerVolumeFormatter }}</span>
+          <span class="text-uppercase text-subtitle1 f-w-800">{{ ticker.volume | tickerVolumeFormatter }}</span>
         </div>
 
         <!--        Chart-->
@@ -98,7 +111,19 @@ export default {
   data () {
     return {
       bids: [],
-      asks: []
+      asks: [],
+      price: this.ticker.lastPrice,
+      priceClass: 'text-white'
+    }
+  },
+  watch: {
+    ticker () {
+      if (this.price < this.ticker.lastPrice) {
+        this.priceClass = 'text-positive'
+      } else if (this.price > this.ticker.lastPrice) {
+        this.priceClass = 'text-negative'
+      }
+      this.price = this.ticker.lastPrice
     }
   }
 }

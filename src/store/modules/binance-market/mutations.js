@@ -15,14 +15,12 @@ export function mutationSymbols (state, data) {
     .map(item => {
       if (parseFloat(item.lastPrice)) {
         return {
+          logo: item.logo,
           symbol: item.symbol,
           lastPrice: parseFloat(item.lastPrice),
           priceChange: parseFloat(item.priceChange),
           priceChangePercent: parseFloat(item.priceChangePercent),
-          volume: parseFloat(item.volume),
-          quoteVolume: parseFloat(item.quoteVolume),
-          lowPrice: parseFloat(item.lowPrice),
-          highPrice: parseFloat(item.highPrice)
+          volume: parseFloat(item.volume)
         }
       }
       return null
@@ -42,18 +40,14 @@ export function mutationFutureSymbols (state, data) {
         return {
           symbol: item.symbol.replace('1000', ''),
           lastPrice: parseFloat(item.lastPrice),
-          priceChange: parseFloat(item.priceChange),
           priceChangePercent: parseFloat(item.priceChangePercent),
-          volume: parseFloat(item.volume),
-          quoteVolume: parseFloat(item.quoteVolume),
-          lowPrice: parseFloat(item.lowPrice),
-          highPrice: parseFloat(item.highPrice)
+          volume: parseFloat(item.volume)
         }
       }
       return null
     })
 
-  state.futureSymbols = formattedData.filter(item => !!item).sort((a, b) => b.quoteVolume - a.quoteVolume)
+  state.futureSymbols = formattedData.filter(item => !!item).sort((a, b) => b.volume - a.volume)
 }
 
 export function mutationHoverSymbol (state, data) {

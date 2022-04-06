@@ -62,17 +62,7 @@ export async function loadTickerInfo ({ commit, dispatch }) {
       })
       .then(res => {
         commit('mutationTickerInfo', res.data)
-        dispatch('loadCapitalization', res.data.name?.toLowerCase())
       })
-  } catch (e) {
-    errorHandler(e)
-  }
-}
-
-export async function loadCapitalization ({ commit }, tokenName) {
-  try {
-    await axios.get(`api.coincap.io/v2/assets/${tokenName}`).then(res => {
-    })
   } catch (e) {
     errorHandler(e)
   }

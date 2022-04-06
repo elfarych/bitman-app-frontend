@@ -1,111 +1,120 @@
 <template>
-<div class="binance-orders">
-  <div class="row items-center">
-    <div class="col-6 col-sm-4 q-pb-sm">
-      <base-page-title screener-name="Рынок" screener-link="https://accounts.binance.com/ru/register?ref=368026154" screener-text="" :real-time-text="false"/>
+  <div class="binance-orders">
+    <div class="row items-center">
+      <div class="col-6 col-sm-4 q-pb-sm">
+        <base-page-title screener-name="Рынок" screener-link="https://accounts.binance.com/ru/register?ref=368026154"
+                         screener-text="" :real-time-text="false"/>
+      </div>
+      <div class="col-sm-4 col-6 q-pb-sm binance-market-switcher">
+        <q-btn
+          label="Spot"
+          dense flat
+          :color="market === 'Spot' ? 'primary' : ''"
+          class="f-w-800 transition-1"
+          @click="market = 'Spot'"
+        />
+
+        <q-btn
+          label="Futures"
+          :color="market === 'Futures' ? 'primary' : ''"
+          class="f-w-800 q-ml-sm transition-1"
+          dense flat
+          @click="market = 'Futures'"
+        />
+
+        <q-btn
+
+          :color="market === 'Wishlist' ? 'primary' : ''"
+          class="q-ml-sm transition-1"
+          dense flat
+          @click="market = 'Wishlist'"
+        >
+          <q-icon name="star" size="15px"/>
+        </q-btn>
+      </div>
+      <div class="col-12 col-sm-4 q-pb-sm">
+        <q-input
+          v-model="searchText"
+          outlined dense clearable
+          @clear="searchText = ''"
+        >
+          <template v-slot:prepend>
+            <q-icon name="search"/>
+          </template>
+        </q-input>
+      </div>
     </div>
-    <div class="col-sm-4 col-6 q-pb-sm binance-market-switcher">
-      <q-btn
-        label="Spot"
-        dense flat
-        :color="market === 'Spot' ? 'primary' : ''"
-        class="f-w-800 transition-1"
-        @click="market = 'Spot'"
-      />
 
-      <q-btn
-        label="Futures"
-        :color="market === 'Futures' ? 'primary' : ''"
-        class="f-w-800 q-ml-sm transition-1"
-        dense flat
-        @click="market = 'Futures'"
-      />
+    <div class="flex q-mt-sm">
+      <div class="relative-position flex no-wrap items-center cursor-pointer">
+        <q-btn
+          v-if="sortField"
+          icon="filter_list_off"
+          flat dense no-caps
+          size="sm"
+          class="q-mr-sm"
+          color="secondary"
+          @click="sortField = ''"
+        />
+        <q-btn
+          label="Токен"
+          :icon-right="sortField === 'symbol' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
+          size="sm"
+          :color="sortField === 'symbol' ? 'primary' : ''"
+          dense flat no-caps
+          @click="setSort('symbol')"
+        />
+      </div>
 
-      <q-btn
-
-        :color="market === 'Wishlist' ? 'primary' : ''"
-        class="q-ml-sm transition-1"
-        dense flat
-        @click="market = 'Wishlist'"
-      ><q-icon name="star" size="15px"/></q-btn>
+      <!--    <div class="relative-position col-sm-2 col-3 flex no-wrap items-center cursor-pointer">-->
+      <!--      <q-btn-->
+      <!--        label="Цена"-->
+      <!--        :icon-right="sortField === 'price' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"-->
+      <!--        size="sm"-->
+      <!--        :color="sortField === 'price' ? 'primary' : ''"-->
+      <!--        dense flat no-caps-->
+      <!--        @click="setSort('price')"-->
+      <!--      />-->
+      <!--    </div>-->
+      <div class="relative-position q-ml-md flex no-wrap items-center cursor-pointer">
+        <q-btn
+          label="Изменение"
+          :icon-right="sortField === 'change' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
+          size="sm"
+          :color="sortField === 'change' ? 'primary' : ''"
+          dense flat no-caps
+          @click="setSort('change')"
+        />
+      </div>
     </div>
-    <div class="col-12 col-sm-4 q-pb-sm">
-      <q-input
-        v-model="searchText"
-        outlined dense clearable
-        @clear="searchText = ''"
+
+    <div v-if="symbols.length" class="orders-tickers">
+      <q-infinite-scroll
+        :offset="1000"
+        @load="onLoad"
+        ref="infiniteScroll"
       >
-        <template v-slot:prepend><q-icon name="search"/></template>
-      </q-input>
-    </div>
-  </div>
+        <binance-market-ticker
+          v-for="ticker in slicedData"
+          :key="ticker.symbol"
+          :ticker="ticker"
+        />
+      </q-infinite-scroll>
+      <div v-if="slicedData.length < sortedTickers.length" class="text-center q-mt-lg">
+        Загрузка...
+      </div>
 
-  <div class="flex q-mt-sm">
-    <div class="relative-position flex no-wrap items-center cursor-pointer">
+    </div>
+
+    <div v-else style="height: 500px" class="flex flex-center">
       <q-btn
-        v-if="sortField"
-        icon="filter_list_off"
-        flat dense no-caps
-        size="sm"
-        class="q-mr-sm"
-        color="secondary"
-        @click="sortField = ''"
-      />
-      <q-btn
-        label="Токен"
-        :icon-right="sortField === 'symbol' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
-        size="sm"
-        :color="sortField === 'symbol' ? 'primary' : ''"
-        dense flat no-caps
-        @click="setSort('symbol')"
+        size="lg"
+        loading
+        flat
       />
     </div>
 
-<!--    <div class="relative-position col-sm-2 col-3 flex no-wrap items-center cursor-pointer">-->
-<!--      <q-btn-->
-<!--        label="Цена"-->
-<!--        :icon-right="sortField === 'price' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"-->
-<!--        size="sm"-->
-<!--        :color="sortField === 'price' ? 'primary' : ''"-->
-<!--        dense flat no-caps-->
-<!--        @click="setSort('price')"-->
-<!--      />-->
-<!--    </div>-->
-    <div class="relative-position q-ml-md flex no-wrap items-center cursor-pointer">
-      <q-btn
-        label="Изменение"
-        :icon-right="sortField === 'change' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
-        size="sm"
-        :color="sortField === 'change' ? 'primary' : ''"
-        dense flat no-caps
-        @click="setSort('change')"
-      />
-    </div>
   </div>
-
-  <div v-if="symbols.length" class="orders-tickers">
-    <q-infinite-scroll
-      :offset="1000"
-      @load="onLoad"
-      ref="infiniteScroll"
-    >
-      <binance-market-ticker
-        v-for="ticker in slicedData"
-        :key="ticker.symbol"
-        :ticker="ticker"
-      />
-    </q-infinite-scroll>
-  </div>
-
-  <div v-else style="height: 500px" class="flex flex-center">
-    <q-btn
-      size="lg"
-      loading
-      flat
-    />
-  </div>
-
-</div>
 </template>
 
 <script>
@@ -213,6 +222,7 @@ export default {
 .binance-orders
   .q-field--dense .q-field__control, .q-field--dense .q-field__marginal
     height: 33px !important
+
 .up-sort-btn
   position: absolute
   bottom: -4px

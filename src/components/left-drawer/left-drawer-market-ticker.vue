@@ -11,7 +11,7 @@
       <div class="q-ml-xs f-w-800">{{ slicedSymbol }}</div>
     </div>
 
-    <div class="text-right col-3">
+    <div class="text-right col-3" :class="priceClass">
       {{ ticker.lastPrice | tickerPriceFormatter }}
     </div>
 
@@ -57,8 +57,24 @@ export default {
       return parseFloat(this.ticker.priceChangePercent)
     }
   },
+  data () {
+    return {
+      price: this.ticker.lastPrice,
+      priceClass: 'text-white'
+    }
+  },
   filters: {
     tickerPriceFormatter, tickerVolumeFormatter
+  },
+  watch: {
+    ticker () {
+      if (this.price < this.ticker.lastPrice) {
+        this.priceClass = 'text-positive'
+      } else if (this.price > this.ticker.lastPrice) {
+        this.priceClass = 'text-negative'
+      }
+      this.price = this.ticker.lastPrice
+    }
   }
 }
 </script>

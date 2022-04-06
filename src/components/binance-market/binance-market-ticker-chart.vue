@@ -2,6 +2,7 @@
 <div class="binance-market-ticker-chart relative-position" :id="`ticker-chart-${symbol}${chartKey}`" @click="showChartPopup($event)">
   <small class="absolute-top-right q-mr-xs">{{ days }} дн.</small>
   <div
+    v-if="$mobile"
     class="binance-market-ticker-chart-overlay"
     @click="showChartPopup($event)"
   >
@@ -131,5 +132,5 @@ export default {
   left: 0
   right: 0
   bottom: 0
-  z-index: -1
+  z-index: 999
 </style>
