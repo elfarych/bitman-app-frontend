@@ -20,7 +20,7 @@
     </div>
 
     <!--    Chart & Limit orders-->
-    <div class="q-mt-sm">
+    <div v-show="!ordersChartMode" class="q-mt-sm">
       <div class="row q-col-gutter-sm">
 
         <!--      Chart-->
@@ -35,6 +35,10 @@
       </div>
     </div>
 
+<!--    Orders chart-->
+    <div v-show="ordersChartMode">
+      <ticker-detail-orders-chart class="q-mt-sm"/>
+    </div>
     <!--    Trades Difference-->
 
     <div class="q-mt-sm">
@@ -106,10 +110,12 @@ import TickerDetailHodlers from 'components/binance-market/ticker-detail/ticker-
 import TickerDetailSocial from 'components/binance-market/ticker-detail/ticker-detail-social'
 import WishlistBtn from 'components/wishlist/wishlist-btn'
 import MobileChartPopupBtn from 'components/chart/mobile-chart-popup-btn'
+import TickerDetailOrdersChart from 'components/binance-market/ticker-detail/ticker-detail-orders-chart'
 
 export default {
   name: 'page-ticker-detail',
   components: {
+    TickerDetailOrdersChart,
     MobileChartPopupBtn,
     WishlistBtn,
     TickerDetailSocial,
@@ -134,6 +140,9 @@ export default {
     ...mapState('tickerDetail', ['tickerFuturesInfo']),
     symbol () {
       return this.$route.params.symbol
+    },
+    ordersChartMode () {
+      return this.$route.query.chartMode && this.$route.query.chartMode.toString() === 'orders'
     }
   },
   watch: {

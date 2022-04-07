@@ -74,15 +74,19 @@
       </div>
 
     </div>
+
+    <ticker-detail-chart-controls/>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import tickerVolumeFormatter from 'src/filters/ticker-volume-formatter'
+import TickerDetailChartControls from 'components/binance-market/ticker-detail/ticker-detail-chart-controls'
 
 export default {
   name: 'ticker-main-info',
+  components: { TickerDetailChartControls },
   filters: {
     tickerVolumeFormatter
   },
