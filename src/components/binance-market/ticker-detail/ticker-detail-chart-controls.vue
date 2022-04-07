@@ -3,6 +3,7 @@
   <div class="flex justify-between" style="padding-right: 13px">
     <div>
       <q-btn
+        v-if="!$mobile"
         :label="ordersChartMode ? 'График по умолчанию' : 'Заявки на графике'"
         color="secondary"
         flat dense no-caps

@@ -11,7 +11,7 @@
           :outline="interval !== '1h'"
           class="f-w-800"
           size="sm"
-          @click="interval = '1h'"
+          @click="setLiquidityInterval('1h')"
         />
         <q-btn
           label="4h"
@@ -20,7 +20,7 @@
           :outline="interval !== '4h'"
           class="f-w-800"
           size="sm"
-          @click="interval = '4h'"
+          @click="setLiquidityInterval('4h')"
         />
         <q-btn
           label="24h"
@@ -29,7 +29,7 @@
           :text-color="interval === '24h' ? 'dark' : ''"
           :outline="interval !== '24h'"
           class="f-w-800"
-          @click="interval = '24h'"
+          @click="setLiquidityInterval('24h')"
         />
       </q-btn-group>
     </div>
@@ -72,7 +72,11 @@ export default {
     tickerVolumeFormatter
   },
   methods: {
-    ...mapActions('info', ['loadLiquidity'])
+    ...mapActions('info', ['loadLiquidity']),
+    setLiquidityInterval (interval) {
+      this.interval = interval
+      this.loadLiquidity(interval)
+    }
   },
   data () {
     return {
@@ -85,9 +89,6 @@ export default {
     }, 1000)
   },
   watch: {
-    interval () {
-      this.loadLiquidity(this.interval)
-    },
 
     '$route.params.symbol' () {
       this.loadLiquidity(this.interval)

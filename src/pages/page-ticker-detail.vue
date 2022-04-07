@@ -10,13 +10,13 @@
     </portal>
 
     <div class="row q-col-gutter-sm">
-      <div class="col-12 col-md-8">
+      <div class="col-12" :class="$mobile ? 'col-md-7' : 'col-md-8'">
         <!--  Main info card-->
         <ticker-main-info/>
 
         <ticker-detail-chart-controls/>
       </div>
-      <div class="col-12 col-md-4">
+      <div class="col-12 " :class="$mobile ? 'col-md-5' : 'col-md-4'">
         <ticker-detail-trade-button/>
       </div>
     </div>
@@ -26,12 +26,12 @@
       <div class="row q-col-gutter-sm">
 
         <!--      Chart-->
-        <div class="col-sm-7 col-md-8 col-12 ticker-detail-chart">
+        <div class="col-sm-7 col-12 ticker-detail-chart" :class="$mobile ? 'col-md-7' : 'col-md-8'">
           <ticker-detail-chart class="q-pl-sm"/>
         </div>
 
         <!--      Orders-->
-        <div class="col-sm-5 col-md-4 col-12 full-height">
+        <div class="col-sm-5 col-md-4 col-12 full-height" :class="$mobile ? 'col-md-5' : 'col-md-4'">
           <ticker-detail-orders/>
         </div>
       </div>
@@ -46,22 +46,22 @@
     <div class="q-mt-sm">
       <div class="row q-col-gutter-sm">
         <!--    limit orders Difference-->
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6" :class="$mobile ? 'col-md-6' : 'col-md-3'">
           <ticker-detail-limit-orders-difference />
         </div>
 
         <!--    limit Futures orders Difference-->
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6" :class="$mobile ? 'col-md-6' : 'col-md-3'">
           <ticker-detail-limit-orders-difference futures/>
         </div>
 
         <!--    recent orders Difference-->
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6" :class="$mobile ? 'col-md-6' : 'col-md-3'">
           <ticker-detail-recent-orders-difference />
         </div>
 
         <!--    recent futures orders Difference-->
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6" :class="$mobile ? 'col-md-6' : 'col-md-3'">
           <ticker-detail-recent-orders-difference futures/>
         </div>
 
@@ -94,6 +94,19 @@
       </div>
     </div>
 
+    <div class="home-liders q-mt-lg q-px-sm">
+      <div class="row q-col-gutter-md">
+        <div class="col-12 col-md-6">
+          <h3 class="text-h5 f-w-800 text-center q-pt-xl">Лидеры роста</h3>
+          <widgets-big-liders-tabs :show-count="5"/>
+        </div>
+        <div class="col-12 col-md-6">
+          <h3 class="text-h5 f-w-800 text-center q-pt-xl">Лидеры падения</h3>
+          <widgets-big-liders-tabs :up="false" :show-count="5"/>
+        </div>
+      </div>
+    </div>
+
   </q-page>
 </template>
 
@@ -114,10 +127,12 @@ import WishlistBtn from 'components/wishlist/wishlist-btn'
 import MobileChartPopupBtn from 'components/chart/mobile-chart-popup-btn'
 import TickerDetailOrdersChart from 'components/binance-market/ticker-detail/ticker-detail-orders-chart'
 import TickerDetailChartControls from 'components/binance-market/ticker-detail/ticker-detail-chart-controls'
+import WidgetsBigLidersTabs from 'components/binance-market/widgets/widgets-big-liders-tabs'
 
 export default {
   name: 'page-ticker-detail',
   components: {
+    WidgetsBigLidersTabs,
     TickerDetailChartControls,
     TickerDetailOrdersChart,
     MobileChartPopupBtn,

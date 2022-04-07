@@ -1,8 +1,17 @@
 <template>
 <div class="binance-market-ticker-chart relative-position" :id="`ticker-chart-${symbol}${chartKey}`" @click="showChartPopup($event)">
-  <small class="absolute-top-right q-mr-xs">{{ days }} дн.</small>
+  <small class="absolute-top-right q-mr-xs" style="top: -5px">
+    <span v-if="startEndDifference" :class="startEndDifference > 0 ? 'text-positive' : 'text-negative'" class="f-w-800 q-mr-xs">
+      {{ startEndDifference > 0 ? '+' : '' }}{{ startEndDifference.toFixed(2) }}%
+    </span>
+    за {{ days }} дн.
+  </small>
+
+  <div class="absolute-bottom-right q-mr-xs" style="z-index: 1000; bottom: -5px">
+    <small>мин <span class="f-w-800">{{ periodMinValue }}</span></small>
+    <small class="q-ml-md">макс <span class="f-w-800">{{ periodMaxValue }}</span></small>
+  </div>
   <div
-    v-if="$mobile"
     class="binance-market-ticker-chart-overlay"
     @click="showChartPopup($event)"
   >
@@ -10,9 +19,6 @@
       Быстрый просмотр
     </q-tooltip>
   </div>
-  <q-tooltip v-if="!$mobile">
-    Быстрый просмотр
-  </q-tooltip>
 </div>
 </template>
 
@@ -22,6 +28,7 @@ import errorHandler from 'src/utils/error-handler'
 import axios from 'axios'
 import { createChart } from 'lightweight-charts'
 import { mapMutations } from 'vuex'
+import getDifferencePercent from 'src/helpers/difference-precent'
 
 export default {
   name: 'binance-market-ticker-chart',
@@ -30,9 +37,26 @@ export default {
     chartKey: String,
     change: Number
   },
+  computed: {
+    startEndDifference () {
+      if (!this.firstCandle && !this.lastCandle) return ''
+      return getDifferencePercent(this.firstCandle.open, this.lastCandle.close) || ''
+    },
+    periodMaxValue () {
+      return new Intl.NumberFormat('us').format(Math.max(...this.candleHighs))
+    },
+    periodMinValue () {
+      return new Intl.NumberFormat('us').format(Math.min(...this.candleMins))
+    }
+  },
   data () {
     return {
-      days: 0
+      days: 0,
+      firstCandle: null,
+      lastCandle: null,
+      candles: [],
+      candleHighs: [],
+      candleMins: []
     }
   },
   methods: {
@@ -58,15 +82,21 @@ export default {
           }
         }).then(res => {
           const candleData = []
-          res.data.forEach(item => {
+          res.data.forEach((item, index, arr) => {
             const candle = {
               time: item[0],
-              value: parseFloat(item[4])
+              value: parseFloat(item[4]),
+              open: parseFloat(item[1]),
+              high: parseFloat(item[2]),
+              low: parseFloat(item[3]),
+              close: parseFloat(item[4])
             }
-            // const candle = {
-            //   time: item[0], open: item[1], high: item[2], low: item[3], close: item[4]
-            // }
+
+            if (index === 0) vm.firstCandle = candle
+            else if (index === arr.length - 1) vm.lastCandle = candle
             candleData.push(candle)
+            vm.candleHighs.push(candle.high)
+            vm.candleMins.push(candle.low)
           })
           return candleData
         })
@@ -84,6 +114,10 @@ export default {
       layout: {
         backgroundColor: 'transparent',
         textColor: 'rgba(255, 255, 255, 0.9)'
+      },
+      timeScale: {
+        visible: false,
+        barSpacing: element.offsetWidth / 100
       },
       crosshair: {
         vertLine: {
@@ -103,9 +137,6 @@ export default {
       },
       rightPriceScale: {
         visible: false
-      },
-      timeScale: {
-        visible: false
       }
     })
     const candleSeries = chart.addAreaSeries({
@@ -124,9 +155,9 @@ export default {
     //   wickDownColor: 'rgba(255, 144, 0, 1)',
     //   wickUpColor: 'rgba(255, 144, 0, 1)'
     // })
-    const candles = await this.loadCandles()
-    candleSeries.setData(candles)
-    this.days = candles ? candles.length : 0
+    vm.candles = await this.loadCandles()
+    candleSeries.setData(vm.candles)
+    this.days = vm.candles ? vm.candles.length : 0
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-<div class="widgets-big-liders">
+<div :class="showCount > 14 ? 'widgets-big-liders' : ''" class="widgets-big-liders-tabs">
 
   <q-tabs
     v-model="tab"
@@ -14,11 +14,11 @@
 
   <q-tab-panels  v-model="tab" animated class="text-white bg-transparent rounded-borders">
     <q-tab-panel name="spot" class="q-pa-none">
-      <widget-liders :up="up" tabKey="spot"/>
+      <widget-liders :up="up" tabKey="spot" :show-count="showCount"/>
     </q-tab-panel>
 
     <q-tab-panel name="futures" class="q-pa-none">
-      <widget-liders futures :up="up" tabKey="futures"/>
+      <widget-liders futures :up="up" tabKey="futures" :show-count="showCount"/>
     </q-tab-panel>
 
   </q-tab-panels>
@@ -34,6 +34,10 @@ export default {
     up: {
       type: Boolean,
       default: true
+    },
+    showCount: {
+      type: Number,
+      default: 15
     }
   },
   data () {
@@ -48,6 +52,7 @@ export default {
 .widgets-big-liders
   min-height: 800px
 
+.widgets-big-liders-tabs
   .q-tab__label
-    font-weight: 800
+    font-weight: 900
 </style>

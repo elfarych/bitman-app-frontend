@@ -8,7 +8,7 @@
 
       <div class="row full-width items-center">
         <!--    Name & -->
-        <div class="ticker-token-name col-md-3 col-6 q-pl-sm">
+        <div class="ticker-token-name  col-6 q-pl-sm" :class="$mobile ? 'col-md-6' : 'col-md-3'">
           <div class="flex items-center">
             <q-avatar :size="$mobile ? '20px' : '30px'" class="bg-transparent" square>
               <q-img
@@ -40,7 +40,7 @@
         </div>
 
         <!--        Chart-->
-        <div class="col-md-4 col-6" v-if="$mobile">
+        <div class="col-md-6 col-6" v-if="$mobile">
           <binance-market-ticker-chart :symbol="slicedSymbol" :chart-key="chartKey" :change="changePercentValue" />
         </div>
 
