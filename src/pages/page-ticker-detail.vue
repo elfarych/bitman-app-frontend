@@ -13,6 +13,8 @@
       <div class="col-12 col-md-8">
         <!--  Main info card-->
         <ticker-main-info/>
+
+        <ticker-detail-chart-controls/>
       </div>
       <div class="col-12 col-md-4">
         <ticker-detail-trade-button/>
@@ -20,7 +22,7 @@
     </div>
 
     <!--    Chart & Limit orders-->
-    <div v-show="!ordersChartMode" class="q-mt-sm">
+    <div v-if="!ordersChartMode" class="q-mt-sm">
       <div class="row q-col-gutter-sm">
 
         <!--      Chart-->
@@ -36,7 +38,7 @@
     </div>
 
 <!--    Orders chart-->
-    <div v-show="ordersChartMode">
+    <div v-else>
       <ticker-detail-orders-chart class="q-mt-sm"/>
     </div>
     <!--    Trades Difference-->
@@ -111,10 +113,12 @@ import TickerDetailSocial from 'components/binance-market/ticker-detail/ticker-d
 import WishlistBtn from 'components/wishlist/wishlist-btn'
 import MobileChartPopupBtn from 'components/chart/mobile-chart-popup-btn'
 import TickerDetailOrdersChart from 'components/binance-market/ticker-detail/ticker-detail-orders-chart'
+import TickerDetailChartControls from 'components/binance-market/ticker-detail/ticker-detail-chart-controls'
 
 export default {
   name: 'page-ticker-detail',
   components: {
+    TickerDetailChartControls,
     TickerDetailOrdersChart,
     MobileChartPopupBtn,
     WishlistBtn,
@@ -142,7 +146,7 @@ export default {
       return this.$route.params.symbol
     },
     ordersChartMode () {
-      return this.$route.query.chartMode && this.$route.query.chartMode.toString() === 'orders'
+      return (this.$route.query.chartMode && this.$route.query.chartMode.toString() === 'orders' && !this.$mobile)
     }
   },
   watch: {

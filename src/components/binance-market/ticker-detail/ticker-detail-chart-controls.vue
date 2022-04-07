@@ -3,19 +3,11 @@
   <div class="flex justify-between" style="padding-right: 13px">
     <div>
       <q-btn
-        label="TradingView"
-        :color="ordersChartMode ? 'white' : 'primary'"
+        :label="ordersChartMode ? 'График по умолчанию' : 'Заявки на графике'"
+        color="secondary"
         flat dense no-caps
         class="f-w-600"
-        @click="changeChartMode('tradingView')"
-      />
-
-      <q-btn
-        label="Заявки"
-        :color="ordersChartMode ? 'primary' : 'white'"
-        flat dense no-caps
-        class="f-w-600 q-ml-sm"
-        @click="changeChartMode('orders')"
+        @click="changeChartMode"
       />
     </div>
       <div>
@@ -43,16 +35,14 @@ export default {
     }
   },
   methods: {
-    changeChartMode (mode) {
+    changeChartMode () {
       const vm = this
-      if (vm.$route.query.chartMode !== mode) {
-        this.$router.replace({
-          query: {
-            ...this.$route.query,
-            chartMode: mode
-          }
-        })
-      }
+      this.$router.replace({
+        query: {
+          ...this.$route.query,
+          chartMode: vm.ordersChartMode ? undefined : 'orders'
+        }
+      })
     },
     showChartPopup (event) {
       this.$router.replace({
@@ -69,7 +59,7 @@ export default {
 <style lang="sass">
 .ticker-detail-chart-controls
   position: relative
-  bottom: -7px
+  top: -25px
   left: 3px
 
 @media screen and (max-width: 700px)

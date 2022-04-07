@@ -5,5 +5,6 @@ export default {
   binanceAPIURI: 'https://api.binance.com',
   binanceTradeURI: 'https://www.binance.com/ru/trade',
   binanceFuturesTradeURI: 'https://www.binance.com/ru/futures',
+  binanceStreamURI: 'wss://stream.binance.com:9443/ws',
   bigDataURI: 'https://api.gatebigdata.com/v3/data'
 }

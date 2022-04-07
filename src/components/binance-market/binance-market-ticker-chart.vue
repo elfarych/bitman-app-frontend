@@ -63,6 +63,9 @@ export default {
               time: item[0],
               value: parseFloat(item[4])
             }
+            // const candle = {
+            //   time: item[0], open: item[1], high: item[2], low: item[3], close: item[4]
+            // }
             candleData.push(candle)
           })
           return candleData
@@ -111,6 +114,16 @@ export default {
       lineColor: vm.change > 0 ? '#16cb85' : '#f6465d',
       lineWidth: 1
     })
+
+    // Свечи
+    // const candleSeries = chart.addCandlestickSeries({
+    //   upColor: 'rgba(255, 144, 0, 1)',
+    //   downColor: '#000',
+    //   borderDownColor: 'rgba(255, 144, 0, 1)',
+    //   borderUpColor: 'rgba(255, 144, 0, 1)',
+    //   wickDownColor: 'rgba(255, 144, 0, 1)',
+    //   wickUpColor: 'rgba(255, 144, 0, 1)'
+    // })
     const candles = await this.loadCandles()
     candleSeries.setData(candles)
     this.days = candles ? candles.length : 0

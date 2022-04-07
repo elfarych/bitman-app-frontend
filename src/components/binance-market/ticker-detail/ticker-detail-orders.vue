@@ -43,7 +43,7 @@
 
           class="orders-asks flex justify-between relative-position"
         >
-          <div class="orders-bids-values" :style="getBidWidth(bid[1])"></div>
+          <div class="orders-bids-values" :style="getLineWidth(bid[1])"></div>
           <div class="order-asks-price">{{ bid[0] }}</div>
           <div class="order-asks-volume text-positive f-w-600 text-uppercase">{{ getUsdVolume(bid[1]) }}</div>
         </div>
@@ -65,7 +65,7 @@
           :key="index"
           class="orders-asks flex justify-between relative-position"
         >
-          <div class="orders-ask-values" :style="getAskWidth(ask[1])"></div>
+          <div class="orders-ask-values" :style="getLineWidth(ask[1])"></div>
           <div class="order-asks-price">{{ ask[0] }}</div>
           <div class="order-asks-volume text-negative f-w-600 text-uppercase">{{ getUsdVolume(ask[1]) }}</div>
         </div>
@@ -113,13 +113,6 @@ export default {
     formattedRange () {
       return new Intl.NumberFormat('ru').format(this.range)
     },
-    bidsMax () {
-      return Math.max(...this.bids.map(item => parseFloat(item[1])))
-    },
-
-    asksMax () {
-      return Math.max(...this.asks.map(item => parseFloat(item[1])))
-    },
     tickerPrice () {
       return parseFloat(this.ticker.c)
     },
@@ -151,11 +144,8 @@ export default {
     getUsdVolume (val) {
       return this.$numeral((val * this.tickerPrice)).format('(0.00a)').replace('(', '- ').replace(')', '')
     },
-    getBidWidth (val) {
-      return { width: (parseFloat(val) * 100 / this.bidsMax * 1.2).toFixed(3) + '%' }
-    },
-    getAskWidth (val) {
-      return { width: (parseFloat(val) * 100 / this.asksMax * 1.2).toFixed(3) + '%' }
+    getLineWidth (val) {
+      return { width: ((val * this.tickerPrice) * 100 / 1000000) + '%' }
     },
 
     reloadOrders () {

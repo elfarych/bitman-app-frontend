@@ -53,7 +53,7 @@ export default {
     '$route.name' (val, oldVal) {
       if (val === 'market-ticker-detail' && oldVal !== 'market-ticker-detail' && this.tab === 'menu') {
         this.tab = 'spot'
-      }
+      } else if (val === 'Binance-Market' && oldVal !== 'Binance-Market') this.tab = 'menu'
     }
   }
 }
