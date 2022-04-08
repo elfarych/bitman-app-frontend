@@ -1,5 +1,5 @@
 <template>
-  <div class="" style="margin-top: 5px">
+  <div class="">
     <q-item
       clickable
       class="q-pa-none full-width binance-orders-ticker binance-orders-ticker-card rounded-borders overflow-hidden"

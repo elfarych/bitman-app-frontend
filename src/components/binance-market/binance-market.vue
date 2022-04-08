@@ -5,6 +5,8 @@
         <base-page-title screener-name="Рынок" screener-link="https://accounts.binance.com/ru/register?ref=368026154"
                          screener-text="" :real-time-text="false"/>
       </div>
+
+<!--      Market switcher-->
       <div class="col-sm-4 col-6 q-pb-sm binance-market-switcher">
         <q-btn
           label="Spot"
@@ -32,6 +34,8 @@
           <q-icon name="star" size="15px"/>
         </q-btn>
       </div>
+
+<!--      Search input-->
       <div class="col-12 col-sm-4 q-pb-sm">
         <q-input
           v-model="searchText"
@@ -45,6 +49,7 @@
       </div>
     </div>
 
+<!--    Sort controls-->
     <div class="flex q-mt-sm">
       <div class="relative-position flex no-wrap items-center cursor-pointer">
         <q-btn
@@ -66,16 +71,6 @@
         />
       </div>
 
-      <!--    <div class="relative-position col-sm-2 col-3 flex no-wrap items-center cursor-pointer">-->
-      <!--      <q-btn-->
-      <!--        label="Цена"-->
-      <!--        :icon-right="sortField === 'price' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"-->
-      <!--        size="sm"-->
-      <!--        :color="sortField === 'price' ? 'primary' : ''"-->
-      <!--        dense flat no-caps-->
-      <!--        @click="setSort('price')"-->
-      <!--      />-->
-      <!--    </div>-->
       <div class="relative-position q-ml-md flex no-wrap items-center cursor-pointer">
         <q-btn
           label="Изменение"
@@ -88,17 +83,24 @@
       </div>
     </div>
 
+<!--    Market tickers-->
     <div v-if="symbols.length" class="orders-tickers">
       <q-infinite-scroll
         :offset="1000"
         @load="onLoad"
         ref="infiniteScroll"
       >
-        <binance-market-ticker
-          v-for="ticker in slicedData"
-          :key="ticker.symbol"
-          :ticker="ticker"
-        />
+        <div class="row q-col-gutter-sm">
+          <div
+            v-for="ticker in slicedData"
+            :key="ticker.symbol"
+            class="col-12 col-sm-6"
+          >
+            <binance-market-ticker :ticker="ticker"/>
+          </div>
+
+        </div>
+
       </q-infinite-scroll>
       <div v-if="slicedData.length < sortedTickers.length" class="text-center q-mt-lg">
         Загрузка...

@@ -94,19 +94,6 @@
       </div>
     </div>
 
-    <div class="home-liders q-mt-lg q-px-sm">
-      <div class="row q-col-gutter-md">
-        <div class="col-12 col-md-6">
-          <h3 class="text-h5 f-w-800 text-center q-pt-xl">Лидеры роста</h3>
-          <widgets-big-liders-tabs :show-count="5"/>
-        </div>
-        <div class="col-12 col-md-6">
-          <h3 class="text-h5 f-w-800 text-center q-pt-xl">Лидеры падения</h3>
-          <widgets-big-liders-tabs :up="false" :show-count="5"/>
-        </div>
-      </div>
-    </div>
-
   </q-page>
 </template>
 
@@ -127,12 +114,10 @@ import WishlistBtn from 'components/wishlist/wishlist-btn'
 import MobileChartPopupBtn from 'components/chart/mobile-chart-popup-btn'
 import TickerDetailOrdersChart from 'components/binance-market/ticker-detail/ticker-detail-orders-chart'
 import TickerDetailChartControls from 'components/binance-market/ticker-detail/ticker-detail-chart-controls'
-import WidgetsBigLidersTabs from 'components/binance-market/widgets/widgets-big-liders-tabs'
 
 export default {
   name: 'page-ticker-detail',
   components: {
-    WidgetsBigLidersTabs,
     TickerDetailChartControls,
     TickerDetailOrdersChart,
     MobileChartPopupBtn,

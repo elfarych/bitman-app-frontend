@@ -8,8 +8,8 @@
   </small>
 
   <div class="absolute-bottom-right q-mr-xs" style="z-index: 1000; bottom: -5px">
-    <small>мин <span class="f-w-800">{{ periodMinValue }}</span></small>
-    <small class="q-ml-md">макс <span class="f-w-800">{{ periodMaxValue }}</span></small>
+    <small class="q-ml-lg">мин <span class="f-w-800">{{ periodMinValue || '' }}</span></small>
+    <small class="q-ml-md">макс <span class="f-w-800">{{ periodMaxValue || '' }}</span></small>
   </div>
   <div
     class="binance-market-ticker-chart-overlay"
@@ -85,7 +85,7 @@ export default {
           res.data.forEach((item, index, arr) => {
             const candle = {
               time: item[0],
-              value: parseFloat(item[4]),
+              value: parseFloat(index === 0 ? item[1] : item[4]),
               open: parseFloat(item[1]),
               high: parseFloat(item[2]),
               low: parseFloat(item[3]),
@@ -103,61 +103,59 @@ export default {
       } catch (e) {
         errorHandler(e)
       }
+    },
+    async createChart () {
+      const vm = this
+      const element = document.getElementById(`ticker-chart-${this.symbol}${this.chartKey}`)
+      const chart = createChart(element, {
+        width: element.offsetWidth < 590 ? element.offsetWidth : 590,
+        height: vm.$mobile ? 70 : 70,
+        layout: {
+          backgroundColor: 'transparent',
+          textColor: 'rgba(255, 255, 255, 0.9)'
+        },
+        timeScale: {
+          visible: false,
+          barSpacing: element.offsetWidth / 100
+        },
+        crosshair: {
+          vertLine: {
+            visible: false
+          },
+          horzLine: {
+            visible: false
+          }
+        },
+        grid: {
+          vertLines: {
+            color: 'transparent'
+          },
+          horzLines: {
+            color: 'transparent'
+          }
+        },
+        rightPriceScale: {
+          visible: false
+        }
+      })
+      const candleSeries = chart.addAreaSeries({
+        topColor: vm.change > 0 ? '#16cb85' : '#f6465d',
+        bottomColor: '#1e222d',
+        lineColor: vm.change > 0 ? '#16cb85' : '#f6465d',
+        lineWidth: 1
+      })
+      vm.candles = await this.loadCandles()
+      candleSeries.setData(vm.candles)
+      this.days = vm.candles ? vm.candles.length : 0
     }
   },
   async mounted () {
-    const vm = this
-    const element = document.getElementById(`ticker-chart-${this.symbol}${this.chartKey}`)
-    const chart = createChart(element, {
-      width: element.offsetWidth < 590 ? element.offsetWidth : 590,
-      height: vm.$mobile ? 70 : 70,
-      layout: {
-        backgroundColor: 'transparent',
-        textColor: 'rgba(255, 255, 255, 0.9)'
-      },
-      timeScale: {
-        visible: false,
-        barSpacing: element.offsetWidth / 100
-      },
-      crosshair: {
-        vertLine: {
-          visible: false
-        },
-        horzLine: {
-          visible: false
-        }
-      },
-      grid: {
-        vertLines: {
-          color: 'transparent'
-        },
-        horzLines: {
-          color: 'transparent'
-        }
-      },
-      rightPriceScale: {
-        visible: false
-      }
-    })
-    const candleSeries = chart.addAreaSeries({
-      topColor: vm.change > 0 ? '#16cb85' : '#f6465d',
-      bottomColor: '#1e222d',
-      lineColor: vm.change > 0 ? '#16cb85' : '#f6465d',
-      lineWidth: 1
-    })
-
-    // Свечи
-    // const candleSeries = chart.addCandlestickSeries({
-    //   upColor: 'rgba(255, 144, 0, 1)',
-    //   downColor: '#000',
-    //   borderDownColor: 'rgba(255, 144, 0, 1)',
-    //   borderUpColor: 'rgba(255, 144, 0, 1)',
-    //   wickDownColor: 'rgba(255, 144, 0, 1)',
-    //   wickUpColor: 'rgba(255, 144, 0, 1)'
-    // })
-    vm.candles = await this.loadCandles()
-    candleSeries.setData(vm.candles)
-    this.days = vm.candles ? vm.candles.length : 0
+    await this.createChart()
+  },
+  watch: {
+    '$route' () {
+      this.createChart()
+    }
   }
 }
 </script>

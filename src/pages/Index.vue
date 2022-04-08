@@ -16,11 +16,11 @@
       <div class="row q-col-gutter-md">
         <div class="col-12 col-md-6">
           <h3 class="text-h5 f-w-800 text-center q-pt-xl">Лидеры роста</h3>
-          <widgets-big-liders-tabs />
+          <widgets-big-liders-tabs key="home"/>
         </div>
         <div class="col-12 col-md-6">
           <h3 class="text-h5 f-w-800 text-center q-pt-xl">Лидеры падения</h3>
-          <widgets-big-liders-tabs :up="false"/>
+          <widgets-big-liders-tabs :up="false" key="home"/>
         </div>
       </div>
     </div>

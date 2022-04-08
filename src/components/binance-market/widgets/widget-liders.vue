@@ -5,6 +5,7 @@
       :key="ticker.symbol"
       :ticker="ticker"
       :chart-key="futures.toString()"
+      class="q-mt-sm"
     />
 </div>
 </template>
