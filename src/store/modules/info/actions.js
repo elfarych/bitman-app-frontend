@@ -16,6 +16,7 @@ export async function loadVix ({ commit }) {
         const vix = array[array.length - 1][0]
 
         commit('mutationVix', vix)
+        commit('mutationVixWeekData', res.data.data)
       })
   } catch (e) {
     errorHandler(e)

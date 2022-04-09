@@ -1,5 +1,37 @@
 <template>
-  <div class="binance-orders">
+  <div class="binance-orders" id="binance-market-el">
+
+    <portal to="title">
+      <!--      Market switcher-->
+      <div class="flex items-center full-height justify-center">
+        <q-btn
+          label="Spot"
+          dense flat
+          :color="market === 'Spot' ? 'primary' : ''"
+          class="f-w-800 transition-1"
+          @click="market = 'Spot'"
+        />
+
+        <q-btn
+          label="Futures"
+          :color="market === 'Futures' ? 'primary' : ''"
+          class="f-w-800 q-ml-sm transition-1"
+          dense flat
+          @click="market = 'Futures'"
+        />
+
+        <q-btn
+
+          :color="market === 'Wishlist' ? 'primary' : ''"
+          class="q-ml-sm transition-1"
+          dense flat
+          @click="market = 'Wishlist'"
+        >
+          <q-icon name="star" size="15px"/>
+        </q-btn>
+      </div>
+    </portal>
+
     <div class="row items-center">
       <div class="col-6 col-sm-4 q-pb-sm">
         <base-page-title screener-name="Рынок" screener-link="https://accounts.binance.com/ru/register?ref=368026154"
@@ -85,23 +117,38 @@
 
 <!--    Market tickers-->
     <div v-if="symbols.length" class="orders-tickers">
-      <q-infinite-scroll
-        :offset="1000"
-        @load="onLoad"
-        ref="infiniteScroll"
-      >
-        <div class="row q-col-gutter-sm">
-          <div
-            v-for="ticker in slicedData"
-            :key="ticker.symbol"
-            class="col-12 col-sm-6"
-          >
-            <binance-market-ticker :ticker="ticker"/>
+
+        <div class="row q-col-gutter-sm relative-position">
+          <div class="col-12 col-sm-7">
+            <q-infinite-scroll
+              :offset="1000"
+              @load="onLoad"
+              ref="infiniteScroll"
+            >
+            <binance-market-ticker
+              v-for="ticker in slicedData"
+              :key="ticker.symbol"
+              :ticker="ticker"
+              class="q-mt-sm"
+            />
+            </q-infinite-scroll>
+          </div>
+
+<!--          <div-->
+<!--            v-for="ticker in slicedData"-->
+<!--            :key="ticker.symbol"-->
+<!--            class="col-12 col-sm-7"-->
+<!--          >-->
+<!--            <binance-market-ticker :ticker="ticker"/>-->
+<!--          </div>-->
+          <div class="col-12 col-sm-5 q-mt-sm">
+            <div class="market-right-panel rounded-borders">
+              <widget-week-vix-chart />
+            </div>
           </div>
 
         </div>
 
-      </q-infinite-scroll>
       <div v-if="slicedData.length < sortedTickers.length" class="text-center q-mt-lg">
         Загрузка...
       </div>
@@ -123,10 +170,11 @@
 import { mapState } from 'vuex'
 import BasePageTitle from 'components/base-page-title'
 import BinanceMarketTicker from 'components/binance-market/binance-market-ticker'
+import WidgetWeekVixChart from 'components/binance-market/widgets/widget-week-vix-chart'
 
 export default {
   name: 'binance-market',
-  components: { BinanceMarketTicker, BasePageTitle },
+  components: { WidgetWeekVixChart, BinanceMarketTicker, BasePageTitle },
   props: {
     wishlist: {
       type: Boolean,
@@ -216,6 +264,12 @@ export default {
       this.sortField = field
       this.sortUp = !this.sortUp
     }
+  },
+  watch: {
+    market () {
+      const element = document.getElementById('q-app')
+      element.scrollIntoView({ block: 'start', behavior: 'smooth' })
+    }
   }
 }
 </script>
@@ -234,6 +288,10 @@ export default {
   position: absolute
   top: -5px
   right: -20px
+
+.market-right-panel
+  background: $dark
+  padding: 10px 0
 
 @media screen and (max-width: 700px)
   .binance-market-switcher

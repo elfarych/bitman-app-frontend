@@ -5,6 +5,7 @@ export default function () {
     liquidity: {},
     openInterest: {},
     cashFlow: [],
-    hodlers: []
+    hodlers: [],
+    weekVixData: []
   }
 }

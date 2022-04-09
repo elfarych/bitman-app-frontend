@@ -3,7 +3,7 @@
   <div v-if="showChart" class="chart-popup-wrapper">
     <q-card>
       <q-toolbar class="q-px-sm">
-        <q-toolbar-title class="f-w-800 text-primary">
+        <q-toolbar-title class="f-w-800">
           {{ symbol }}
         </q-toolbar-title>
         <q-btn label="Закрыть" icon-right="close" @click="closeChartPopup" no-caps flat dense class="f-w-600 rounded-borders"/>

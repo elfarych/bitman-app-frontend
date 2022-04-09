@@ -164,9 +164,9 @@ export default {
 .binance-market-ticker-chart
   height: 65px
 
-.tv-lightweight-charts
-  position: absolute
-  right: -3px
+  .tv-lightweight-charts
+    position: absolute
+    right: -3px
 
 .binance-market-ticker-chart-overlay
   position: absolute
