@@ -7,8 +7,8 @@
     за {{ days }} дн.
   </small>
 
-  <div class="absolute-bottom-right q-mr-xs" style="z-index: 1000; bottom: -5px">
-    <small class="q-ml-lg">мин <span class="f-w-800">{{ periodMinValue || '' }}</span></small>
+  <div class="absolute-bottom-right q-mr-xs flex no-wrap text-right" style="z-index: 1000; bottom: -5px">
+    <small>мин <span class="f-w-800">{{ periodMinValue || '' }}</span></small>
     <small class="q-ml-md">макс <span class="f-w-800">{{ periodMaxValue || '' }}</span></small>
   </div>
   <div
@@ -43,10 +43,10 @@ export default {
       return getDifferencePercent(this.firstCandle.open, this.lastCandle.close) || ''
     },
     periodMaxValue () {
-      return new Intl.NumberFormat('us').format(Math.max(...this.candleHighs))
+      return new Intl.NumberFormat('us', { maximumFractionDigits: 15 }).format(Math.max(...this.candleHighs))
     },
     periodMinValue () {
-      return new Intl.NumberFormat('us').format(Math.min(...this.candleMins))
+      return new Intl.NumberFormat('us', { maximumFractionDigits: 15 }).format(Math.min(...this.candleMins))
     }
   },
   data () {

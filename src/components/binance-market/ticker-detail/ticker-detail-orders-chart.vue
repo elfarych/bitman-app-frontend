@@ -35,8 +35,8 @@
       <q-tooltip>Обновить заявки</q-tooltip>
     </q-btn>
   </div>
-  <div>
-    <div :id="chartElementId"></div>
+  <div class="transition-1" :style="chart ? `opacity: 1` : `opacity: 0`">
+    <div :id="chartElementId" ></div>
   </div>
 
 </div>
@@ -56,7 +56,10 @@ export default {
   computed: {
     ...mapState('tickerDetail', ['tickerAskOrders', 'tickerBidOrders', 'ticker', 'tickerFuturesBidOrders', 'tickerFuturesAskOrders']),
     tickerPrice () {
-      return parseFloat(this.ticker.c)
+      return parseFloat(this.ticker.c) || 0
+    },
+    fixedLen () {
+      return this.tickerPrice.toString().split('.')[1]?.length
     },
     asks () {
       const orders = this.market === 'spot' ? this.tickerAskOrders : this.tickerFuturesAskOrders
@@ -189,6 +192,9 @@ export default {
           tickMarkFormatter: (time) => {
             return vm.$dayjs(time).format(vm.timeFormat)
           }
+        },
+        localization: {
+          priceFormatter: function (price) { return parseFloat(price).toFixed(vm.fixedLen) }
         }
       })
       vm.candleSeries = vm.chart.addCandlestickSeries({
@@ -283,9 +289,11 @@ export default {
   },
 
   async mounted () {
-    await this.createChart()
-    await this.setChartCandlesData()
-    await this.createChartOrders()
+    setTimeout(async () => {
+      await this.createChart()
+      await this.setChartCandlesData()
+      await this.createChartOrders()
+    }, 1000)
   },
   watch: {
     tickerAskOrders () {
@@ -295,6 +303,12 @@ export default {
       this.createChartOrders()
     },
     async '$route.params.symbol' () {
+      await this.$router.replace({
+        query: {
+          ...this.$route.query,
+          chartMode: undefined
+        }
+      })
       await this.createChart()
       await this.setChartCandlesData()
     }

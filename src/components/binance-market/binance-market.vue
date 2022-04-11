@@ -142,9 +142,8 @@
 <!--            <binance-market-ticker :ticker="ticker"/>-->
 <!--          </div>-->
           <div class="col-12 col-sm-5 q-mt-sm">
-            <div class="market-right-panel rounded-borders">
-              <widget-week-vix-chart />
-            </div>
+            <binance-market-widgets-panel />
+
           </div>
 
         </div>
@@ -170,11 +169,11 @@
 import { mapState } from 'vuex'
 import BasePageTitle from 'components/base-page-title'
 import BinanceMarketTicker from 'components/binance-market/binance-market-ticker'
-import WidgetWeekVixChart from 'components/binance-market/widgets/widget-week-vix-chart'
+import BinanceMarketWidgetsPanel from 'components/binance-market/binance-market-widgets-panel'
 
 export default {
   name: 'binance-market',
-  components: { WidgetWeekVixChart, BinanceMarketTicker, BasePageTitle },
+  components: { BinanceMarketWidgetsPanel, BinanceMarketTicker, BasePageTitle },
   props: {
     wishlist: {
       type: Boolean,
@@ -193,7 +192,9 @@ export default {
         return this.futureSymbols.filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()))
       }
       if (this.market === 'Wishlist') {
-        return this.symbols.filter(item => this.wishlistItems.includes(item.symbol.replace('USDT', '')))
+        return this.symbols
+          .filter(item => this.wishlistItems.includes(item.symbol.replace('USDT', '')))
+          .filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()))
       }
       return this.symbols.filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()))
     },
@@ -288,10 +289,6 @@ export default {
   position: absolute
   top: -5px
   right: -20px
-
-.market-right-panel
-  background: $dark
-  padding: 10px 0
 
 @media screen and (max-width: 700px)
   .binance-market-switcher

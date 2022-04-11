@@ -1,23 +1,34 @@
 <template>
-<div class="widget-week-vix-chart">
- <div class="f-w-800 text-subtitle1 text-center">
-   Индекс страха и жадности
- </div>
-
-  <div class="q-mt-sm  f-w-800 flex justify-center">
-    <div class="flex  items-center">
-      <span class="block q-mr-xs" style="width: 10px; height: 10px; border-radius: 4px; background: #f3ba2e;"></span>
-      Bitcoin
+  <div
+    :key="fullscreen"
+    class="widget-week-vix-chart rounded-borders bg-dark blue-shadow q-pt-md relative-position q-pb-lg"
+    :style="fullscreen ? '' : 'height: 300px'"
+    :class="fullscreen ? 'widget-week-vix-chart-full-screen' : ''"
+  >
+    <q-btn
+      :icon-right="fullscreen ? 'fullscreen_exit' : 'fullscreen'"
+      flat dense no-caps
+      class="q-ma-md absolute-top-right"
+      @click="setScreen"
+    />
+    <div class="f-w-800 text-subtitle1 text-center q-pb-md">
+      Индекс страха и жадности
     </div>
 
-    <div class="flex  items-center q-ml-lg">
-    <span class="block q-mr-xs" style="width: 10px; height: 10px; border-radius: 4px; background: #2760f8;"></span>
-    Индекс страха
-  </div>
-  </div>
+    <div class="q-mt-sm  f-w-800 flex justify-center absolute-bottom-left q-pa-md">
+      <div class="flex  items-center">
+        <span class="block q-mr-xs" style="width: 10px; height: 10px; border-radius: 4px; background: #f3ba2e; margin-top: -1px"></span>
+        Bitcoin
+      </div>
 
-  <div id="vix-week-chart" style="height: 210px"></div>
-</div>
+      <div class="flex  items-center q-ml-lg">
+        <span class="block q-mr-xs" style="width: 10px; height: 10px; border-radius: 4px; background: #2760f8; margin-top: -1px"></span>
+        Индекс страха
+      </div>
+    </div>
+
+    <div id="vix-week-chart" class="fit transition-1" :style="`opacity: ${chart ? 1 : 0}`"></div>
+  </div>
 </template>
 
 <script>
@@ -29,20 +40,26 @@ export default {
   computed: {
     ...mapState('info', ['weekVixData'])
   },
+  data () {
+    return {
+      fullscreen: false,
+      chart: null
+    }
+  },
   methods: {
-    createChart () {
+    createChart (id = 'vix-week-chart') {
       const vm = this
-      const element = document.getElementById('vix-week-chart')
-      const chart = createChart(element, {
-        width: element.offsetWidth - 3,
-        height: 200,
+      const element = document.getElementById(id)
+      vm.chart = createChart(element, {
+        width: element.offsetWidth - 10,
+        height: element.offsetHeight - 55,
         layout: {
           backgroundColor: 'transparent',
           textColor: 'rgba(255, 255, 255, 0.9)'
         },
         timeScale: {
           visible: true,
-          barSpacing: element.offsetWidth / 100
+          barSpacing: element.offsetWidth / (vm.weekVixData?.length + 4)
         },
         crosshair: {
           vertLine: {
@@ -61,21 +78,23 @@ export default {
           }
         },
         rightPriceScale: {
-          visible: true
+          visible: true,
+          borderVisible: false
         },
         leftPriceScale: {
-          visible: true
+          visible: true,
+          borderVisible: false
         }
       })
 
-      const vixSeries = chart.addAreaSeries({
+      const vixSeries = vm.chart.addAreaSeries({
         topColor: '#2760f8',
         bottomColor: '#1e222d',
         lineColor: '#2760f8',
         lineWidth: 2
       })
 
-      const btcSeries = chart.addLineSeries({
+      const btcSeries = vm.chart.addLineSeries({
         priceScaleId: 'left',
         color: '#f3ba2e',
         lineWidth: 1
@@ -94,19 +113,36 @@ export default {
           value: item.vixValue
         }
       }))
+    },
+    setScreen () {
+      this.chart = null
+      this.fullscreen = !this.fullscreen
     }
   },
   mounted () {
-    this.createChart()
+    setTimeout(() => {
+      if (!this.chart) this.createChart()
+    }, 1000)
   },
   watch: {
     weekVixData () {
-      this.createChart()
+      if (!this.chart) this.createChart()
+    },
+    fullscreen () {
+      setTimeout(() => {
+        if (!this.chart) this.createChart()
+      }, 1000)
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style lang="sass">
+.widget-week-vix-chart-full-screen
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 9999
 </style>
