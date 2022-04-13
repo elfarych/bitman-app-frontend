@@ -175,4 +175,5 @@ export default {
   right: 0
   bottom: 0
   z-index: 999
+
 </style>

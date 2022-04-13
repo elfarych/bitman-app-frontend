@@ -23,32 +23,29 @@
                 </template>
               </q-img>
             </q-avatar>
-            <div class="cursor-pointer text-white text-subtitle1 f-w-800 q-ml-sm" style="line-height: 0">
+            <div class="cursor-pointer text-white text-subtitle1 f-w-800 q-ml-sm text-white-shadow-light" style="line-height: 0">
               {{ slicedSymbol }}
             </div>
           </div>
 
-          <div :class="priceClass" class="q-mt-sm">${{ ticker.lastPrice | tickerPriceFormatter }}</div>
+          <div :class="priceClass" class="q-mt-sm fontsize-13">${{ ticker.lastPrice | tickerPriceFormatter }}</div>
 
-          <div v-if="$mobile">
+          <div v-if="$mobile" class="relative-position">
             <div :class="changePercentValue > 0 ? 'text-positive' : 'text-negative'" class="f-w-800"
                  style="line-height: 1.2 !important">
               <span>{{ changePercentValue > 0 ? '+' : '' }}</span>{{ changePercent }}%
+              <span class="text-white absolute-bottom-right q-pr-sm f-w-200">
+                <small class="block small-text text-right">Объем 24h</small>
+                <span class="text-uppercase f-w-800 fontsize-13">{{ ticker.volume | tickerVolumeFormatter }}</span>
+              </span>
             </div>
           </div>
-
         </div>
 
         <!--        Chart-->
         <div class="col-md-6 col-6" v-if="$mobile">
           <binance-market-ticker-chart :symbol="slicedSymbol" :chart-key="chartKey" :change="changePercentValue" />
         </div>
-
-<!--        &lt;!&ndash;    price&ndash;&gt;-->
-<!--        <div class="f-w-800 col-sm-2 col-3" style="line-height: 1.2">-->
-<!--          <small class="block f-w-400 small-text">Цена</small>-->
-<!--          {{ ticker.lastPrice | tickerPriceFormatter }}-->
-<!--        </div>-->
 
         <!--    Change-->
         <div v-if="!$mobile" class="col-sm-2 col-6 ">

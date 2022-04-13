@@ -105,6 +105,17 @@
 
       <div class="relative-position q-ml-md flex no-wrap items-center cursor-pointer">
         <q-btn
+          label="Объем"
+          :icon-right="sortField === 'volume' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
+          size="sm"
+          :color="sortField === 'volume' ? 'primary' : ''"
+          dense flat no-caps
+          @click="setSort('volume')"
+        />
+      </div>
+
+      <div class="relative-position q-ml-md flex no-wrap items-center cursor-pointer">
+        <q-btn
           label="Изменение"
           :icon-right="sortField === 'change' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
           size="sm"
@@ -134,13 +145,6 @@
             </q-infinite-scroll>
           </div>
 
-<!--          <div-->
-<!--            v-for="ticker in slicedData"-->
-<!--            :key="ticker.symbol"-->
-<!--            class="col-12 col-sm-7"-->
-<!--          >-->
-<!--            <binance-market-ticker :ticker="ticker"/>-->
-<!--          </div>-->
           <div class="col-12 col-sm-5 q-mt-sm">
             <binance-market-widgets-panel />
 
@@ -230,6 +234,17 @@ export default {
       if (this.sortField === 'change' && !this.sortUp) {
         return symbols.sort((a, b) => {
           return a.priceChangePercent < b.priceChangePercent ? 1 : -1
+        })
+      }
+
+      if (this.sortField === 'volume' && this.sortUp) {
+        return symbols.sort((a, b) => {
+          return a.volume > b.volume ? 1 : -1
+        })
+      }
+      if (this.sortField === 'volume' && !this.sortUp) {
+        return symbols.sort((a, b) => {
+          return a.volume < b.volume ? 1 : -1
         })
       }
 
