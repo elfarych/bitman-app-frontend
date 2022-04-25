@@ -19,18 +19,18 @@ export default {
     ...mapActions('siteInfo', { siteInfoInit: 'init' }),
     ...mapActions('blog', ['loadPosts']),
     ...mapMutations('volatility', ['mutationAddVolatilityTicker']),
-    debuger () {
-      // debugger // eslint-disable-line no-debugger
-    }
+    ...mapActions('trader', ['loadUser'])
   },
   mounted () {
+    const jwt = localStorage.getItem('jwt')
+    if (jwt) {
+      this.loadUser()
+    }
     this.wishlistInit()
     this.loadVolatilityTickers()
   },
   async created () {
-    for (let i = 0; i < 100000; i++) {
-      this.debuger()
-    }
+    if (this.$route.query.ref) localStorage.setItem('ref', this.$route.query.ref.toString())
     await this.siteInfoInit()
     await this.infoInit()
     await this.binanceMarketInit()

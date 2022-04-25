@@ -1,5 +1,5 @@
 <template>
-  <div class="widget-btc-long-short-positions rounded-borders bg-dark blue-shadow q-px-md q-pt-md q-pb-xl relative-position">
+  <div class="widget-btc-long-short-positions rounded-borders bg-dark q-px-md q-pt-md q-pb-xl relative-position">
 
     <div class="absolute-bottom-right q-pr-md q-pb-sm">
       <q-btn
@@ -42,13 +42,13 @@
 
     <div class="row q-col-gutter-md">
       <div class="col-4">
-        <widget-long-short-positions-diagram :token="btc"/>
+        <widget-long-short-positions-diagram :token="btc" :diagram-height="diagramHeight"/>
       </div>
       <div class="col-4">
-        <widget-long-short-positions-diagram :token="eth"/>
+        <widget-long-short-positions-diagram :token="eth" :diagram-height="diagramHeight"/>
       </div>
       <div class="col-4">
-        <widget-long-short-positions-diagram :token="bnb"/>
+        <widget-long-short-positions-diagram :token="bnb" :diagram-height="diagramHeight"/>
       </div>
     </div>
     <q-separator class="q-mb-sm"/>
@@ -75,6 +75,9 @@ from 'components/binance-market/widgets/widget-long-short-positions/widget-long-
 export default {
   name: 'widget-long-short-positions',
   components: { WidgetLongShortPositionsDiagram },
+  props: {
+    diagramHeight: Number
+  },
   data () {
     return {
       interval: '24h',

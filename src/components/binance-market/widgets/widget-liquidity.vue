@@ -1,6 +1,6 @@
 <template>
 <div
-  class="widget-liquidity rounded-borders bg-dark blue-shadow q-py-md relative-position q-pb-xl q-pt-md"
+  class="widget-liquidity rounded-borders bg-dark q-py-md relative-position q-pb-xl q-pt-md"
   :key="`${fullscreen}` "
   :style="fullscreen ? '' : 'height: 370px'"
   :class="fullscreen ? 'widget-liquidity-chart-full-screen' : ''"
@@ -150,7 +150,7 @@ export default {
           visible: true,
           barSpacing: element.offsetWidth / (vm.liquidationData.longs?.length + 4),
           tickMarkFormatter: (time) => {
-            return `${time.day < 10 ? '0' + time.day : time.day}.${time.month < 10 ? '0' + time.month : time.month}`
+            return `${time?.day < 10 ? '0' + time?.day : time?.day}.${time?.month < 10 ? '0' + time?.month : time?.month}`
           }
         },
         crosshair: {
@@ -176,7 +176,7 @@ export default {
           drawTicks: false,
           mode: PriceScaleMode.Normal,
           scaleMargins: {
-            top: 0.35,
+            top: 0.59,
             bottom: 0.2
           }
         },
@@ -221,11 +221,13 @@ export default {
     crossChairMove (param) {
       const vm = this
       const values = Array.from(param.seriesPrices.entries())
-      vm.activeDate = `${param.time.day < 10 ? '0' + param.time.day : param.time.day}.${param.time.month < 10 ? '0' + param.time.month : param.time.month}.${param.time.year}`
+      if (param.time) {
+        vm.activeDate = `${param.time?.day < 10 ? '0' + param.time?.day : param.time?.day}.${param.time?.month < 10 ? '0' + param.time?.month : param.time?.month}.${param.time?.year}`
+      }
 
-      vm.activeTotal = values[0][1]
-      vm.activeLong = values[1][1]
-      vm.activeShort = values[2][1]
+      vm.activeTotal = values?.[0]?.[1]
+      vm.activeLong = values?.[1]?.[1]
+      vm.activeShort = values?.[2]?.[1]
     }
 
   },

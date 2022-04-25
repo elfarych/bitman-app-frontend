@@ -36,8 +36,8 @@
           <div class="q-ml=md text-subtitle1 text-uppercase f-w-800 q-ml-sm">{{ wallet.token }}</div>
         </div>
 
-        <div class="q-ml=md text-grey-6 f-w-800 q-mt-sm">Сеть: <span class="text-primary">{{ wallet.chain }}</span></div>
-        <div class="q-ml=md text-subtitle2 text-grey-6 f-w-800">Адрес: <span class="text-white">{{ wallet.address }}</span> <q-icon name="content_copy" size="16px" style="margin-left: 5px; margin-top: -5px"/></div>
+        <div class="text-grey-6 q-mt-sm">Сеть: <span class="text-primary f-w-600">{{ wallet.chain }}</span></div>
+        <div class="text-subtitle2 text-grey-6">Адрес: <span class="text-white f-w-600">{{ wallet.address }}</span> <q-icon name="content_copy" size="16px" style="margin-left: 5px; margin-top: -5px"/></div>
 
         <q-tooltip content-class="bg-primary text-dark f-w-600">
           Скопировать адрес кошелька

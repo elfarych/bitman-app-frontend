@@ -6,13 +6,30 @@
     </portal>
 
     <div class="pages q-pa-sm">
-      <home-slider />
+      <home-slider/>
     </div>
     <div class="q-px-sm">
-      <base-site-cards />
+      <base-site-cards/>
     </div>
 
-    <div class="home-liders q-mt-lg q-px-sm">
+    <!--    Widgets-->
+    <div class="q-px-sm q-mt-xl q-pt-lg">
+      <div class="row q-col-gutter-sm">
+        <div class="col-12 col-sm-12 col-md-4">
+          <widget-week-vix-chart class="fit" style="min-height: 350px"/>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4">
+          <widget-long-short-positions class="fit" :diagram-height="200"/>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4">
+          <widget-liquidity />
+        </div>
+      </div>
+    </div>
+
+    <div class="home-liders q-mt-xl q-px-sm">
       <div class="row q-col-gutter-md">
         <div class="col-12 col-md-6">
           <h3 class="text-h5 f-w-800 text-center q-pt-xl">Лидеры роста</h3>
@@ -32,7 +49,7 @@
     <div class="q-mt-xl q-px-sm  q-pt-lg">
       <h3 class="text-h5 f-w-800 text-center">Дорожная карта проекта</h3>
       <div class="q-mt-xl">
-        <roadmap />
+        <roadmap/>
       </div>
     </div>
 
@@ -46,10 +63,24 @@ import WidgetsBigLidersTabs from 'components/binance-market/widgets/widgets-big-
 import PostsList from 'components/blog/posts-list'
 import BasePageTopTitle from 'components/base-page-top-title'
 import Roadmap from 'components/roadmap/roadmap'
+import WidgetWeekVixChart from 'components/binance-market/widgets/widget-week-vix-chart'
+import WidgetLongShortPositions
+from 'components/binance-market/widgets/widget-long-short-positions/widget-long-short-positions'
+import WidgetLiquidity from 'components/binance-market/widgets/widget-liquidity'
 
 export default {
   name: 'PageIndex',
-  components: { Roadmap, BasePageTopTitle, PostsList, WidgetsBigLidersTabs, BaseSiteCards, HomeSlider },
+  components: {
+    WidgetLiquidity,
+    WidgetLongShortPositions,
+    WidgetWeekVixChart,
+    Roadmap,
+    BasePageTopTitle,
+    PostsList,
+    WidgetsBigLidersTabs,
+    BaseSiteCards,
+    HomeSlider
+  },
   data () {
     return {
       pages: [

@@ -101,6 +101,30 @@ const routes = [
     ]
   },
 
+  {
+    path: '/auth',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Auth',
+        component: () => import('pages/trader/authorization')
+      }
+    ]
+  },
+
+  {
+    path: '/profile',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Profile',
+        component: () => import('pages/trader/profile')
+      }
+    ]
+  },
+
   // Always leave this as last one,
   // but you can also remove it
   {

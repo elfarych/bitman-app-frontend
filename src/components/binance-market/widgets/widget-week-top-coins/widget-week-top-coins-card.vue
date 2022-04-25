@@ -1,7 +1,7 @@
 <template>
   <div class="widget-week-top-coins-card q-mt-sm">
     <div class="row items-center f-w-800">
-      <div class="col-6 flex items-center">
+      <div class="col-6 flex items-center no-wrap">
         <q-avatar :size="$mobile ? '20px' : '30px'" class="bg-transparent" square>
           <q-img
             v-if="coin.small || coin.thumb"

@@ -34,8 +34,8 @@
             <div :class="changePercentValue > 0 ? 'text-positive' : 'text-negative'" class="f-w-800"
                  style="line-height: 1.2 !important">
               <span>{{ changePercentValue > 0 ? '+' : '' }}</span>{{ changePercent }}%
-              <span class="text-white absolute-bottom-right q-pr-sm f-w-200">
-                <small class="block small-text text-right">Объем 24h</small>
+              <span class="text-white absolute-bottom-right q-pr-sm f-w-200 text-right">
+                <small class="block small-text text-right">объем 24h</small>
                 <span class="text-uppercase f-w-800 fontsize-13">{{ ticker.volume | tickerVolumeFormatter }}</span>
               </span>
             </div>
@@ -57,7 +57,7 @@
         </div>
 
         <!--        Volume-->
-        <div v-if="!$mobile" class="f-w-800 col-md-2 col-3 binance-orders-ticker-volume" style="line-height: 1.2">
+        <div v-if="!$mobile" class="f-w-800 col-md-2 col-3 binance-orders-ticker-volume text-right q-pr-sm" style="line-height: 1.2">
           <small class="block f-w-400 small-text">Объем 24H</small>
           <span class="text-uppercase text-subtitle1 f-w-800">{{ ticker.volume | tickerVolumeFormatter }}</span>
         </div>

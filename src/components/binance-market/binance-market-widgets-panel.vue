@@ -1,19 +1,19 @@
 <template>
 <div class="binance-market-widgets-panel">
   <div class="market-right-panel">
-    <widget-week-vix-chart />
+    <widget-week-vix-chart :key="`${$route.query.market}`"/>
   </div>
 
   <div class="q-mt-md">
-    <widget-long-short-positions />
+    <widget-long-short-positions :key="`${$route.query.market}`"/>
   </div>
 
   <div class="q-mt-md">
-    <widget-liquidity />
+    <widget-liquidity :key="`${$route.query.market}`"/>
   </div>
 
   <div class="q-mt-md">
-    <widget-week-top-coins />
+    <widget-week-top-coins :key="`${$route.query.market}`"/>
   </div>
 </div>
 </template>

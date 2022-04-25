@@ -8,8 +8,8 @@
     align="justify"
     v-touch-swipe
   >
-    <q-tab name="spot" label="Spot" class="rounded-borders" />
-    <q-tab name="futures" label="Futures" class="rounded-borders"/>
+    <q-tab name="spot" label="Спот" class="rounded-borders" />
+    <q-tab name="futures" label="Фьючерсы" class="rounded-borders"/>
   </q-tabs>
 
   <q-tab-panels  v-model="tab" animated class="text-white bg-transparent rounded-borders">

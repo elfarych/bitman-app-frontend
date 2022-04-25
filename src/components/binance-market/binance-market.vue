@@ -5,18 +5,18 @@
       <!--      Market switcher-->
       <div class="flex items-center full-height justify-center">
         <q-btn
-          label="Spot"
-          dense flat
+          label="Спот"
+          dense flat no-caps
           :color="market === 'Spot' ? 'primary' : ''"
           class="f-w-800 transition-1"
           @click="market = 'Spot'"
         />
 
         <q-btn
-          label="Futures"
+          label="Фьючерсы"
           :color="market === 'Futures' ? 'primary' : ''"
           class="f-w-800 q-ml-sm transition-1"
-          dense flat
+          dense flat no-caps
           @click="market = 'Futures'"
         />
 
@@ -28,6 +28,16 @@
           @click="market = 'Wishlist'"
         >
           <q-icon name="star" size="15px"/>
+        </q-btn>
+
+        <q-btn
+
+          :color="market === 'Metrics' ? 'primary' : ''"
+          class="q-ml-sm transition-1 market-widget-panel-mobile-button"
+          dense flat
+          @click="market = 'Metrics'"
+        >
+          <q-icon name="leaderboard" size="15px"/>
         </q-btn>
       </div>
     </portal>
@@ -38,40 +48,11 @@
                          screener-text="" :real-time-text="false"/>
       </div>
 
-<!--      Market switcher-->
-      <div class="col-sm-4 col-6 q-pb-sm binance-market-switcher">
-        <q-btn
-          label="Spot"
-          dense flat
-          :color="market === 'Spot' ? 'primary' : ''"
-          class="f-w-800 transition-1"
-          @click="market = 'Spot'"
-        />
-
-        <q-btn
-          label="Futures"
-          :color="market === 'Futures' ? 'primary' : ''"
-          class="f-w-800 q-ml-sm transition-1"
-          dense flat
-          @click="market = 'Futures'"
-        />
-
-        <q-btn
-
-          :color="market === 'Wishlist' ? 'primary' : ''"
-          class="q-ml-sm transition-1"
-          dense flat
-          @click="market = 'Wishlist'"
-        >
-          <q-icon name="star" size="15px"/>
-        </q-btn>
-      </div>
-
-<!--      Search input-->
-      <div class="col-12 col-sm-4 q-pb-sm">
+      <!--      Search input-->
+      <div class="col-6 col-sm-4 q-pb-md">
         <q-input
           v-model="searchText"
-          outlined dense clearable
+          dense clearable
           @clear="searchText = ''"
         >
           <template v-slot:prepend>
@@ -79,10 +60,51 @@
           </template>
         </q-input>
       </div>
+
+      <!--      Market switcher-->
+      <div
+        class="col-sm-4 col-12 q-pb-sm binance-market-switcher flex no-wrap q-mt-sm"
+        :class="$mobile ? 'justify-between' : 'justify-end'"
+      >
+        <q-btn
+          label="Спот"
+          dense flat no-caps
+          :color="market === 'Spot' ? 'primary' : ''"
+          class="f-w-800 transition-1"
+          @click="market = 'Spot'"
+        />
+
+        <q-btn
+          label="Фьючерсы"
+          :color="market === 'Futures' ? 'primary' : ''"
+          class="f-w-800 q-ml-sm transition-1"
+          dense flat no-caps
+          @click="market = 'Futures'"
+        />
+
+        <q-btn
+          :color="market === 'Wishlist' ? 'primary' : ''"
+          class="q-ml-sm transition-1"
+          dense flat no-wrap no-caps
+          @click="market = 'Wishlist'"
+        >
+          <span class="f-w-800 q-ml-xs">Избранное</span>
+        </q-btn>
+
+        <q-btn
+          :color="market === 'Metrics' ? 'primary' : ''"
+          class="q-ml-sm transition-1 market-widget-panel-mobile-button"
+          dense flat no-caps
+          @click="market = 'Metrics'"
+        >
+          <span class="f-w-800 q-ml-xs">Метрики</span>
+        </q-btn>
+      </div>
+
     </div>
 
-<!--    Sort controls-->
-    <div class="flex q-mt-sm">
+    <!--    Sort controls-->
+    <div v-if="market !== 'Metrics'" class="flex q-mt-sm">
       <div class="relative-position flex no-wrap items-center cursor-pointer">
         <q-btn
           v-if="sortField"
@@ -126,31 +148,30 @@
       </div>
     </div>
 
-<!--    Market tickers-->
+    <!--    Market tickers-->
     <div v-if="symbols.length" class="orders-tickers">
 
-        <div class="row q-col-gutter-sm relative-position">
-          <div class="col-12 col-sm-7">
-            <q-infinite-scroll
-              :offset="1000"
-              @load="onLoad"
-              ref="infiniteScroll"
-            >
+      <div class="row q-col-gutter-sm relative-position">
+        <div v-if="market !== 'Metrics'" class="col-12 col-sm-7">
+          <q-infinite-scroll
+            :offset="1000"
+            @load="onLoad"
+            ref="infiniteScroll"
+          >
             <binance-market-ticker
               v-for="ticker in slicedData"
               :key="ticker.symbol"
               :ticker="ticker"
               class="q-mt-sm"
             />
-            </q-infinite-scroll>
-          </div>
-
-          <div class="col-12 col-sm-5 q-mt-sm">
-            <binance-market-widgets-panel />
-
-          </div>
-
+          </q-infinite-scroll>
         </div>
+
+        <div class="col-12 col-sm-5 q-mt-sm" :class="market !== 'Metrics' ? 'market-widget-panel' : 'block'">
+          <binance-market-widgets-panel/>
+        </div>
+
+      </div>
 
       <div v-if="slicedData.length < sortedTickers.length" class="text-center q-mt-lg">
         Загрузка...
@@ -281,10 +302,21 @@ export default {
       this.sortUp = !this.sortUp
     }
   },
+  created () {
+    if (this.$route.query.market) {
+      this.market = this.$route.query.market
+    }
+  },
   watch: {
     market () {
       const element = document.getElementById('q-app')
       element.scrollIntoView({ block: 'start', behavior: 'smooth' })
+      this.$router.replace({
+        query: {
+          ...this.$route.query,
+          market: this.market
+        }
+      })
     }
   }
 }
@@ -305,7 +337,14 @@ export default {
   top: -5px
   right: -20px
 
+.market-widget-panel-mobile-button
+  display: none
+
 @media screen and (max-width: 700px)
-  .binance-market-switcher
-    text-align: right
+
+  .market-widget-panel
+    display: none
+
+  .market-widget-panel-mobile-button
+    display: block
 </style>

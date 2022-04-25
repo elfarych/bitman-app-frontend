@@ -42,6 +42,7 @@
           />
         </q-slide-transition>
         <portal-target name="top-bar-right"></portal-target>
+        <div><trader-top-btn /></div>
 
       </q-toolbar>
     </q-header>
@@ -52,14 +53,7 @@
     </q-drawer>
 
     <q-page-container v-scroll="scrolled">
-      <transition
-        appear
-        enter-active-class="animated fadeIn"
-        leave-active-class=""
-      >
       <router-view/>
-      </transition>
-
       <site-footer class="q-mt-xs q-pt-xl"/>
     </q-page-container>
 
@@ -69,7 +63,7 @@
 
     <q-btn
       icon="north"
-      style="position: fixed; bottom: 5px; right: 5px; z-index: 100;"
+      style="position: fixed; bottom: 5px; right: 5px; z-index: 1000;"
       :style="`opacity: ${titleOpacity}`"
       color="secondary"
       padding="10px"
@@ -86,9 +80,10 @@ import ChartHover from 'components/chart/chart-hover'
 import LeftDrawerTabs from 'components/left-drawer/left-drawer-tabs'
 import { mapState } from 'vuex'
 import SiteFooter from 'components/footer/site-footer'
+import TraderTopBtn from 'components/trader/trader-top-btn'
 
 export default {
-  components: { SiteFooter, LeftDrawerTabs, ChartHover, ChartPopup, VolatilityTickersFilter },
+  components: { TraderTopBtn, SiteFooter, LeftDrawerTabs, ChartHover, ChartPopup, VolatilityTickersFilter },
   data () {
     return {
       left: false,

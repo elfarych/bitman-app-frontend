@@ -1,7 +1,7 @@
 <template>
   <div
-    :key="fullscreen"
-    class="widget-week-vix-chart rounded-borders bg-dark blue-shadow q-pt-md relative-position q-pb-lg"
+    :key="`${fullscreen}`"
+    class="widget-week-vix-chart rounded-borders bg-dark q-pt-md relative-position q-pb-lg"
     :style="fullscreen ? '' : 'height: 300px'"
     :class="fullscreen ? 'widget-week-vix-chart-full-screen' : ''"
   >

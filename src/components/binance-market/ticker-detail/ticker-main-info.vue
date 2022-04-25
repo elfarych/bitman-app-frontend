@@ -6,12 +6,15 @@
           {{ $route.params.symbol }}<br>
           <span class="text-uppercase small-text f-w-400">usdt</span>
         </div>
-        <div class="text-subtitle2 f-w-600 q-ml-md">
-          {{ price }}
+        <div>
+          <div class="text-subtitle2 f-w-600 q-ml-md l-h-12">
+            {{ price }}
+          </div>
+          <div class="text-subtitle2 f-w-600 q-ml-md l-h-12" :class="ticker.P > 0 ? 'text-positive' : 'text-negative'" style="margin-top: -3px">
+            {{ ticker.P > 0 ? '+' : '' }}{{ changePercent || '' }}%
+          </div>
         </div>
-        <div class="text-subtitle2 f-w-600 q-ml-sm" :class="ticker.P > 0 ? 'text-positive' : 'text-negative'">
-          {{ ticker.P > 0 ? '+' : '' }}{{ changePercent || '' }}%
-        </div>
+
       </div>
     </portal>
     <div class="ticker-main-info-card flex no-wrap justify-between items-center rounded-borders">
