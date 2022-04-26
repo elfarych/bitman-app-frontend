@@ -125,6 +125,23 @@ const routes = [
     ]
   },
 
+  {
+    path: '/online-trader',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: '/signals',
+        name: 'OnlineTraderSignals',
+        component: () => import('pages/partners/online-trader/page-online-trader-signals')
+      },
+      {
+        path: '/copy-results',
+        name: 'OnlineTraderCopyResults',
+        component: () => import('pages/partners/online-trader/page-online-trader-copy-results')
+      }
+    ]
+  },
+
   // Always leave this as last one,
   // but you can also remove it
   {

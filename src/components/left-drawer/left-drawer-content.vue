@@ -80,6 +80,36 @@
         class="items-center text-grey-7"
         style="background: #131722"
       >
+        Наши партнеры
+      </q-item>
+      <q-item
+        clickable
+        :to="{ name: 'OnlineTraderSignals' }"
+        class="items-center relative-position"
+        tag="a"
+        title="Торговые сигналы"
+      >
+        <q-icon name="auto_graph" size="22px" class="q-mr-sm"/>
+        Торговые сигналы
+        <small class="block text-warning absolute-top-right q-pr-xs">Все рынки</small>
+      </q-item>
+
+      <q-item
+        clickable
+        :to="{ name: 'OnlineTraderCopyResults' }"
+        class="items-center relative-position"
+        tag="a"
+        title="Копитрейдинг"
+      >
+        <q-icon name="stacked_line_chart" size="22px" class="q-mr-sm"/>
+        Копитрейдинг
+        <small class="block text-warning absolute-top-right q-pr-xs">Рекомендуем</small>
+      </q-item>
+
+      <q-item
+        class="items-center text-grey-7"
+        style="background: #131722"
+      >
         Дополнительно
       </q-item>
 
