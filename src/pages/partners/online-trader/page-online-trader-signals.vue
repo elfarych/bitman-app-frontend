@@ -4,7 +4,7 @@
     <base-page-top-title title="Сигналы"/>
   </portal>
 
-  <base-page-title :real-time-text="false" screener-name="Торовые сигналы"/>
+  <base-page-title :real-time-text="false" screener-name="Торговые сигналы"/>
 
   <section>
     <q-btn

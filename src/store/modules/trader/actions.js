@@ -21,6 +21,7 @@ export async function loadUser ({ commit, dispatch }) {
 }
 
 export async function getTrader ({ commit, dispatch }) {
+  const vm = this
   const jwt = localStorage.getItem('jwt')
   try {
     await axios
@@ -36,17 +37,20 @@ export async function getTrader ({ commit, dispatch }) {
           dispatch('createTrader')
         }
       })
+      .catch(e => {
+        vm.$router.replace({ name: 'Auth' })
+      })
   } catch (e) {
     errorHandler(e)
   }
 }
 
-export async function createTrader ({ commit }) {
+export async function createTrader ({ commit, state }) {
   const jwt = localStorage.getItem('jwt')
   try {
     await axios
       .post(`${config.socialServerURI}/trader/create/`, {
-
+        email: state.user.email
       }, {
         headers: {
           Authorization: `Bearer ${jwt}`
@@ -72,7 +76,6 @@ export async function updateTrader ({ commit, state }, payload) {
         }
       })
       .then(res => {
-        debugger
         commit('mutationTrader', res.data)
       })
   } catch (e) {
