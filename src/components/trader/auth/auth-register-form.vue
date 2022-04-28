@@ -5,13 +5,14 @@
       <q-input
         dense
         v-model="user.email"
-        label="E-mail"
+        label="E-mail*"
         :rules="rulesNoEmpty"
       >
         <template v-slot:prepend>
           <q-icon name="mail"/>
         </template>
       </q-input>
+
     </div>
 
     <div class="">
@@ -19,7 +20,7 @@
         dense
         v-model="user.password"
         type="password"
-        label="Пароль"
+        label="Пароль*"
         :rules="rulesNoEmpty"
       >
         <template v-slot:prepend>
@@ -33,7 +34,7 @@
         dense
         type="password"
         v-model="user.passwordConfirm"
-        label="Пароль еще раз"
+        label="Пароль еще раз*"
         lazy-rules
         :rules="rulesComparePasswordConfirm"
       >

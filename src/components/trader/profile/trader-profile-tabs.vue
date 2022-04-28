@@ -7,9 +7,10 @@
     align="justify"
     v-touch-swipe dense no-caps
   >
-    <q-tab name="case" label="Портфель" class="rounded-borders" icon="business_center"/>
-    <q-tab name="forecasts" label="Прогнозы" class="rounded-borders" icon="tips_and_updates"/>
-    <q-tab name="refs" label="Рефералы" class="rounded-borders" icon="tips_and_updates"/>
+    <q-tab name="case" label="Портфель" class="rounded-borders"/>
+    <q-tab name="forecasts" label="Прогнозы" class="rounded-borders"/>
+    <q-tab name="wishlist" label="Избранное" class="rounded-borders"/>
+    <q-tab name="refs" label="Рефералы" class="rounded-borders"/>
   </q-tabs>
 
   <q-tab-panels  v-model="tab" animated class="text-white bg-transparent rounded-borders">

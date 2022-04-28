@@ -4,7 +4,7 @@
     header-class="text-subtitle2 f-w-800"
     group="case"
     class="bg-dark rounded-borders column"
-    default-opened
+    :default-opened="opened"
     expand-icon="none"
   >
     <template v-slot:header>
@@ -16,12 +16,13 @@
           <div class="q-ml-md">
             <div class="text-subtitle1 f-w-800">{{ caseItem.title }}</div>
             <div class="f-w-600 fontsize-13">{{ caseItem.text }}</div>
+            <small class="f-w-200">Монет: {{ caseItem ? caseItem.items.length : '' }}</small>
           </div>
         </div>
 
         <div>
           <q-btn
-            label="Редактировать"
+            :label="$mobile ? '' : 'Редактировать'"
             icon="edit"
             size="sm"
             dense flat no-wrap no-caps
@@ -38,16 +39,7 @@
         Портфель пуст.
       </div>
 
-      <q-btn
-        label="Добавить монету"
-        icon="add"
-        size="sm"
-        no-caps
-        unelevated
-        outline
-        color="primary"
-        class="q-mt-md"
-      />
+      <trader-case-add-coin />
     </div>
   </q-expansion-item>
 
@@ -78,9 +70,11 @@ import config from 'src/config'
 import notifier from 'src/utils/notifier'
 import errorHandler from 'src/utils/error-handler'
 import { mapActions } from 'vuex'
+import TraderCaseAddCoin from 'components/trader/profile/trader-case/trader-case-add-coin'
 
 export default {
   name: 'trader-case-list-item',
+  components: { TraderCaseAddCoin },
   props: {
     caseItem: {
       type: Object,
@@ -102,6 +96,10 @@ export default {
     return {
       editCaseDialog: false,
       addCaseLoading: false,
+      addCoinLoading: false,
+      addCoinForm: {
+
+      },
       caseForm: {
         title: '',
         text: '',
@@ -111,6 +109,10 @@ export default {
   },
   methods: {
     ...mapActions('trader', ['getTrader']),
+    async addCoin () {
+      const vm = this
+      vm.addCoinLoading = true
+    },
     async editCase () {
       this.caseForm = { ...this.caseItem }
       this.editCaseDialog = true

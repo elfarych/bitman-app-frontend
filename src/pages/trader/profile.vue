@@ -4,11 +4,13 @@
     <base-page-top-title title="Профиль"/>
   </portal>
 
+  <logout />
+
   <div>
     <trader-profile-main-info />
   </div>
 
-  <div class="q-mt-md">
+  <div class="q-mt-lg">
     <trader-profile-tabs />
   </div>
 
@@ -29,10 +31,11 @@ import { mapState } from 'vuex'
 import BasePageTopTitle from 'components/base-page-top-title'
 import TraderProfileMainInfo from 'components/trader/profile/trader-profile-main-info'
 import TraderProfileTabs from 'components/trader/profile/trader-profile-tabs'
+import Logout from 'components/trader/auth/logout'
 
 export default {
   name: 'profile',
-  components: { TraderProfileTabs, TraderProfileMainInfo, BasePageTopTitle },
+  components: { Logout, TraderProfileTabs, TraderProfileMainInfo, BasePageTopTitle },
   computed: {
     ...mapState('trader', ['user', 'trader'])
   },

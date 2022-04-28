@@ -4,7 +4,7 @@
   <div class="flex items-center">
     <div>
       <q-avatar size="70px" square class="rounded-borders">
-        <q-img v-if="trader" :src="trader.avatar" height="70px" width="70px" class="rounded-borders">
+        <q-img v-if="trader && trader.avatar" :src="trader.avatar" height="70px" width="70px" class="rounded-borders">
           <template v-slot:loading><q-skeleton class="fit"/></template>
         </q-img>
         <q-icon v-else name="person" size="60px"/>
@@ -12,7 +12,8 @@
     </div>
 
     <div class="q-ml-md">
-      <div class="text-subtitle1 f-w-800 text-white-shadow">{{ trader ? trader.name : '' }}</div>
+      <small>{{ user.username }}</small>
+      <div class="text-subtitle1 f-w-800 text-white-shadow">{{ trader ? trader.name : 'Аноним' }}</div>
       <div>
         <q-btn
           label="Редактировать"
@@ -83,7 +84,7 @@ import config from 'src/config'
 export default {
   name: 'trader-profile-main-info',
   computed: {
-    ...mapState('trader', ['trader']),
+    ...mapState('trader', ['trader', 'user']),
     imageUploadUrl () {
       if (this.trader) return `${config.socialServerURI}/trader/update/${this.trader.id}/`
       return ''
@@ -126,9 +127,7 @@ export default {
     }
   },
   mounted () {
-    if (this.trader && !this.trader.name) {
-      this.updateTrader({ name: 'Аноним ' + this.trader.id })
-    }
+
   }
 }
 </script>
