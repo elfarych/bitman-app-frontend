@@ -12,7 +12,7 @@
     </div>
 
     <div class="q-ml-md">
-      <small>{{ user.username }}</small>
+      <small>{{ user ? user.username : '' }}</small>
       <div class="text-subtitle1 f-w-800 text-white-shadow">{{ trader ? trader.name : 'Аноним' }}</div>
       <div>
         <q-btn

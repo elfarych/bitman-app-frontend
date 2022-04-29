@@ -7,6 +7,7 @@
     no-caps
     unelevated
     :loading="addCaseLoading"
+    class="q-py-sm"
     @click="addCase"
   />
 

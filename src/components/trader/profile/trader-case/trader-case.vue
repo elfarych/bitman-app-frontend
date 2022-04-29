@@ -5,7 +5,7 @@
 <!--  Cases -->
   <trader-cases-list class="q-my-md"/>
 <!--  New case-->
-  <trader-new-case />
+  <trader-new-case/>
 </div>
 </template>
 

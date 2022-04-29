@@ -6,9 +6,8 @@
       class="q-mt-md"
     >
       <trader-case-list-item
-        :case-item="traderCase"
-        class="q-ml-xs"
-        :opened="trader.cases && trader.cases.length > 1"
+        :trader-case="traderCase"
+        opened
       />
     </div>
   </div>
