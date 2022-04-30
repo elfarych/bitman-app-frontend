@@ -10,6 +10,7 @@ import info from './modules/info'
 import wishlist from './modules/wishlist'
 import siteInfo from './modules/siteInfo'
 import blog from './modules/blog'
+import traderCase from './modules/trader-case'
 
 Vue.use(Vuex)
 
@@ -33,7 +34,8 @@ export default function (/* { ssrContext } */) {
       info,
       wishlist,
       siteInfo,
-      blog
+      blog,
+      traderCase
     },
 
     // enable strict mode (adds overhead!)

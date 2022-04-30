@@ -1,9 +1,10 @@
 import errorHandler from 'src/utils/error-handler'
 import axios from 'axios'
 import config from 'src/config'
+import getJWT from 'src/utils/get-jwt'
 
 export async function loadUser ({ commit, dispatch }) {
-  const jwt = localStorage.getItem('jwt')
+  const jwt = getJWT()
   try {
     await axios
       .get(`${config.socialServerURI}/auth/users/me/`, {
@@ -22,7 +23,7 @@ export async function loadUser ({ commit, dispatch }) {
 
 export async function getTrader ({ commit, dispatch }) {
   const vm = this
-  const jwt = localStorage.getItem('jwt')
+  const jwt = getJWT()
   try {
     await axios
       .get(`${config.socialServerURI}/trader/me/`, {
@@ -46,7 +47,7 @@ export async function getTrader ({ commit, dispatch }) {
 }
 
 export async function createTrader ({ commit, state }) {
-  const jwt = localStorage.getItem('jwt')
+  const jwt = getJWT()
   try {
     await axios
       .post(`${config.socialServerURI}/trader/create/`, {
@@ -65,7 +66,7 @@ export async function createTrader ({ commit, state }) {
 }
 
 export async function updateTrader ({ commit, state }, payload) {
-  const jwt = localStorage.getItem('jwt')
+  const jwt = getJWT()
   try {
     await axios
       .patch(`${config.socialServerURI}/trader/update/${state.trader.id}/`, {
