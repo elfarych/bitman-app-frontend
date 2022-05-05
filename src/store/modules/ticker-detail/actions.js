@@ -9,6 +9,7 @@ let ws
 export async function init ({ dispatch }) {
   dispatch('tickerStream')
   dispatch('loadTickerInfo')
+  dispatch('loadTickerCap')
   await dispatch('loadTickerFuturesInfo')
   setTimeout(() => {
     dispatch('loadTickerOrders')
@@ -62,6 +63,24 @@ export async function loadTickerInfo ({ commit, dispatch }) {
       })
       .then(res => {
         commit('mutationTickerInfo', res.data)
+      })
+  } catch (e) {
+    errorHandler(e)
+  }
+}
+
+export async function loadTickerCap ({ commit, dispatch }) {
+  const vm = this
+  commit('mutationTickerInfo', {})
+  try {
+    await axios
+      .get(`${config.nodeServerURI}/info/market-capitalization`, {
+        params: {
+          symbol: vm.$router.currentRoute.params.symbol.toUpperCase()
+        }
+      })
+      .then(res => {
+        commit('mutationTickerCap', res.data.data)
       })
   } catch (e) {
     errorHandler(e)

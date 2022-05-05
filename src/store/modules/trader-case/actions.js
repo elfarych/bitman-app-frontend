@@ -50,7 +50,7 @@ export async function updateCase ({ dispatch }, payload) {
   const jwt = getJWT()
   try {
     await axios
-      .patch(`${config.socialServerURI}/case/update/${payload.caseId}`,
+      .patch(`${config.socialServerURI}/case/update/${payload.caseId}/`,
         {
           ...payload.data
         },
@@ -69,16 +69,18 @@ export async function updateCase ({ dispatch }, payload) {
   }
 }
 
-export async function deleteCase ({ dispatch }, id) {
+export async function deleteCase ({ dispatch }, payload) {
+  // payload example { caseId: 2, data: {} }
   const jwt = getJWT()
   try {
     await axios
-      .delete(`${config.socialServerURI}/case/delete/${id}`, {
+      .delete(`${config.socialServerURI}/case/delete/${payload.caseId}/`, {
         headers: {
           Authorization: `Bearer ${jwt}`
         }
       })
-      .then(res => {
+      .then(async res => {
+        await dispatch('updateTokensAndOrders')
         notifier('Портфель успешно удален.', 'positive')
         dispatch('loadCases')
       })
@@ -102,7 +104,9 @@ export async function createCaseToken ({ dispatch }, payload) {
         })
       .then(res => {
         notifier(`Монета ${payload.data.symbol} успешно добавлена в портфель.`, 'positive')
-        dispatch('loadCases')
+        const data = payload.data
+        data.token = res.data.id
+        dispatch('createCaseTokenOrder', { data })
       })
   } catch (e) {
     notifier('Не удалось добавить монету в портфель.', 'negative')
@@ -115,7 +119,7 @@ export async function updateCaseToken ({ dispatch }, payload) {
   const jwt = getJWT()
   try {
     await axios
-      .patch(`${config.socialServerURI}/case_token/update/${payload.caseId}`,
+      .patch(`${config.socialServerURI}/case_token/update/${payload.caseId}/`,
         {
           ...payload.data
         },
@@ -138,17 +142,70 @@ export async function deleteCaseToken ({ dispatch }, id) {
   const jwt = getJWT()
   try {
     await axios
-      .delete(`${config.socialServerURI}/case_token/delete/${id}`, {
+      .delete(`${config.socialServerURI}/case_token/delete/${id}/`, {
         headers: {
           Authorization: `Bearer ${jwt}`
         }
       })
-      .then(res => {
+      .then(async res => {
+        await dispatch('updateTokensAndOrders')
         notifier('Монета удалена из портфеля.')
         dispatch('loadCases')
       })
   } catch (e) {
     notifier('Не удалось удалить монету из портфеля.', 'negative')
+    errorHandler(e)
+  }
+}
+
+export async function createCaseTokenOrder ({ dispatch }, payload) {
+  // payload example { data: {} }
+  const jwt = getJWT()
+  try {
+    await axios
+      .post(`${config.socialServerURI}/case_token_order/create/`,
+        { ...payload.data },
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`
+          }
+        })
+      .then(res => {
+        notifier(`Транзакция по монете ${payload.data.symbol} создана.`, 'positive')
+        dispatch('loadCases')
+      })
+  } catch (e) {
+    notifier('Не удалось добавить транзакцию.', 'negative')
+    errorHandler(e)
+  }
+}
+
+export async function deleteCaseTokenOrder ({ dispatch }, id) {
+  // payload example { data: {} }
+  const jwt = getJWT()
+  try {
+    await axios
+      .delete(`${config.socialServerURI}/case_token_order/delete/${id}/`,
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`
+          }
+        })
+      .then(async res => {
+        notifier('Транзакция удалена.', 'positive')
+        await dispatch('updateTokensAndOrders')
+        dispatch('loadCases')
+      })
+  } catch (e) {
+    notifier('Не удалось удалить транзакцию.', 'negative')
+    errorHandler(e)
+  }
+}
+
+export async function updateTokensAndOrders () {
+  try {
+    await axios.get(`${config.socialServerURI}/update_cases/`)
+  } catch (e) {
     errorHandler(e)
   }
 }

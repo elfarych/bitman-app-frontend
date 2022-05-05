@@ -104,28 +104,38 @@
     </div>
 
     <!--    Sort controls-->
-    <div v-if="market !== 'Metrics'" class="flex q-mt-sm">
-      <div class="relative-position flex no-wrap items-center cursor-pointer">
+    <div v-if="market !== 'Metrics'" class="flex q-mt-sm items-center no-wrap" style="overflow-x: scroll">
+      <div class="relative-position flex no-wrap items-center cursor-pointer items-center">
         <q-btn
           v-if="sortField"
           icon="filter_list_off"
           flat dense no-caps
           size="sm"
-          class="q-mr-sm"
+          class="q-mr-xs"
           color="secondary"
           @click="sortField = ''"
         />
         <q-btn
-          label="Токен"
-          :icon-right="sortField === 'symbol' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
+          label="Ранг"
+          :icon-right="sortField === 'rank' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
           size="sm"
-          :color="sortField === 'symbol' ? 'primary' : ''"
+          :color="sortField === 'rank' ? 'primary' : ''"
           dense flat no-caps
-          @click="setSort('symbol')"
+          @click="setSort('rank')"
+        />
+        <q-btn
+          label="Изм. кап."
+          :icon-right="sortField === 'cap_24h' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
+          size="sm"
+          :color="sortField === 'cap_24h' ? 'primary' : ''"
+          dense flat no-caps
+          title="Капитализация (изменение 24 часа)"
+          class="q-ml-sm"
+          @click="setSort('cap_24h')"
         />
       </div>
 
-      <div class="relative-position q-ml-md flex no-wrap items-center cursor-pointer">
+      <div class="relative-position q-ml-sm flex no-wrap items-center cursor-pointer">
         <q-btn
           label="Объем"
           :icon-right="sortField === 'volume' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
@@ -134,11 +144,21 @@
           dense flat no-caps
           @click="setSort('volume')"
         />
+
+        <q-btn
+          label="Изм. объема"
+          :icon-right="sortField === 'volume_24h_change_24h' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
+          size="sm"
+          :color="sortField === 'volume_24h_change_24h' ? 'primary' : ''"
+          dense flat no-caps
+          class="q-ml-sm"
+          @click="setSort('volume_24h_change_24h')"
+        />
       </div>
 
-      <div class="relative-position q-ml-md flex no-wrap items-center cursor-pointer">
+      <div class="relative-position q-ml-sm flex no-wrap items-center cursor-pointer">
         <q-btn
-          label="Изменение"
+          label="Изм. цены"
           :icon-right="sortField === 'change' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
           size="sm"
           :color="sortField === 'change' ? 'primary' : ''"
@@ -193,7 +213,7 @@
 <script>
 import { mapState } from 'vuex'
 import BasePageTitle from 'components/base-page-title'
-import BinanceMarketTicker from 'components/binance-market/binance-market-ticker'
+import BinanceMarketTicker from 'components/binance-market/binance-market-ticker/binance-market-ticker'
 import BinanceMarketWidgetsPanel from 'components/binance-market/binance-market-widgets-panel'
 
 export default {
@@ -214,26 +234,61 @@ export default {
     ...mapState('wishlist', { wishlistItems: 'wishlist' }),
     filteredTickers () {
       if (this.futures || this.market === 'Futures') {
-        return this.futureSymbols.filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()))
+        return this.futureSymbols.filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()) || item.name?.toLowerCase().includes(this.searchText.toLowerCase()))
       }
       if (this.market === 'Wishlist') {
         return this.symbols
           .filter(item => this.wishlistItems.includes(item.symbol.replace('USDT', '')))
-          .filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()))
+          .filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()) || item.name?.toLowerCase().includes(this.searchText.toLowerCase()))
       }
-      return this.symbols.filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()))
+      return this.symbols.filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()) || item.name?.toLowerCase().includes(this.searchText.toLowerCase()))
     },
     sortedTickers () {
       const symbols = [...this.filteredTickers]
-      if (this.sortField === 'symbol' && this.sortUp) {
-        return symbols.sort((a, b) => {
-          return a.symbol > b.symbol ? 1 : -1
-        })
+
+      if (this.sortField === 'rank' && this.sortUp) {
+        return symbols
+          .filter(item => item.rank)
+          .sort((a, b) => {
+            return a.rank > b.rank ? 1 : -1
+          })
       }
-      if (this.sortField === 'symbol' && !this.sortUp) {
-        return symbols.sort((a, b) => {
-          return a.symbol < b.symbol ? 1 : -1
-        })
+      if (this.sortField === 'rank' && !this.sortUp) {
+        return symbols
+          .filter(item => item.rank)
+          .sort((a, b) => {
+            return a.rank < b.rank ? 1 : -1
+          })
+      }
+
+      if (this.sortField === 'cap_24h' && this.sortUp) {
+        return symbols
+          .filter(item => item.market_cap_change_24h)
+          .sort((a, b) => {
+            return a.market_cap_change_24h > b.market_cap_change_24h ? 1 : -1
+          })
+      }
+      if (this.sortField === 'cap_24h' && !this.sortUp) {
+        return symbols
+          .filter(item => item.market_cap_change_24h)
+          .sort((a, b) => {
+            return a.market_cap_change_24h < b.market_cap_change_24h ? 1 : -1
+          })
+      }
+
+      if (this.sortField === 'volume_24h_change_24h' && this.sortUp) {
+        return symbols
+          .filter(item => item.volume_24h_change_24h)
+          .sort((a, b) => {
+            return a.volume_24h_change_24h > b.volume_24h_change_24h ? 1 : -1
+          })
+      }
+      if (this.sortField === 'volume_24h_change_24h' && !this.sortUp) {
+        return symbols
+          .filter(item => item.volume_24h_change_24h)
+          .sort((a, b) => {
+            return a.volume_24h_change_24h < b.volume_24h_change_24h ? 1 : -1
+          })
       }
 
       if (this.sortField === 'price' && this.sortUp) {

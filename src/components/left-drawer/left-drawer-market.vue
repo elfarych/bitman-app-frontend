@@ -103,7 +103,7 @@ export default {
       if (this.wishlistMode) {
         symbols = symbols.filter(item => this.wishlist.includes(item.symbol.replace('USDT', '')))
       }
-      return symbols.filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()))
+      return symbols.filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()) || item.name?.toLowerCase().includes(this.searchText.toLowerCase()))
     },
     sortedTickers () {
       const symbols = [...this.filteredTickers]

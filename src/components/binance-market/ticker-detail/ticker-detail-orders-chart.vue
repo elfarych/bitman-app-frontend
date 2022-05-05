@@ -132,8 +132,8 @@ export default {
         vm.asks.forEach(item => {
           const priceLine = vm.candleSeries.createPriceLine({
             price: item[0],
-            color: '#2862ff',
-            lineWidth: parseFloat(item[1]) * vm.tickerPrice > 1000000 ? 2 : 0.5,
+            color: parseFloat(item[0]) > vm.tickerPrice ? '#f4465d' : '#2862ff',
+            lineWidth: parseFloat(item[1]) * vm.tickerPrice > 3000000 ? 3 : parseFloat(item[1]) * vm.tickerPrice > 1000000 ? 2 : 0.5,
             axisLabelVisible: true,
             lineStyle: LineStyle.Solid,
             title: '$' + vm.getUsdVolume(item[1]) + ' Sell limit'

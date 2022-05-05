@@ -13,8 +13,6 @@
       <div class="col-12" :class="$mobile ? 'col-md-7' : 'col-md-8'">
         <!--  Main info card-->
         <ticker-main-info/>
-
-        <ticker-detail-chart-controls/>
       </div>
       <div class="col-12 " :class="$mobile ? 'col-md-5' : 'col-md-4'">
         <ticker-detail-trade-button/>
@@ -24,9 +22,9 @@
     <!--    Chart & Limit orders-->
     <div v-if="!ordersChartMode" class="q-mt-sm">
       <div class="row q-col-gutter-sm">
-
         <!--      Chart-->
         <div class="col-sm-7 col-12 ticker-detail-chart" :class="$mobile ? 'col-md-7' : 'col-md-8'">
+          <ticker-detail-chart-controls/>
           <ticker-detail-chart class="q-pl-sm"/>
         </div>
 
@@ -39,7 +37,8 @@
 
 <!--    Orders chart-->
     <div v-else>
-      <ticker-detail-orders-chart class="q-mt-sm"/>
+      <ticker-detail-chart-controls/>
+      <ticker-detail-orders-chart/>
     </div>
     <!--    Trades Difference-->
 

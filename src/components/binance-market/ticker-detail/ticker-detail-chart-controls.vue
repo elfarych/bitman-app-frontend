@@ -1,9 +1,8 @@
 <template>
 <div class="ticker-detail-chart-controls">
-  <div class="flex justify-between" style="padding-right: 13px">
+  <div class="flex justify-between" style="padding-right: 13px; ">
     <div>
       <q-btn
-        v-if="!$mobile"
         :label="ordersChartMode ? 'График по умолчанию' : 'Заявки на графике'"
         color="secondary"
         flat dense no-caps
@@ -60,7 +59,7 @@ export default {
 <style lang="sass">
 .ticker-detail-chart-controls
   position: relative
-  top: -25px
+  top: 0
   left: 3px
 
 @media screen and (max-width: 700px)

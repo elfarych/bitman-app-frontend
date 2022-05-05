@@ -1,5 +1,5 @@
 <template>
-<div class="ticker-detail-chart fit" id="tr-chart">
+<div class="ticker-detail-chart" id="tr-chart">
   <VueTradingView :options="options" :key="$route.params.symbol"/>
 </div>
 </template>

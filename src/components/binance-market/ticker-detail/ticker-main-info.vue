@@ -17,7 +17,8 @@
 
       </div>
     </portal>
-    <div class="ticker-main-info-card flex no-wrap justify-between items-center rounded-borders">
+
+    <div class="ticker-main-info-card flex no-wrap justify-between items-center rounded-borders" style="height: 110px">
 
       <!--      Logo & Name-->
       <div class="flex items-center no-wrap">
@@ -41,12 +42,13 @@
               {{ tickerInfo.name || symbol }}</h1>
 
             <!--          Symbol-->
-            <small class="f-w-600">{{ ticker.s }}</small>
+            <small v-if="ticker.s" class="f-w-600">{{ ticker.s }}</small>
+            <q-skeleton v-else width="100px" height="18px"/>
           </div>
 
           <!--          Price-->
-          <div v-if="ticker.e" class="f-w-800 text-h6 q-mt-xs" style="line-height: 1">$ {{ price || '' }}
-          </div>
+          <div v-if="ticker.e" class="f-w-800 text-h6 q-mt-xs" style="line-height: 1">${{ price || '' }}</div>
+          <q-skeleton v-else width="130px" height="24px" class="q-mt-xs"/>
         </div>
       </div>
 
@@ -61,43 +63,53 @@
           <small class="f-w-400 small-text block text-right">
             изм. 24h
           </small>
-          <div v-if="ticker.e" :class="ticker.P > 0 ? 'text-positive' : 'text-negative'">
+          <div v-if="ticker.e" :class="ticker.P > 0 ? 'text-positive' : 'text-negative'" class="text-subtitle1 f-w-800 l-h-12">
             {{ ticker.P > 0 ? '+' : '' }}{{ changePercent || '' }}%
           </div>
+          <div  v-else class="flex justify-end">
+            <q-skeleton width="70px" height="19px"/>
+          </div>
+
         </div>
         <!--        Volume-->
         <div class="text-subtitle1 f-w-800 text-right q-mt-sm" style="line-height: 1.2">
           <small class="f-w-400 small-text block">
             объем 24h
           </small>
-          <div v-if="ticker.e" class="text-uppercase no-wrap">
+          <div v-if="ticker.e" class="text-uppercase no-wrap text-subtitle1 f-w-800 l-h-12">
             {{ volume | tickerVolumeFormatter }}
+          </div>
+          <div  v-else class="flex justify-end">
+            <q-skeleton width="100px" height="19px"/>
           </div>
         </div>
       </div>
 
     </div>
 
+    <ticker-detail-cap-info :price="this.ticker.c"/>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import tickerVolumeFormatter from 'src/filters/ticker-volume-formatter'
+import TickerDetailCapInfo from 'components/binance-market/ticker-detail/ticker-detail-cap-info'
 
 export default {
   name: 'ticker-main-info',
+  components: { TickerDetailCapInfo },
   filters: {
     tickerVolumeFormatter
   },
   computed: {
-    ...mapState('tickerDetail', ['ticker', 'tickerInfo']),
+    ...mapState('tickerDetail', ['ticker', 'tickerInfo', 'tickerCap']),
     symbol () {
       return this.$route.params.symbol
     },
     price () {
       if (parseFloat(this.ticker.c) > 1000) {
-        return new Intl.NumberFormat('ru').format(parseFloat(this.ticker.c))
+        return new Intl.NumberFormat('en').format(parseFloat(this.ticker.c))
       }
       return parseFloat(this.ticker.c)
     },
@@ -111,7 +123,7 @@ export default {
       return this.ticker.p ? parseFloat(this.ticker.p) : ''
     },
     volume () {
-      return this.ticker.q
+      return this.tickerCap.volume
     }
   },
   methods: {}
@@ -159,6 +171,40 @@ export default {
 // slug: "ethereum"
 // subreddit: "ethereum"
 // symbol: "ETH"
+
+// CAP INFO
+// baseAsset: null
+// circulatingSupply: 988661279
+// cmcUniqueId: 1765
+// dayChange: 3.875459
+// dayChangeAmount: 1.74840169
+// explorerUrls: null
+// fullName: "EOS"
+// id: 14465075
+// imageUrl: null
+// issueDate: null
+// issuePrice: null
+// issuePriceUsed: null
+// localFullName: "EOS"
+// logo: "https://bin.bnbstatic.com/image/admin_mgs_image_upload/20201110/09f93059-fe85-42cc-96b7-603ef6da07c6.png"
+// mapperName: "EOS"
+// marketCap: 2174608613.8259807
+// maxSupply: null
+// name: "EOS"
+// price: 2.19954868
+// quoteAsset: null
+// rank: 45
+// slug: "eos"
+// source: null
+// symbol: "EOSBUSD"
+// tagInfos: [{tag: "pos", display: "POS"}, {tag: "Layer1_Layer2", display: "Layer 1 / Layer 2"}]
+// tags: ["pos", "Layer1_Layer2"]
+// totalSupply: 1053884985
+// tradeUrl: null
+// url: null
+// volume: 402668470.84317595
+// volumeGlobal: null
+// website: null
 </script>
 
 <style lang="sass">

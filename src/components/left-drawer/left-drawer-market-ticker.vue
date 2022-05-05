@@ -2,13 +2,14 @@
 <div class="left-drawer-market-ticker">
   <q-item
     clickable
+    :title="ticker.name"
     class="q-px-sm row items-center f-w-800"
     :to="{ name: 'market-ticker-detail', params: { symbol: slicedSymbol } }"
   >
     <div class="flex items-center col-5 no-wrap">
       <chart-popup-btn v-if="$mobile" :chart-symbol="slicedSymbol" class="q-mr-xs" :change="changePercentValue"/>
       <chart-hover-btn v-else :chart-symbol="slicedSymbol" class="q-mr-xs" :change="changePercentValue"/>
-      <div class="q-ml-xs f-w-800">{{ slicedSymbol }}</div>
+      <div class="q-ml-xs f-w-800 text-white-shadow-light">{{ slicedSymbol }}</div>
     </div>
 
     <div class="text-right col-3" :class="priceClass">

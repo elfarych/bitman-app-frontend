@@ -29,10 +29,12 @@ export async function loadLiquidity ({ commit }, interval = '24H') {
     axios
       .get(`https://api.gatebigdata.com/v2/data/burst/bourse/coin_type/${symbol}/ts/${interval}?url=burst/bourse/coin_type`)
       .then(res => {
-        const totalSum = parseFloat(res.data.data[1].data[res.data.data[1].data.length - 1][0])
-        const longs = parseFloat(res.data.data[2].data[res.data.data[2].data.length - 1][0])
-        const shorts = parseFloat(res.data.data[3].data[res.data.data[3].data.length - 1][0])
-        commit('mutationLiquidity', { totalSum, longs, shorts })
+        if (res.data?.data[1]) {
+          const totalSum = parseFloat(res.data.data[1].data[res.data.data[1].data.length - 1][0])
+          const longs = parseFloat(res.data.data[2].data[res.data.data[2].data.length - 1][0])
+          const shorts = parseFloat(res.data.data[3].data[res.data.data[3].data.length - 1][0])
+          commit('mutationLiquidity', { totalSum, longs, shorts })
+        }
       })
   } catch (e) {
     errorHandler(e)

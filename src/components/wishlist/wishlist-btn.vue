@@ -2,7 +2,8 @@
 <div class="wishlist-btn">
   <q-btn
     flat dense
-    class="rounded-borders"
+    padding="3px"
+    class="rounded-borders text-white-shadow-light"
     :color="symbolInWishlist ? 'primary' : ''"
     @click.stop="addToWish($event)"
   >

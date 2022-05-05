@@ -1,5 +1,5 @@
 <template>
-<div class="trader-new-case">
+<div class="add-case">
   <q-btn
     :label="addCaseTitle"
     color="secondary"
@@ -7,7 +7,7 @@
     no-caps
     unelevated
     :loading="addCaseLoading"
-    class="q-py-sm"
+    class="q-py-xs"
     @click="addCase"
   />
 
@@ -35,16 +35,13 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import errorHandler from 'src/utils/error-handler'
-import notifier from 'src/utils/notifier'
-import config from 'src/config'
 
 export default {
-  name: 'trader-new-case',
+  name: 'add-case',
   computed: {
-    ...mapState('trader', ['trader']),
+    ...mapState('traderCase', ['cases']),
     addCaseTitle () {
-      return this.trader && this.trader.cases && this.trader.cases.length ? 'Добавить портфель' : 'Создать портфель'
+      return this.cases.length ? 'Добавить портфель' : 'Создать портфель'
     },
     rulesNoEmpty () {
       return [
@@ -64,38 +61,16 @@ export default {
     }
   },
   methods: {
-    ...mapActions('trader', ['getTrader']),
+    ...mapActions('traderCase', ['createCase']),
     addCase () {
       this.addCaseDialog = true
     },
     async caseFormSubmit () {
       const vm = this
       vm.addCaseLoading = true
-      const jwt = localStorage.getItem('jwt')
-      try {
-        await vm.$axios
-          .post(`${config.socialServerURI}/case/create/`, {
-            ...vm.caseForm
-          }, {
-            headers: {
-              Authorization: `Bearer ${jwt}`
-            }
-          })
-          .then(res => {
-            if (res.status === 201) {
-              notifier('Порфтель успешно создан.', 'positive')
-              vm.addCaseDialog = false
-              vm.getTrader()
-            } else {
-              notifier('Что-то пошло не так.')
-            }
-          })
-      } catch (e) {
-        notifier('Не удалось создать порфтель. Произошла ошибка.', 'dark')
-        errorHandler(e)
-      } finally {
-        vm.addCaseLoading = false
-      }
+      await vm.createCase({ data: vm.caseForm })
+      vm.addCaseDialog = false
+      vm.addCaseLoading = false
     }
   }
 }

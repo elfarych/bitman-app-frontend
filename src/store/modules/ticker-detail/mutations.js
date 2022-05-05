@@ -12,6 +12,10 @@ export function mutationsTickerAskOrders (state, data) {
   })
 }
 
+export function mutationTickerCap (state, data) {
+  state.tickerCap = data
+}
+
 export function mutationsTickerBidOrders (state, data) {
   state.tickerBidOrders = data.map(item => {
     return [parseFloat(item[0]), parseFloat(item[1])]

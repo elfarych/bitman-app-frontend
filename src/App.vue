@@ -7,6 +7,7 @@
 import { mapActions, mapMutations } from 'vuex'
 
 import volatilityTickerMixin from 'src/mixins/volatility-stream-mixin'
+import marketCapGetEndSetter from 'src/utils/market-cap-get-n-setter'
 
 export default {
   name: 'App',
@@ -30,6 +31,7 @@ export default {
     this.loadVolatilityTickers()
   },
   async created () {
+    await marketCapGetEndSetter()
     if (this.$route.query.ref) localStorage.setItem('ref', this.$route.query.ref.toString())
     await this.siteInfoInit()
     await this.infoInit()
@@ -39,6 +41,10 @@ export default {
     setTimeout(() => {
       this.startVolatilityStream() // From volatilityTickerMixin
     }, 2000)
+
+    setInterval(() => {
+      marketCapGetEndSetter()
+    }, 60000)
   },
   beforeCreate () {
     this.$q.dark.set(true)

@@ -4,6 +4,7 @@
     icon="person"
     dense
     flat
+    class="text-white-shadow-light"
     @click="clicked"
   />
 </div>

@@ -4,6 +4,7 @@ export default function () {
     ticker: {},
     tickerInfo: {},
     tickerFuturesInfo: null,
+    tickerCap: {},
 
     tickerFuturesAskOrders: [],
     tickerAskOrders: [],

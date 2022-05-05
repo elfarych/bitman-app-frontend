@@ -40,7 +40,8 @@ export async function loadSymbols ({ commit, dispatch, state }) {
     await axios
       .get(`${config.binanceAPIURI}/api/v3/ticker/24hr`)
       .then(res => {
-        commit('mutationSymbols', res.data.filter(item => item.symbol.endsWith('USDT') && !item.symbol.includes('DOWN')))
+        debugger
+        commit('mutationSymbols', res.data.filter(item => item.symbol.endsWith('USDT')))
       })
   } catch (e) {
     errorHandler(e)

@@ -1,13 +1,14 @@
 <template>
-<div class="trader-case-add-coin">
-<q-btn
-  label="Добавить монету"
-  icon="add"
-  color="secondary"
-  outline no-caps
-  class="q-mt-lg"
-  @click="addCoinStart"
-/>
+<div class="add-case-token">
+  <q-btn
+    label="Добавить монету"
+    icon="add"
+    color="secondary"
+    no-caps
+    unelevated
+    class="q-mt-lg"
+    @click="addCoinStart"
+  />
   <q-dialog v-model="dialog">
     <q-card style="width: 555px; max-width: 100%">
       <q-toolbar>
@@ -17,7 +18,7 @@
 
       <q-card-section>
 
-<!--        Token-->
+        <!--        Token-->
         <q-select
           v-model="coinForm.symbol"
           :options="options"
@@ -50,7 +51,7 @@
           </template>
         </q-select>
 
-<!--        Price-->
+        <!--        Price-->
         <q-input
           type="number"
           v-model="coinForm.price"
@@ -69,13 +70,13 @@
           </template>
         </q-input>
 
-<!--        Quantity-->
+        <!--        Quantity-->
         <div class="row q-col-gutter-sm">
           <div class="col-6">
             <q-input
               type="number"
               v-model="coinForm.quantity_base_asset"
-              :disable="!coinForm.price"
+              :disable="!coinForm.price || coinForm.price < 0"
               :label="selectedSymbol ? `Количество ${selectedSymbol}` : 'Количество монет'"
               outlined
               dense
@@ -93,9 +94,9 @@
           </div>
         </div>
 
-<!--        Add button-->
+        <!--        Add button-->
         <q-btn
-          :disable="computedSumInUsd === '0.00'"
+          :disable="computedSumInUsd === '0.00' || computedSumInUsd.startsWith('-')"
           label="Добавить монету"
           class="q-mt-lg q-py-sm text-white-shadow f-w-800 full-width"
           no-caps
@@ -113,13 +114,12 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import errorHandler from 'src/utils/error-handler'
-import notifier from 'src/utils/notifier'
-import config from 'src/config'
 import axios from 'axios'
+import config from 'src/config'
+import errorHandler from 'src/utils/error-handler'
 
 export default {
-  name: 'trader-case-add-coin',
+  name: 'add-case-token',
   props: {
     caseId: Number,
     caseTokens: []
@@ -163,60 +163,47 @@ export default {
     }
   },
   methods: {
-    ...mapActions('trader', ['getTrader']),
+    ...mapActions('traderCase', ['createCaseToken']),
+
     addCoinStart () {
       this.options = this.coinOptions
       this.dialog = true
     },
-    async addCoin () {
-      const vm = this
-      const jwt = localStorage.getItem('jwt')
-      vm.addCoinLoading = true
-      const fullInfo = await vm.loadTickerDetailInfo()
 
-      try {
-        await vm.$axios
-          .post(`${config.socialServerURI}/case_token/create/`,
-            {
-              symbol: vm.coinForm.symbol,
-              price: Math.abs(parseFloat(vm.coinForm.price)),
-              quantity_base_asset: Math.abs(parseFloat(vm.coinForm.quantity_base_asset)),
-              case: vm.caseId,
-              full_name: fullInfo.name,
-              logo: fullInfo.logo
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${jwt}`
-              }
-            })
-          .then(async res => {
-            if (res.status === 201) {
-              notifier('Монета добавлена в портфель.', 'positive')
-              await vm.getTrader()
-              vm.dialog = false
-              vm.coinForm = {
-                symbol: '',
-                price: null,
-                quantity_base_asset: null
-              }
-            }
-          })
-      } catch (e) {
-        notifier('Не удалось добавить монету в портфель.', 'negative')
-        errorHandler(e)
-      } finally {
-        vm.addCoinLoading = false
-      }
-    },
     coinsFilter (val, update, abort) {
       update(() => {
         this.options = this.coinOptions.filter(item => item.toLowerCase().includes(val.toLowerCase()))
       })
     },
+
     updateSelectedPrice () {
       this.coinForm.price = this.selectedCoin.lastPrice
     },
+
+    async addCoin () {
+      const vm = this
+      vm.addCoinLoading = true
+      const fullInfo = await vm.loadTickerDetailInfo()
+      const data = {
+        symbol: vm.coinForm.symbol,
+        price: Math.abs(parseFloat(vm.coinForm.price)),
+        quantity_base_asset: Math.abs(parseFloat(vm.coinForm.quantity_base_asset)),
+        case: vm.caseId,
+        full_name: fullInfo.name,
+        logo: fullInfo.logo
+      }
+
+      await vm.createCaseToken({ data })
+
+      vm.dialog = false
+      vm.coinForm = {
+        symbol: '',
+        price: null,
+        quantity_base_asset: null
+      }
+      vm.addCoinLoading = false
+    },
+
     async loadTickerDetailInfo () {
       const vm = this
       let tokenInfo

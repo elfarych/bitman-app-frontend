@@ -15,9 +15,10 @@ export function mutationSymbols (state, data) {
     .map(item => {
       if (parseFloat(item.lastPrice)) {
         return {
-          logo: item.logo,
-          symbol: item.symbol,
+          ...item,
           lastPrice: parseFloat(item.lastPrice),
+          lowPrice: parseFloat(item.lowPrice),
+          highPrice: parseFloat(item.highPrice),
           priceChange: parseFloat(item.priceChange),
           priceChangePercent: parseFloat(item.priceChangePercent),
           volume: parseFloat(item.volume)
@@ -38,9 +39,11 @@ export function mutationFutureSymbols (state, data) {
     .map(item => {
       if (parseFloat(item.lastPrice)) {
         return {
-          logo: item.logo,
-          symbol: item.symbol.replace('1000', ''),
+          ...item,
           lastPrice: parseFloat(item.lastPrice),
+          lowPrice: parseFloat(item.lowPrice),
+          highPrice: parseFloat(item.highPrice),
+          priceChange: parseFloat(item.priceChange),
           priceChangePercent: parseFloat(item.priceChangePercent),
           volume: parseFloat(item.volume)
         }

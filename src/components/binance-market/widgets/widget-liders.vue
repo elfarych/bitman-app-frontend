@@ -12,7 +12,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import BinanceMarketTicker from 'components/binance-market/binance-market-ticker'
+import BinanceMarketTicker from 'components/binance-market/binance-market-ticker/binance-market-ticker'
 
 export default {
   name: 'widget-liders',

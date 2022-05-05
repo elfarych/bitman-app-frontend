@@ -7,7 +7,7 @@
     за {{ days }} дн.
   </small>
 
-  <div class="absolute-bottom-right q-mr-xs flex no-wrap text-right" style="z-index: 1000; bottom: -5px">
+  <div class="absolute-bottom-right q-mr-xs flex no-wrap text-right" style="z-index: 1000; bottom: 0">
     <small>мин <span class="f-w-800">{{ periodMinValue || '' }}</span></small>
     <small class="q-ml-md">макс <span class="f-w-800">{{ periodMaxValue || '' }}</span></small>
   </div>
