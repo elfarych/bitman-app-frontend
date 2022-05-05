@@ -1,14 +1,15 @@
 <template>
   <div
     :key="`${fullscreen}`"
-    class="widget-week-vix-chart rounded-borders bg-dark q-pt-md relative-position q-pb-lg"
+    class="widget-week-vix-chart rounded-borders q-pt-md relative-position q-pb-lg bitman-border"
     :style="fullscreen ? '' : 'height: 300px'"
     :class="fullscreen ? 'widget-week-vix-chart-full-screen' : ''"
   >
     <q-btn
       :icon-right="fullscreen ? 'fullscreen_exit' : 'fullscreen'"
-      flat dense no-caps
+      dense no-caps
       class="q-ma-md absolute-top-right"
+      color="secondary"
       @click="setScreen"
     />
     <div class="f-w-800 text-subtitle1 text-center q-pb-md">
@@ -145,4 +146,5 @@ export default {
   right: 0
   bottom: 0
   z-index: 9999
+  background: rgba(0,0,0,.95)
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="widget-btc-long-short-positions rounded-borders bg-dark q-px-md q-pt-md q-pb-xl relative-position">
+  <div class="widget-btc-long-short-positions rounded-borders q-px-md q-pt-md q-pb-xl relative-position bitman-border">
 
     <div class="absolute-bottom-right q-pr-md q-pb-sm">
       <q-btn

@@ -71,13 +71,15 @@
           <!--              Capitalization-->
           <small class="block f-w-400 small-text text-grey-5">market cap</small>
           <div class="f-w-800" style="line-height: 1 !important">
-            <span class="text-uppercase">{{ ticker.marketCap | tickerVolumeFormatter }}</span>
+            <span v-if="ticker.marketCap" class="text-uppercase">{{ ticker.marketCap | tickerVolumeFormatter }}</span>
+            <span v-else class="text-grey-5">No data</span>
           </div>
 
           <!--        Volume-->
           <small class="block f-w-400 small-text q-mt-xs text-grey-5">объем 24ч</small>
           <div class="f-w-800" style="line-height: 1 !important">
-            <span class="text-uppercase">{{ ticker.volume | tickerVolumeFormatter }}</span>
+            <span v-if="ticker.volume" class="text-uppercase">{{ ticker.volume | tickerVolumeFormatter }}</span>
+            <span v-else class="text-grey-5">No data</span>
           </div>
 
         </div>
@@ -211,7 +213,7 @@ export default {
 <style lang="sass">
 .binance-orders-ticker-card
   background: $dark
-  padding: 5px 0 0 3px
+  padding: 0 0 0 3px
 
 @media screen and (max-width: 700px)
   .binance-orders-ticker-volume, .binance-orders-ticker-min

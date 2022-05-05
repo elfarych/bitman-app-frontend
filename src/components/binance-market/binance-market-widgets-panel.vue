@@ -3,16 +3,15 @@
   <div class="market-right-panel">
     <widget-week-vix-chart :key="`${$route.query.market}`"/>
   </div>
-
-  <div class="q-mt-md">
+  <div class="q-mt-sm">
     <widget-long-short-positions :key="`${$route.query.market}`"/>
   </div>
 
-  <div class="q-mt-md">
+  <div class="q-mt-sm">
     <widget-liquidity :key="`${$route.query.market}`"/>
   </div>
 
-  <div class="q-mt-md">
+  <div class="q-mt-sm">
     <widget-week-top-coins :key="`${$route.query.market}`"/>
   </div>
 </div>

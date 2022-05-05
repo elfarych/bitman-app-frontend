@@ -1,6 +1,6 @@
 <template>
 <div class="binance-market-ticker-day-price-range">
-  <div class="relative-position rounded-borders bg-grey-7 overflow-hidden" style="height: 5px">
+  <div class="relative-position rounded-borders bg-grey-9 overflow-hidden" :style="styles">
     <div
       :style="`width: ${lineWidth}%`"
       class="full-height absolute-left"
@@ -16,7 +16,11 @@ export default {
   props: {
     lowPrice: Number,
     highPrice: Number,
-    lastPrice: Number
+    lastPrice: Number,
+    styles: {
+      type: String,
+      default: 'height: 5px'
+    }
   },
   computed: {
     avgPrice () {

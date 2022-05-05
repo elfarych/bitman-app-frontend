@@ -38,7 +38,7 @@
                         ticker.rank
                       }}</small>
                   </div>
-                  <small class="small-text text-grey-5 block f-w-400 ellipsis" style="line-height: 1">{{ ticker.fullName }}</small>
+                  <small class="small-text text-grey-5 block f-w-400" style="line-height: 1">{{ ticker.fullName }}</small>
 
                   <div :class="priceClass" class="small-text flex items-center q-mt-xs">
                     ${{ ticker.lastPrice | tickerPriceFormatter }}
@@ -69,7 +69,7 @@
                 style="margin: 3px 0"
               />
 
-              <div class="full-height absolute-right" style="right: -10px; top: 7px">
+              <div class="full-height absolute-right" style="right: -10px; top: 5px">
                 <div :class="changePercentValue > 0 ? 'text-positive' : 'text-negative'" class="f-w-800 small-text"
                      style="line-height: 1 !important">
                   <span class="">{{ changePercentValue > 0 ? '+' : '' }}</span>{{ changePercent }}%
@@ -79,9 +79,12 @@
 
             <div class="col-5 text-right l-h-12 q-pr-xs" style="line-height: 1">
               <small class="block small-text text-grey-5 f-w-400">объем 24h</small>
-              <span class="block text-uppercase f-w-800 fontsize-12">{{ ticker.volume | tickerVolumeFormatter }}</span>
+              <span v-if="ticker.volume" class="block text-uppercase f-w-800 fontsize-12">{{ ticker.volume | tickerVolumeFormatter }}</span>
+              <span v-else class="block fontsize-12 text-grey-5">no data</span>
+
               <small class="block small-text text-grey-5 f-w-400">market cap</small>
-              <span class="block text-uppercase f-w-800 fontsize-12">{{ ticker.marketCap | tickerVolumeFormatter }}</span>
+              <span v-if="ticker.marketCap" class="block text-uppercase f-w-800 fontsize-12">{{ ticker.marketCap | tickerVolumeFormatter }}</span>
+              <span v-else class="block fontsize-12 text-grey-5">no data</span>
             </div>
           </div>
         </div>
@@ -192,7 +195,7 @@ export default {
 <style lang="sass">
 .binance-orders-ticker-card
   background: $dark
-  padding: 5px 0 0 3px
+  padding: 0 0 0 3px
 
 @media screen and (max-width: 700px)
   .binance-orders-ticker-volume, .binance-orders-ticker-min

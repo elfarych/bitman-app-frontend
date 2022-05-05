@@ -107,31 +107,13 @@
     <div v-if="market !== 'Metrics'" class="flex q-mt-sm items-center no-wrap" style="overflow-x: scroll">
       <div class="relative-position flex no-wrap items-center cursor-pointer items-center">
         <q-btn
-          v-if="sortField"
-          icon="filter_list_off"
-          flat dense no-caps
+          label="Market cap"
+          :icon-right="sortField === 'cap' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
           size="sm"
-          class="q-mr-xs"
-          color="secondary"
-          @click="sortField = ''"
-        />
-        <q-btn
-          label="Ранг"
-          :icon-right="sortField === 'rank' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
-          size="sm"
-          :color="sortField === 'rank' ? 'primary' : ''"
+          :color="sortField === 'cap' ? 'primary' : ''"
           dense flat no-caps
-          @click="setSort('rank')"
-        />
-        <q-btn
-          label="Изм. кап."
-          :icon-right="sortField === 'cap_24h' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
-          size="sm"
-          :color="sortField === 'cap_24h' ? 'primary' : ''"
-          dense flat no-caps
-          title="Капитализация (изменение 24 часа)"
-          class="q-ml-sm"
-          @click="setSort('cap_24h')"
+          title="Капитализация"
+          @click="setSort('cap')"
         />
       </div>
 
@@ -146,13 +128,13 @@
         />
 
         <q-btn
-          label="Изм. объема"
-          :icon-right="sortField === 'volume_24h_change_24h' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
+          label="Цена"
+          :icon-right="sortField === 'price' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
           size="sm"
-          :color="sortField === 'volume_24h_change_24h' ? 'primary' : ''"
+          :color="sortField === 'price' ? 'primary' : ''"
           dense flat no-caps
           class="q-ml-sm"
-          @click="setSort('volume_24h_change_24h')"
+          @click="setSort('price')"
         />
       </div>
 
@@ -166,6 +148,15 @@
           @click="setSort('change')"
         />
       </div>
+      <q-btn
+        v-if="sortField"
+        icon="filter_list_off"
+        flat dense no-caps
+        size="sm"
+        class="q-ml-md"
+        color="secondary"
+        @click="sortField = ''"
+      />
     </div>
 
     <!--    Market tickers-->
@@ -246,48 +237,18 @@ export default {
     sortedTickers () {
       const symbols = [...this.filteredTickers]
 
-      if (this.sortField === 'rank' && this.sortUp) {
+      if (this.sortField === 'cap' && this.sortUp) {
         return symbols
-          .filter(item => item.rank)
+          .filter(item => item.marketCap)
           .sort((a, b) => {
-            return a.rank > b.rank ? 1 : -1
+            return a.marketCap > b.marketCap ? 1 : -1
           })
       }
-      if (this.sortField === 'rank' && !this.sortUp) {
+      if (this.sortField === 'cap' && !this.sortUp) {
         return symbols
-          .filter(item => item.rank)
+          .filter(item => item.marketCap)
           .sort((a, b) => {
-            return a.rank < b.rank ? 1 : -1
-          })
-      }
-
-      if (this.sortField === 'cap_24h' && this.sortUp) {
-        return symbols
-          .filter(item => item.market_cap_change_24h)
-          .sort((a, b) => {
-            return a.market_cap_change_24h > b.market_cap_change_24h ? 1 : -1
-          })
-      }
-      if (this.sortField === 'cap_24h' && !this.sortUp) {
-        return symbols
-          .filter(item => item.market_cap_change_24h)
-          .sort((a, b) => {
-            return a.market_cap_change_24h < b.market_cap_change_24h ? 1 : -1
-          })
-      }
-
-      if (this.sortField === 'volume_24h_change_24h' && this.sortUp) {
-        return symbols
-          .filter(item => item.volume_24h_change_24h)
-          .sort((a, b) => {
-            return a.volume_24h_change_24h > b.volume_24h_change_24h ? 1 : -1
-          })
-      }
-      if (this.sortField === 'volume_24h_change_24h' && !this.sortUp) {
-        return symbols
-          .filter(item => item.volume_24h_change_24h)
-          .sort((a, b) => {
-            return a.volume_24h_change_24h < b.volume_24h_change_24h ? 1 : -1
+            return a.marketCap < b.marketCap ? 1 : -1
           })
       }
 
@@ -314,14 +275,14 @@ export default {
       }
 
       if (this.sortField === 'volume' && this.sortUp) {
-        return symbols.sort((a, b) => {
-          return a.volume > b.volume ? 1 : -1
-        })
+        return symbols
+          .filter(item => item.volume)
+          .sort((a, b) => { return a.volume > b.volume ? 1 : -1 })
       }
       if (this.sortField === 'volume' && !this.sortUp) {
-        return symbols.sort((a, b) => {
-          return a.volume < b.volume ? 1 : -1
-        })
+        return symbols
+          .filter(item => item.volume)
+          .sort((a, b) => { return a.volume < b.volume ? 1 : -1 })
       }
 
       return symbols
@@ -336,7 +297,7 @@ export default {
       searchText: '',
       slice: 20,
       sortField: '',
-      sortUp: false
+      sortUp: true
     }
   },
   methods: {

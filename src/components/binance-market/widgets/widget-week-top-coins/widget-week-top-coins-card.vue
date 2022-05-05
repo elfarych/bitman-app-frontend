@@ -1,5 +1,5 @@
 <template>
-  <div class="widget-week-top-coins-card q-mt-sm">
+  <a class="widget-week-top-coins-card q-mt-md block text-white" :href="`https://www.coingecko.com/en/coins/${coin.slug}`" target="_blank">
     <div class="row items-center f-w-800">
       <div class="col-6 flex items-center no-wrap">
         <q-avatar :size="$mobile ? '20px' : '30px'" class="bg-transparent" square>
@@ -29,9 +29,7 @@
       </div>
 
     </div>
-
-    <q-separator class="q-mt-sm"/>
-  </div>
+  </a>
 </template>
 
 <script>

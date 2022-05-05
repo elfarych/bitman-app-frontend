@@ -12,8 +12,10 @@ export default {
         stream = new EventSource(`${config.nodeServerURI}/volatility/binance-volatility-stream`)
         stream.onmessage = (event) => {
           const parsedData = JSON.parse(event.data)
-          this.createNotify(parsedData).then(() => {})
-          this.mutationAddVolatilityTicker(parsedData)
+          if (parsedData.name && !parsedData.name.endsWith('DOWN') && !parsedData.name.endsWith('UP')) {
+            this.createNotify(parsedData).then(() => {})
+            this.mutationAddVolatilityTicker(parsedData)
+          }
         }
       } catch (e) {
         this.startVolatilityStream()

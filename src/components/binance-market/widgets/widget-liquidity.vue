@@ -1,6 +1,6 @@
 <template>
 <div
-  class="widget-liquidity rounded-borders bg-dark q-py-md relative-position q-pb-xl q-pt-md"
+  class="widget-liquidity rounded-borders q-py-md relative-position q-pb-xl q-pt-md bitman-border"
   :key="`${fullscreen}` "
   :style="fullscreen ? '' : 'height: 370px'"
   :class="fullscreen ? 'widget-liquidity-chart-full-screen' : ''"
@@ -15,7 +15,8 @@
 <!--    />-->
     <q-btn
       :icon-right="fullscreen ? 'fullscreen_exit' : 'fullscreen'"
-      flat dense no-caps
+      dense no-caps
+      color="secondary"
       class="q-ml-xs"
       @click="setScreen"
     />
@@ -276,4 +277,5 @@ export default {
   right: 0
   bottom: 0
   z-index: 9999
+  background: rgba(0,0,0,.95)
 </style>

@@ -89,7 +89,15 @@ export default {
       return new Intl.NumberFormat('ru').format(this.range)
     },
     timeFormat () {
-      return 'DD.MM.YY HH:mm'
+      if (this.chartInterval === '5m' || this.chartInterval === '15m') {
+        return 'HH:mm'
+      }
+
+      if (this.chartInterval === '30m' || this.chartInterval === '1h' || this.chartInterval === '4h') {
+        return 'DD MMMM'
+      }
+
+      return 'MMMM YYYY'
     }
   },
   data () {

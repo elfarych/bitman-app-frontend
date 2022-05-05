@@ -1,6 +1,6 @@
 <template>
 <div class="binance-market-ticker-chart relative-position" :id="`ticker-chart-${symbol}${chartKey}`" @click="showChartPopup($event)">
-  <small class="absolute-top-right q-mr-xs" style="top: -5px">
+  <small class="absolute-top-right q-mr-xs">
     <span v-if="startEndDifference" :class="startEndDifference > 0 ? 'text-positive' : 'text-negative'" class="f-w-800 q-mr-xs">
       {{ startEndDifference > 0 ? '+' : '' }}{{ startEndDifference.toFixed(2) }}%
     </span>
@@ -19,6 +19,8 @@
       Быстрый просмотр
     </q-tooltip>
   </div>
+
+  <q-skeleton v-if="!candles.length" class="absolute-full"/>
 </div>
 </template>
 

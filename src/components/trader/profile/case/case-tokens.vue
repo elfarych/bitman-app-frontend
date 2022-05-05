@@ -4,7 +4,7 @@
     <div
       v-for="token in tokens"
       :key="token.id"
-      class="col-sm-6 col-lg-3 col-12"
+      class="col-sm-6 col-lg-4 col-12"
     >
       <case-token :case-id="caseId" :token="token"/>
     </div>

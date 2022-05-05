@@ -15,15 +15,15 @@
     <!--    Widgets-->
     <div class="q-px-sm q-mt-xl q-pt-lg">
       <div class="row q-col-gutter-sm">
-        <div class="col-12 col-sm-12 col-md-4">
+        <div class="col-12">
           <widget-week-vix-chart class="fit" style="min-height: 350px"/>
         </div>
 
-        <div class="col-12 col-sm-6 col-md-4">
+        <div class="col-12 col-sm-6">
           <widget-long-short-positions class="fit" :diagram-height="200"/>
         </div>
 
-        <div class="col-12 col-sm-6 col-md-4">
+        <div class="col-12 col-sm-6">
           <widget-liquidity />
         </div>
       </div>

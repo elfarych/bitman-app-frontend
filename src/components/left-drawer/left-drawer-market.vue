@@ -1,10 +1,10 @@
 <template>
   <div class="left-drawer-market">
 
-    <div class="q-px-xs q-pb-sm">
+    <div class="q-px-md q-pb-md">
       <q-input
         v-model="searchText"
-        outlined dense clearable
+        dense clearable
         @clear="searchText = ''"
       >
         <template v-slot:prepend>
@@ -13,7 +13,7 @@
       </q-input>
     </div>
 
-    <div class="row q-pl-sm">
+    <div class="row q-pl-sm q-pr-lg">
       <div class="relative-position col-6 flex no-wrap items-center cursor-pointer">
         <q-btn
           v-if="sortField"

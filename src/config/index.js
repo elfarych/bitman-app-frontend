@@ -3,7 +3,7 @@ export default {
   socialServerURI: 'http://192.168.0.199:8000',
   // socialServerURI: 'https://api-pys.bitman.trade',
   // nodeServerURI: 'https://api-node.bitman.trade',
-  nodeServerURI: 'http://192.168.0.199:5000',
+  nodeServerURI: 'http://192.168.0.155:5000',
   binanceAPIURI: 'https://api.binance.com',
   binanceTradeURI: 'https://www.binance.com/ru/trade',
   binanceFuturesTradeURI: 'https://www.binance.com/ru/futures',

@@ -19,19 +19,19 @@
   </q-tabs>
 
   <q-tab-panels v-model="tab" animated class="text-white" swipeable>
-    <q-tab-panel name="menu" class="q-pa-none q-pt-sm">
+    <q-tab-panel name="menu" class="q-pa-none">
       <left-drawer-content />
     </q-tab-panel>
 
-    <q-tab-panel name="spot" class="q-pa-none q-pt-sm">
+    <q-tab-panel name="spot" class="q-pa-none">
       <left-drawer-market />
     </q-tab-panel>
 
-    <q-tab-panel name="futures" class="q-pa-none q-pt-sm">
+    <q-tab-panel name="futures" class="q-pa-none">
       <left-drawer-market futures />
     </q-tab-panel>
 
-    <q-tab-panel name="wishlist" class="q-pa-none q-pt-sm">
+    <q-tab-panel name="wishlist" class="q-pa-none">
       <left-drawer-market wishlist-mode/>
     </q-tab-panel>
   </q-tab-panels>

@@ -97,15 +97,15 @@
     <div class="q-mt-xl">
       <div class="text-subtitle1 text-uppercase f-w-800 q-mb-lg">Общие данные</div>
       <div class="row q-col-gutter-sm">
-        <div class="col-12 col-sm-12 col-md-4">
+        <div class="col-12 col-sm-12">
           <widget-week-vix-chart class="fit" style="min-height: 350px"/>
         </div>
 
-        <div class="col-12 col-sm-6 col-md-4">
+        <div class="col-12 col-sm-6">
           <widget-long-short-positions class="fit" :diagram-height="200"/>
         </div>
 
-        <div class="col-12 col-sm-6 col-md-4">
+        <div class="col-12 col-sm-6">
           <widget-liquidity />
         </div>
       </div>
