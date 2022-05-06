@@ -2,7 +2,7 @@
   <div class="ticker-detail-hodlers rounded-borders">
     <div>
       <div class="f-w-800 text-uppercase q-mt-lg text-subtitle1 flex justify-between items-center">
-        <span class="block">ТОП-100 ходлеров</span>
+        <span class="block">ТОП-100 холдеров</span>
         <q-btn
           icon="refresh"
           flat dense
@@ -11,6 +11,9 @@
           :disable="disableLoader"
           @click="reloadHodlers"
         />
+      </div>
+      <div>
+        Балансы и транзакции топ-100 холдеров монеты {{ ticker.symbol }}
       </div>
       <div v-if="hodlers && hodlers.length">
         <!--      Header-->

@@ -1,5 +1,5 @@
 <template>
-<div class="widget-week-top-coins bitman-border q-pa-md rounded-borders">
+<div class="widget-week-top-coins bg-dark q-pa-md rounded-borders">
   <div class="text-subtitle1 f-w-800 text-center">В тренде за неделю</div>
   <div class="row q-mt-sm">
     <div class="col-3 offset-6">

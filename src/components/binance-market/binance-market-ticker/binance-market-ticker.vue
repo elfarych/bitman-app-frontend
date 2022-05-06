@@ -4,13 +4,13 @@
     <q-item
       v-if="!$mobile"
       clickable
-      class="q-pa-none full-width binance-orders-ticker binance-orders-ticker-card rounded-borders overflow-hidden"
+      class="q-pa-none full-width binance-orders-ticker binance-orders-ticker-card rounded-borders overflow-hidden binance-market-ticker"
       :to="{ name: 'market-ticker-detail', params: { symbol: slicedSymbol } }"
     >
 
       <div class="row full-width items-center">
         <!--    Name & -->
-        <div class="ticker-token-name q-pl-sm col-4">
+        <div class="ticker-token-name q-pl-sm col-4 q-pt-xs">
           <div class="flex items-center">
             <div class="text-center">
               <q-avatar size="30px" class="bg-transparent" square>
@@ -60,8 +60,7 @@
             <span class="">{{ changePercentValue > 0 ? '+' : '' }}</span>{{ changePercent }}%
           </div>
 
-          <div v-if="ticker.priceChange >= 0.000001" :class="ticker.priceChange >= 0 ? 'text-positive' : 'text-negative'" class="f-w-800 q-mt-xs"
-               style="line-height: 1 !important">
+          <div v-if="ticker.priceChange >= 0.000001 || ticker.priceChange <= -0.000001" :class="ticker.priceChange >= 0 ? 'text-positive' : 'text-negative'" class="f-w-800 q-mt-xs" style="line-height: 1 !important">
             <span class="">{{ ticker.priceChange > 0 ? '+' : '' }}</span>{{ ticker.priceChange | tickerPriceFormatter }}$
           </div>
         </div>

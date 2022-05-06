@@ -1,6 +1,6 @@
 <template>
 <div
-  class="widget-liquidity rounded-borders q-py-md relative-position q-pb-xl q-pt-md bitman-border"
+  class="widget-liquidity rounded-borders q-py-md relative-position q-pb-xl q-pt-md bg-dark"
   :key="`${fullscreen}` "
   :style="fullscreen ? '' : 'height: 370px'"
   :class="fullscreen ? 'widget-liquidity-chart-full-screen' : ''"
