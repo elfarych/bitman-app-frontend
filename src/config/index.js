@@ -10,5 +10,5 @@ export default {
   binanceStreamURI: 'wss://stream.binance.com:9443/ws',
   bigDataURI: 'https://api.gatebigdata.com/v3/data',
 
-  coinGeckoAPI: 'https://api.coingecko.com/api'
+  coinGeckoAPI: 'https://api.coingecko.com/api/v3'
 }

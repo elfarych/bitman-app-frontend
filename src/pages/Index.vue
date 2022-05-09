@@ -6,12 +6,12 @@
     </portal>
 
     <div class="pages q-pa-sm">
-      <div class="row q-col-gutter-sm">
+
+      <div class="row q-col-gutter-sm items-center">
         <div class="col-12 col-sm-6">
-          <q-card class="shadow-0 rounded-borders bg-transparent">
+          <q-card class="shadow-0 rounded-borders bg-transparent q-py-lg">
             <q-card-section class="q-pa-sm">
-              <h1 class="text-subtitle2 f-w-800 text-uppercase">Bitman</h1>
-              <h2 class="text-subtitle2 q-mt-sm">Информационно-аналитическая платформа<br> для криптовалютных трейдеров и инвесторов</h2>
+              <h1 class="text-subtitle2">Информационно-аналитическая платформа<br> для криптовалютных трейдеров и инвесторов</h1>
             </q-card-section>
           </q-card>
         </div>
@@ -25,8 +25,19 @@
         </div>
       </div>
 
-      <div>
-        <coins-domination />
+      <div class="q-pt-md">
+        <coin-categories />
+      </div>
+
+      <div class="q-mt-lg">
+        <div class="row q-col-gutter-md">
+          <div class="col-12 col-md-8">
+            <widget-week-top-coins />
+          </div>
+          <div class="col-12 col-md-4">
+            <widget-long-short-positions :diagram-height="130"/>
+          </div>
+        </div>
       </div>
 
 <!--      <home-slider/>-->
@@ -91,12 +102,14 @@ from 'components/binance-market/widgets/widget-long-short-positions/widget-long-
 import WidgetLiquidity from 'components/binance-market/widgets/widget-liquidity'
 import CoinsGlobalMarketCap from 'components/coins/coins-global-market-cap'
 import CoinsGlobalMarketVolume from 'components/coins/coins-global-market-volume'
-import CoinsDomination from 'components/coins/coins-domination/coins-domination'
+import CoinCategories from 'components/coins/coin-categories/coins-categories'
+import WidgetWeekTopCoins from 'components/coins/widget-week-top-coins/widget-week-top-coins'
 
 export default {
   name: 'PageIndex',
   components: {
-    CoinsDomination,
+    WidgetWeekTopCoins,
+    CoinCategories,
     CoinsGlobalMarketVolume,
     CoinsGlobalMarketCap,
     WidgetLiquidity,

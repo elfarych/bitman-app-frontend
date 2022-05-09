@@ -1,42 +1,34 @@
 <template>
-  <div class="widget-btc-long-short-positions rounded-borders q-px-md q-pt-md q-pb-xl relative-position bg-dark">
+  <div class="widget-btc-long-short-positions q-px-md q-pb-lg q-pt-lg">
 
-    <div class="absolute-bottom-right q-pr-md q-pb-sm">
-      <q-btn
-        label="24h"
-        dense flat
-        class="f-w-800"
-        :disable="disableIntervalBtn"
-        :color="interval === '24h' ? 'secondary' : ''"
-        @click="interval = '24h'"
-      />
-
-      <q-btn
-        label="1h"
-        dense flat
-        class="f-w-800 q-ml-xs"
-        :disable="disableIntervalBtn"
-        :color="interval === '1h' ? 'secondary' : ''"
-        @click="interval = '1h'"
-      />
-    </div>
-
-    <div class="f-w-800 text-subtitle1 text-center ">
+    <div class="f-w-800 text-subtitle1">
       Настроения рынка
     </div>
-    <div class="text-center">
-      по данным топовых бирж
-    </div>
 
-    <div class="q-mt-sm  f-w-800 flex justify-center absolute-bottom-left q-pa-md">
-      <div class="flex  items-center">
-        <span class="block q-mr-xs bg-positive" style="width: 10px; height: 10px; border-radius: 4px"></span>
-        Покупки
+    <div class="flex justify-between items-center">
+      <div class="small-text">
+        по данным топовых бирж
       </div>
+      <div class="q-pr-md q-mt-sm flex justify-end">
+        <q-btn
+          label="24h"
+          dense flat
+          class="f-w-800"
+          size="sm"
+          :disable="disableIntervalBtn"
+          :color="interval === '24h' ? 'secondary' : ''"
+          @click="interval = '24h'"
+        />
 
-      <div class="flex  items-center q-ml-lg">
-        <span class="block q-mr-xs bg-negative" style="width: 10px; height: 10px; border-radius: 4px"></span>
-        Продажи
+        <q-btn
+          label="1h"
+          dense flat
+          size="sm"
+          class="f-w-800 q-ml-xs"
+          :disable="disableIntervalBtn"
+          :color="interval === '1h' ? 'secondary' : ''"
+          @click="interval = '1h'"
+        />
       </div>
     </div>
 
@@ -63,6 +55,7 @@
         BNB
       </div>
     </div>
+
   </div>
 </template>
 

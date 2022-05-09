@@ -1,10 +1,10 @@
 <template>
 <div class="trader-top-btn">
   <q-btn
-    icon="person"
+    icon="account_circle"
     dense
     flat
-    class="text-white-shadow-light"
+    class="text-white-shadow-light rounded-borders"
     @click="clicked"
   />
 </div>

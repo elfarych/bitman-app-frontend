@@ -152,8 +152,8 @@ export default {
       this.mutationVolatilityFilter(filters)
       this.tFilters = filters
     } else {
-      this.tFilters = JSON.parse(JSON.stringify(this.volatilityFilter))
-      localStorage.setItem('filters', JSON.stringify(this.volatilityFilter))
+      // this.tFilters = JSON.parse(JSON.stringify(this.volatilityFilter))
+      // localStorage.setItem('filters', JSON.stringify(this.volatilityFilter))
     }
   },
   watch: {

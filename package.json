@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
-    "@splidejs/vue-splide": "^0.6.3",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "dayjs": "^1.11.0",
@@ -22,6 +21,7 @@
     "quasar": "^1.0.0",
     "trading-vue-js": "^1.0.2",
     "vue-i18n": "^8.0.0",
+    "vue-awesome-swiper": "^4.1.1",
     "vue-trading-view": "^1.0.1",
     "vue-twitter": "^0.1.0"
   },

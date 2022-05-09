@@ -1,18 +1,11 @@
 <template>
-<div class="widget-week-top-coins bg-dark q-pa-md rounded-borders">
-  <div class="text-subtitle1 f-w-800 text-center">В тренде за неделю</div>
-  <div class="row q-mt-sm">
-    <div class="col-3 offset-6">
-      <small>Токен</small>
-    </div>
-    <div class="col-3 text-right">
-      <small>Ранг</small>
-    </div>
-  </div>
-  <widget-week-top-coins-card
+<div class="widget-week-top-coins q-pt-lg">
+  <div class="text-subtitle1 f-w-800">В тренде за неделю</div>
+  <coin-card
     v-for="coin in topCoins"
     :key="coin.item.id"
-    :coin="coin.item"
+    :coin-id="coin.item.id"
+    class="q-mt-sm"
   />
 </div>
 </template>
@@ -21,11 +14,11 @@
 import errorHandler from 'src/utils/error-handler'
 import axios from 'axios'
 import config from 'src/config'
-import WidgetWeekTopCoinsCard from 'components/binance-market/widgets/widget-week-top-coins/widget-week-top-coins-card'
+import CoinCard from 'components/coins/coin-card/coin-card'
 
 export default {
   name: 'widget-week-top-coins',
-  components: { WidgetWeekTopCoinsCard },
+  components: { CoinCard },
   data () {
     return {
       topCoins: []
@@ -51,7 +44,7 @@ export default {
 
 // Data example
 // "item": {
-//     "id": "feg-token-bsc",
+//          "id": "feg-token-bsc",
 //         "coin_id": 14533,
 //         "name": "FEG Token BSC",
 //         "symbol": "FEG",

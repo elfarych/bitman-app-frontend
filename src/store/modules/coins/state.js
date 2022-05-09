@@ -1,6 +1,7 @@
 
 export default function () {
   return {
-    globalData: null
+    globalData: null,
+    coinCategories: null
   }
 }

@@ -21,7 +21,7 @@
 import WidgetWeekVixChart from 'components/binance-market/widgets/widget-week-vix-chart'
 import WidgetLongShortPositions
 from 'components/binance-market/widgets/widget-long-short-positions/widget-long-short-positions'
-import WidgetWeekTopCoins from 'components/binance-market/widgets/widget-week-top-coins/widget-week-top-coins'
+import WidgetWeekTopCoins from 'components/coins/widget-week-top-coins/widget-week-top-coins'
 import WidgetLiquidity from 'components/binance-market/widgets/widget-liquidity'
 export default {
   name: 'binance-market-widgets-panel',
