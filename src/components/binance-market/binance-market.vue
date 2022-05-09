@@ -225,14 +225,14 @@ export default {
     ...mapState('wishlist', { wishlistItems: 'wishlist' }),
     filteredTickers () {
       if (this.futures || this.market === 'Futures') {
-        return this.futureSymbols.filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()) || item.name?.toLowerCase().includes(this.searchText.toLowerCase()))
+        return this.futureSymbols.filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()) || item.fullName?.toLowerCase().includes(this.searchText.toLowerCase()))
       }
       if (this.market === 'Wishlist') {
         return this.symbols
           .filter(item => this.wishlistItems.includes(item.symbol.replace('USDT', '')))
           .filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()) || item.name?.toLowerCase().includes(this.searchText.toLowerCase()))
       }
-      return this.symbols.filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()) || item.name?.toLowerCase().includes(this.searchText.toLowerCase()))
+      return this.symbols.filter(item => item.symbol.toLowerCase().includes(this.searchText.toLowerCase()) || item.fullName?.toLowerCase().includes(this.searchText.toLowerCase()))
     },
     sortedTickers () {
       const symbols = [...this.filteredTickers]

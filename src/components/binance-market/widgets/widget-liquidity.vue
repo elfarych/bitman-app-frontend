@@ -240,7 +240,7 @@ export default {
           vm.createChart()
         })
       }
-    }, 1000)
+    }, 2000)
   },
   watch: {
     fullscreen () {

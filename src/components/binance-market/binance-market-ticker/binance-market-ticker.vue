@@ -10,7 +10,7 @@
 
       <div class="row full-width items-center">
         <!--    Name & -->
-        <div class="ticker-token-name q-pl-sm col-4 q-pt-xs">
+        <div class="ticker-token-name q-pl-xs col-4 q-pt-xs">
           <div class="flex items-center">
             <div class="text-center">
               <q-avatar size="30px" class="bg-transparent" square>
@@ -48,7 +48,7 @@
             :high-price="ticker.highPrice"
             :low-price="ticker.lowPrice"
             :last-price="ticker.lastPrice"
-            style="margin: 3px 0"
+            style="margin: 3px 0 0 -3px"
           />
         </div>
 
@@ -212,7 +212,7 @@ export default {
 <style lang="sass">
 .binance-orders-ticker-card
   background: $dark
-  padding: 0 0 0 3px
+  padding: 0
 
 @media screen and (max-width: 700px)
   .binance-orders-ticker-volume, .binance-orders-ticker-min

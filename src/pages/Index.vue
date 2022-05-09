@@ -6,7 +6,30 @@
     </portal>
 
     <div class="pages q-pa-sm">
-      <home-slider/>
+      <div class="row q-col-gutter-sm">
+        <div class="col-12 col-sm-6">
+          <q-card class="shadow-0 rounded-borders bg-transparent">
+            <q-card-section class="q-pa-sm">
+              <h1 class="text-subtitle2 f-w-800 text-uppercase">Bitman</h1>
+              <h2 class="text-subtitle2 q-mt-sm">Информационно-аналитическая платформа<br> для криптовалютных трейдеров и инвесторов</h2>
+            </q-card-section>
+          </q-card>
+        </div>
+
+        <div class="col-6 col-sm-3">
+          <coins-global-market-cap />
+        </div>
+
+        <div class="col-6 col-sm-3">
+          <coins-global-market-volume />
+        </div>
+      </div>
+
+      <div>
+        <coins-domination />
+      </div>
+
+<!--      <home-slider/>-->
     </div>
     <div class="q-px-sm">
       <base-site-cards/>
@@ -57,7 +80,6 @@
 </template>
 
 <script>
-import HomeSlider from 'components/sliders/home-slider'
 import BaseSiteCards from 'components/base-site-cards'
 import WidgetsBigLidersTabs from 'components/binance-market/widgets/widgets-big-liders-tabs'
 import PostsList from 'components/blog/posts-list'
@@ -67,10 +89,16 @@ import WidgetWeekVixChart from 'components/binance-market/widgets/widget-week-vi
 import WidgetLongShortPositions
 from 'components/binance-market/widgets/widget-long-short-positions/widget-long-short-positions'
 import WidgetLiquidity from 'components/binance-market/widgets/widget-liquidity'
+import CoinsGlobalMarketCap from 'components/coins/coins-global-market-cap'
+import CoinsGlobalMarketVolume from 'components/coins/coins-global-market-volume'
+import CoinsDomination from 'components/coins/coins-domination/coins-domination'
 
 export default {
   name: 'PageIndex',
   components: {
+    CoinsDomination,
+    CoinsGlobalMarketVolume,
+    CoinsGlobalMarketCap,
     WidgetLiquidity,
     WidgetLongShortPositions,
     WidgetWeekVixChart,
@@ -78,8 +106,7 @@ export default {
     BasePageTopTitle,
     PostsList,
     WidgetsBigLidersTabs,
-    BaseSiteCards,
-    HomeSlider
+    BaseSiteCards
   },
   data () {
     return {

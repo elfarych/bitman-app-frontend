@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 
 import volatilityTickerMixin from 'src/mixins/volatility-stream-mixin'
 import marketCapGetEndSetter from 'src/utils/market-cap-get-n-setter'
@@ -13,13 +13,12 @@ export default {
   name: 'App',
   mixins: [volatilityTickerMixin],
   methods: {
-    ...mapActions('volatility', ['loadVolatilityTickers']),
     ...mapActions('binanceMarket', { binanceMarketInit: 'init' }),
+    ...mapActions('coins', { coinsInit: 'init' }),
     ...mapActions('info', { infoInit: 'init' }),
     ...mapActions('wishlist', { wishlistInit: 'init' }),
     ...mapActions('siteInfo', { siteInfoInit: 'init' }),
     ...mapActions('blog', ['loadPosts']),
-    ...mapMutations('volatility', ['mutationAddVolatilityTicker']),
     ...mapActions('trader', ['loadUser'])
   },
   mounted () {
@@ -28,19 +27,15 @@ export default {
       this.loadUser()
     }
     this.wishlistInit()
-    this.loadVolatilityTickers()
   },
   async created () {
+    await this.coinsInit()
     await marketCapGetEndSetter()
     if (this.$route.query.ref) localStorage.setItem('ref', this.$route.query.ref.toString())
     await this.siteInfoInit()
     await this.infoInit()
     await this.binanceMarketInit()
     await this.loadPosts()
-
-    setTimeout(() => {
-      this.startVolatilityStream() // From volatilityTickerMixin
-    }, 2000)
 
     setInterval(() => {
       marketCapGetEndSetter()

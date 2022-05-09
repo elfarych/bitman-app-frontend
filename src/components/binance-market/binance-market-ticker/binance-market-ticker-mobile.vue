@@ -8,7 +8,7 @@
 
       <div class="row full-width items-center">
         <!--    Name & -->
-        <div class="ticker-token-name  col-7">
+        <div class="ticker-token-name q-pl-xs col-7">
           <div class="row">
             <div class="col-7 relative-position">
               <div class="flex items-center no-wrap">
@@ -195,7 +195,7 @@ export default {
 <style lang="sass">
 .binance-orders-ticker-card
   background: $dark
-  padding: 0 0 0 3px
+  padding: 0
 
 @media screen and (max-width: 700px)
   .binance-orders-ticker-volume, .binance-orders-ticker-min

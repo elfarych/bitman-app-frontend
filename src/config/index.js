@@ -8,5 +8,7 @@ export default {
   binanceTradeURI: 'https://www.binance.com/ru/trade',
   binanceFuturesTradeURI: 'https://www.binance.com/ru/futures',
   binanceStreamURI: 'wss://stream.binance.com:9443/ws',
-  bigDataURI: 'https://api.gatebigdata.com/v3/data'
+  bigDataURI: 'https://api.gatebigdata.com/v3/data',
+
+  coinGeckoAPI: 'https://api.coingecko.com/api'
 }

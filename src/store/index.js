@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import volatility from './modules/volatility'
+import coins from './modules/coins'
 import binanceMarket from './modules/binance-market'
 import tickerDetail from './modules/ticker-detail'
 import tickers from './modules/tickers'
@@ -27,7 +27,7 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       trader,
-      volatility,
+      coins,
       binanceMarket,
       tickerDetail,
       tickers,
