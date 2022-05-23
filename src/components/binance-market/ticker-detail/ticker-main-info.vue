@@ -4,11 +4,10 @@
       <div class="flex items-center">
         <div class="text-subtitle1 f-w-800" style="line-height: 0.8">
           {{ $route.params.symbol }}<br>
-          <span class="text-uppercase small-text f-w-400">usdt</span>
         </div>
         <div>
-          <div class="text-subtitle2 f-w-600 q-ml-md l-h-12">
-            {{ price }}
+          <div class="text-subtitle2 f-w-800 q-ml-md l-h-12">
+            ${{ price }}
           </div>
           <div class="text-subtitle2 f-w-600 q-ml-md l-h-12" :class="ticker.P > 0 ? 'text-positive' : 'text-negative'" style="margin-top: -3px">
             {{ ticker.P > 0 ? '+' : '' }}{{ changePercent || '' }}%
@@ -38,11 +37,11 @@
         <div class="q-ml-sm">
           <!--          Name-->
           <div>
-            <h1 class="text-h6 f-w-800 text-uppercase text-white-shadow" style="line-height: 1">
+            <h1 class="text-h6 f-w-800 text-uppercase text-secondary-shadow text-secondary" style="line-height: 1">
               {{ tickerInfo.name || symbol }}</h1>
 
             <!--          Symbol-->
-            <small v-if="ticker.s" class="f-w-600">{{ ticker.s }}</small>
+            <small v-if="ticker.s" class="f-w-600">{{ $route.params.symbol }}</small>
             <q-skeleton v-else width="100px" height="18px"/>
           </div>
 
@@ -63,7 +62,7 @@
           <small class="f-w-400 small-text block text-right">
             изм. 24h
           </small>
-          <div v-if="ticker.e" :class="ticker.P > 0 ? 'text-positive' : 'text-negative'" class="text-subtitle1 f-w-800 l-h-12">
+          <div v-if="ticker.e" :class="ticker.P > 0 ? 'text-positive' : 'text-negative'" class="text-h6 f-w-800 l-h-12">
             {{ ticker.P > 0 ? '+' : '' }}{{ changePercent || '' }}%
           </div>
           <div  v-else class="flex justify-end">
@@ -76,7 +75,7 @@
           <small class="f-w-400 small-text block">
             объем 24h
           </small>
-          <div v-if="ticker.e" class="text-uppercase no-wrap text-subtitle1 f-w-800 l-h-12">
+          <div v-if="ticker.e" class="text-uppercase no-wrap text-h6 f-w-800 l-h-12">
             {{ volume | tickerVolumeFormatter }}
           </div>
           <div  v-else class="flex justify-end">
@@ -87,7 +86,16 @@
 
     </div>
 
-    <ticker-detail-cap-info :price="this.ticker.c"/>
+    <div class="row q-col-gutter-sm">
+      <div class="col-12 col-sm-6">
+        <ticker-detail-cap-info :price="this.ticker.c"/>
+      </div>
+
+      <div class="col-12 col-sm-6">
+        <ticker-detail-high-low />
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -95,15 +103,17 @@
 import { mapState } from 'vuex'
 import tickerVolumeFormatter from 'src/filters/ticker-volume-formatter'
 import TickerDetailCapInfo from 'components/binance-market/ticker-detail/ticker-detail-cap-info'
+import TickerDetailHighLow from 'components/binance-market/ticker-detail/ticker-detail-high-low'
 
 export default {
   name: 'ticker-main-info',
-  components: { TickerDetailCapInfo },
+  components: { TickerDetailHighLow, TickerDetailCapInfo },
   filters: {
     tickerVolumeFormatter
   },
   computed: {
     ...mapState('tickerDetail', ['ticker', 'tickerInfo', 'tickerCap']),
+    ...mapState('binanceMarket', ['symbols']),
     symbol () {
       return this.$route.params.symbol
     },

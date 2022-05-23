@@ -2,14 +2,22 @@ export function mutationTicker (state, data) {
   state.ticker = data
 }
 
+export function mutationCoin (state, data) {
+  state.coin = data
+}
+
 export function mutationTickerInfo (state, data) {
   state.tickerInfo = data.data || {}
 }
 
 export function mutationsTickerAskOrders (state, data) {
-  state.tickerAskOrders = data.map(item => {
-    return [parseFloat(item[0]), parseFloat(item[1])]
-  })
+  state.tickerAskOrders = data
+    .map(item => {
+      return [parseFloat(item[0]), parseFloat(item[1])]
+    })
+    .sort((a, b) => {
+      return a[0] > b[0] ? 1 : -1
+    })
 }
 
 export function mutationTickerCap (state, data) {
@@ -17,9 +25,13 @@ export function mutationTickerCap (state, data) {
 }
 
 export function mutationsTickerBidOrders (state, data) {
-  state.tickerBidOrders = data.map(item => {
-    return [parseFloat(item[0]), parseFloat(item[1])]
-  })
+  state.tickerBidOrders = data
+    .map(item => {
+      return [parseFloat(item[0]), parseFloat(item[1])]
+    })
+    .sort((a, b) => {
+      return a[0] < b[0] ? 1 : -1
+    })
 }
 
 export function mutationsTickerFuturesAskOrders (state, data) {

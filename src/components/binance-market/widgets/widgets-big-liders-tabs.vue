@@ -3,9 +3,11 @@
 
   <q-tabs
     v-model="tab"
-    active-color="primary"
+    active-color="secondary"
+    active-class="secondary-shadow-inset rounded-borders-xl"
     indicator-color="transparent"
     align="justify"
+    class="rounded-borders-xl"
     v-touch-swipe
   >
     <q-tab name="spot" label="Спот" class="rounded-borders" />
@@ -55,4 +57,5 @@ export default {
 .widgets-big-liders-tabs
   .q-tab__label
     font-weight: 900
+    text-transform: capitalize
 </style>

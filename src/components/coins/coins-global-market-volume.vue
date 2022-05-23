@@ -1,10 +1,14 @@
 <template>
-  <div class="coins-global-market-volume bg-dark rounded-borders q-pa-sm relative-position">
-      <div class="f-w-800">
+  <div class="coins-global-market-volume bg-dark rounded-borders-xl q-pa-sm relative-position">
+      <div class="f-w-800 text-subtitle1">
         Объем за сутки
       </div>
 
-      <div v-if="globalData" class="f-w-800 text-h6 text-uppercase text-secondary absolute-bottom-right q-pa-sm">
+      <div
+        v-if="globalData"
+        class="f-w-800 text-uppercase text-secondary absolute-bottom-right q-pa-sm text-secondary-shadow"
+        :class="$mobile ? 'text-h5' : 'text-h4'"
+      >
         {{ globalData.total_volume.usd | bigNumberFormatter }}
       </div>
   </div>
@@ -27,5 +31,5 @@ export default {
 
 <style lang="sass">
 .coins-global-market-volume
-  height: 80px
+  height: 130px
 </style>

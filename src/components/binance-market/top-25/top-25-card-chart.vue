@@ -1,27 +1,27 @@
 <template>
-<div class="binance-market-ticker-chart relative-position" :id="`ticker-chart-${symbol}${chartKey}`" @click="showChartPopup($event)">
-  <small class="absolute-top-right q-mr-xs">
+  <div class="binance-market-ticker-chart relative-position" :id="`ticker-chart-${symbol}${chartKey}`" @click="showChartPopup($event)">
+    <small class="absolute-top-right q-mr-xs">
     <span v-if="startEndDifference" :class="startEndDifference > 0 ? 'text-positive' : 'text-negative'" class="f-w-800 q-mr-xs">
       {{ startEndDifference > 0 ? '+' : '' }}{{ startEndDifference.toFixed(2) }}%
     </span>
-    за {{ intervalName }}
-  </small>
+      за {{ intervalName }}
+    </small>
 
-  <div class="absolute-bottom-right q-mr-xs flex no-wrap text-right" style="z-index: 1000; bottom: -3px">
-    <small>мин <span class="f-w-800">{{ periodMinValue || '' }}</span></small>
-    <small class="q-ml-md">макс <span class="f-w-800">{{ periodMaxValue || '' }}</span></small>
-  </div>
-  <div
-    class="binance-market-ticker-chart-overlay"
-    @click="showChartPopup($event)"
-  >
-    <q-tooltip v-if="!$mobile">
-      Быстрый просмотр
-    </q-tooltip>
-  </div>
+    <div class="absolute-bottom-right q-mr-xs flex no-wrap text-right" style="z-index: 1000; bottom: -3px">
+      <small>мин <span class="f-w-800">{{ periodMinValue || '' }}</span></small>
+      <small class="q-ml-md">макс <span class="f-w-800">{{ periodMaxValue || '' }}</span></small>
+    </div>
+    <div
+      class="binance-market-ticker-chart-overlay"
+      @click="showChartPopup($event)"
+    >
+      <q-tooltip v-if="!$mobile">
+        Быстрый просмотр
+      </q-tooltip>
+    </div>
 
-  <q-skeleton v-if="!candles.length" class="absolute-full"/>
-</div>
+    <q-skeleton v-if="!candles.length" class="absolute-full"/>
+  </div>
 </template>
 
 <script>
@@ -33,7 +33,7 @@ import { mapMutations } from 'vuex'
 import getDifferencePercent from 'src/helpers/difference-precent'
 
 export default {
-  name: 'binance-market-ticker-chart',
+  name: 'top-25-card-chart',
   props: {
     symbol: String,
     chartKey: String,
@@ -149,20 +149,22 @@ export default {
         bottomColor: '#1e222d',
         // lineColor: vm.change > 0 ? '#16cb85' : '#f6465d',
         lineColor: '#00abe7',
-        lineWidth: 1
+        lineWidth: 0.5
       })
       vm.candles = await this.loadCandles()
       candleSeries.setData(vm.candles)
       this.days = vm.candles ? vm.candles.length : 0
     }
   },
-  async mounted () {
-    await this.createChart()
+  mounted () {
+    setTimeout(() => {
+      this.createChart()
+    }, 3000)
   },
   watch: {
-    '$route' () {
-      this.createChart()
-    }
+    // '$route' () {
+    //   this.createChart()
+    // }
   }
 }
 </script>

@@ -24,7 +24,8 @@
 
 <!--      Description-->
       <div class="q-pa-md">
-        {{ tickerInfo.description }}
+        <div v-if="coin" v-html="coin.description.ru" class="ticker-detail-social-description"></div>
+        <div v-else>{{ tickerInfo.description }}</div>
       </div>
 
       <div class="q-pa-md flex">
@@ -45,6 +46,35 @@
             />
         </div>
       </div>
+
+      <div v-if="coin" class="q-mt-md">
+        <div class="row q-col-gutter-md">
+
+          <!--      Development-->
+          <div class="col-12 col-sm-6">
+            <div class="rounded-borders-xl q-pa-md secondary-border secondary-shadow-inset">
+              <div class="f-w-800 text-center">Активность разработки проекта</div>
+              <div class="q-mt-sm">Кол-во звезд: <span class="text-uppercase">{{ countFormatter(coin.developer_data.stars) }}</span></div>
+              <div class="q-mt-sm">Кол-во форков: <span class="text-uppercase">{{ countFormatter(coin.developer_data.forks) }}</span></div>
+              <div class="q-mt-sm">Кол-во подписчиков: <span class="text-uppercase">{{ countFormatter(coin.developer_data.subscribers) }}</span></div>
+              <div class="q-mt-sm">Кол-во коммитов за последний месяц: {{ coin.developer_data.commit_count_4_weeks || 'нет данных' }}</div>
+              <div class="q-mt-sm">Pull requests: <span class="text-uppercase">{{ countFormatter(coin.developer_data.pull_requests_merged) }}</span></div>
+              <div class="q-mt-sm">Задачи (всего / выполнено): {{ coin.developer_data.total_issues || 'нет данных' }} / {{ coin.developer_data.closed_issues || 'нет данных' }}</div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6">
+            <div class="rounded-borders-xl q-pa-md secondary-border secondary-shadow-inset fit">
+              <div class="f-w-800 text-center">Комьюнити</div>
+
+              <div class="q-mt-sm">Twitter: <span class="text-uppercase">{{ countFormatter(coin.community_data.twitter_followers) }}</span></div>
+              <div class="q-mt-sm">Reddit: <span class="text-uppercase">{{ countFormatter(coin.community_data.reddit_subscribers) }}</span></div>
+              <div class="q-mt-sm">Telegram: <span class="text-uppercase">{{ countFormatter(coin.community_data.telegram_channel_user_count) }}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
 <!--    Twitter-->
@@ -69,13 +99,31 @@
 <script>
 import { mapState } from 'vuex'
 import { twitter } from 'vue-twitter'
+import bigNumberFormatter from 'src/filters/big-number-formatter'
+import numeral from 'numeral'
+
 export default {
   name: 'ticker-detail-social',
   components: {
     twitter
   },
+  filters: {
+    bigNumberFormatter
+  },
   computed: {
-    ...mapState('tickerDetail', ['tickerInfo'])
+    ...mapState('tickerDetail', ['tickerInfo', 'coin'])
+  },
+  methods: {
+    countFormatter (count) {
+      return numeral(count).format('(0.00a)').replace('(', '- ').replace(')', '') || 'нет данных'
+    }
+  },
+  mounted () {
+    const vm = this
+    console.log(vm.tickerInfo)
+    setTimeout(() => {
+      console.log(vm.tickerInfo)
+    }, 3000)
   }
 }
 </script>
@@ -84,4 +132,8 @@ export default {
 .ticker-detail-social
   background: $dark
   padding: 10px
+
+  .ticker-detail-social-description
+    a
+      color: $secondary !important
 </style>

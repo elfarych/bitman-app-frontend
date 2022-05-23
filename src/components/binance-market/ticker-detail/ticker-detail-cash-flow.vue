@@ -35,7 +35,7 @@
             :key="cash.time"
             class="q-mt-sm"
           >
-            <div class="row text-uppercase">
+            <div v-if="cash.time" class="row text-uppercase">
               <div class="col-3">
                 {{ cash.time }}
               </div>
@@ -49,7 +49,7 @@
                 {{ cash.netInflow | tickerVolumeFormatter }}
               </div>
             </div>
-            <q-separator class="q-mt-sm"/>
+            <q-separator v-if="cash.time" class="q-mt-sm"/>
           </div>
         </q-scroll-area>
 
@@ -94,7 +94,7 @@ export default {
     weeklyInFlow () {
       let sum = 0
       this.cashFlow.forEach(item => {
-        sum += item.inFlow
+        if (item.inFlow) sum += item.inFlow
       })
 
       return sum
@@ -102,7 +102,7 @@ export default {
     weeklyOutFlow () {
       let sum = 0
       this.cashFlow.forEach(item => {
-        sum += item.outFlow
+        if (item.outFlow) sum += item.outFlow
       })
 
       return sum
@@ -110,7 +110,7 @@ export default {
     weeklyNetFlow () {
       let sum = 0
       this.cashFlow.forEach(item => {
-        sum += item.netInflow
+        if (item.netInflow) sum += item.netInflow
       })
 
       return sum

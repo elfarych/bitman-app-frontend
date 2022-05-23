@@ -19,7 +19,9 @@ export default {
     ...mapActions('wishlist', { wishlistInit: 'init' }),
     ...mapActions('siteInfo', { siteInfoInit: 'init' }),
     ...mapActions('blog', ['loadPosts']),
-    ...mapActions('trader', ['loadUser'])
+    ...mapActions('trader', ['loadUser']),
+    ...mapActions('news', { newsInit: 'init' }),
+    ...mapActions('volatility', { volatilityInit: 'init' })
   },
   mounted () {
     const jwt = localStorage.getItem('jwt')
@@ -27,15 +29,18 @@ export default {
       this.loadUser()
     }
     this.wishlistInit()
+    this.startVolatilityStream()
   },
-  async created () {
-    await this.coinsInit()
-    await marketCapGetEndSetter()
+  created () {
+    this.coinsInit()
+    marketCapGetEndSetter()
     if (this.$route.query.ref) localStorage.setItem('ref', this.$route.query.ref.toString())
-    await this.siteInfoInit()
-    await this.infoInit()
-    await this.binanceMarketInit()
-    await this.loadPosts()
+    this.siteInfoInit()
+    this.infoInit()
+    this.binanceMarketInit()
+    this.loadPosts()
+    this.newsInit()
+    this.volatilityInit()
 
     setInterval(() => {
       marketCapGetEndSetter()

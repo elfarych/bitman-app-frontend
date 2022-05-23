@@ -1,5 +1,5 @@
 <template>
-<div class="ticker-detail-orders rounded-borders">
+<div class="ticker-detail-orders rounded-borders-xl secondary-shadow-inset secondary-border">
   <div class="f-w-800 relative-position flex items-center justify-between">
     <div>
       Лимитные заявки <span class="text-uppercase">Binance {{ market }}</span>
@@ -36,16 +36,16 @@
         <div>Объем $</div>
       </div>
       <q-separator class="q-mb-sm"/>
-      <q-scroll-area style="height: 330px" class="q-pr-md" :thumb-style="thumbStyle">
+      <q-scroll-area style="height: 350px" class="q-pr-md" :thumb-style="thumbStyle">
         <div
           v-for="(bid, index) in bids"
           :key="index"
 
           class="orders-asks flex justify-between relative-position"
         >
-          <div class="orders-bids-values" :style="getLineWidth(bid[1])"></div>
+          <div class="orders-bids-values" :style="getLineWidth(bid[1], bid[0])"></div>
           <div class="order-asks-price">{{ bid[0] }}</div>
-          <div class="order-asks-volume text-positive f-w-600 text-uppercase">{{ getUsdVolume(bid[1]) }}</div>
+          <div class="order-asks-volume text-positive f-w-600 text-uppercase">{{ getUsdVolume(bid[1], bid[0]) }}</div>
         </div>
       </q-scroll-area>
 
@@ -59,41 +59,45 @@
       </div>
       <q-separator class="q-mb-sm"/>
 
-      <q-scroll-area style="height: 330px" class="q-pr-md" :thumb-style="thumbStyle">
+      <q-scroll-area style="height: 350px" class="q-pr-md" :thumb-style="thumbStyle">
         <div
           v-for="(ask, index) in asks"
           :key="index"
           class="orders-asks flex justify-between relative-position"
         >
-          <div class="orders-ask-values" :style="getLineWidth(ask[1])"></div>
+          <div class="orders-ask-values" :style="getLineWidth(ask[1], ask[0])"></div>
           <div class="order-asks-price">{{ ask[0] }}</div>
-          <div class="order-asks-volume text-negative f-w-600 text-uppercase">{{ getUsdVolume(ask[1]) }}</div>
+          <div class="order-asks-volume text-negative f-w-600 text-uppercase">{{ getUsdVolume(ask[1], ask[0]) }}</div>
         </div>
       </q-scroll-area>
 
     </div>
   </div>
 
-  <div class="q-mt-md text-right">
-    <q-btn-group>
-      <q-btn
-        label="Spot"
-        color="primary"
-        :text-color="market === 'spot' ? 'dark' : ''"
-        :outline="market !== 'spot'"
-        class="f-w-800"
-        @click="setMarket('spot')"
-      />
-      <q-btn
-        label="Futures"
-        color="primary"
-        :text-color="market === 'futures' ? 'dark' : ''"
-        :outline="market !== 'futures'"
-        class="f-w-800"
-        @click="setMarket('futures')"
-      />
-    </q-btn-group>
-  </div>
+<!--  <div class="q-mt-md text-right rounded-borders-xl shadow-0">-->
+<!--    <q-btn-group unelevated>-->
+<!--      <q-btn-->
+<!--        label="Spot"-->
+<!--        color="secondary"-->
+<!--        :flat="market !== 'spot'"-->
+<!--        :text-color="market === 'spot' ? 'dark' : ''"-->
+<!--        :outline="market !== 'spot'"-->
+<!--        class="f-w-800 rounded-borders-xl"-->
+<!--        unelevated-->
+<!--        @click="setMarket('spot')"-->
+<!--      />-->
+<!--      <q-btn-->
+<!--        label="Futures"-->
+<!--        color="secondary"-->
+<!--        :flat="market !== 'futures'"-->
+<!--        :text-color="market === 'futures' ? 'dark' : ''"-->
+<!--        :outline="market !== 'futures'"-->
+<!--        unelevated-->
+<!--        class="f-w-800 rounded-borders-xl q-ml-xs"-->
+<!--        @click="setMarket('futures')"-->
+<!--      />-->
+<!--    </q-btn-group>-->
+<!--  </div>-->
 
 </div>
 </template>
@@ -141,11 +145,11 @@ export default {
   },
   methods: {
     ...mapActions('tickerDetail', ['loadTickerOrders', 'loadTickerFuturesOrders']),
-    getUsdVolume (val) {
-      return this.$numeral((val * this.tickerPrice)).format('(0.00a)').replace('(', '- ').replace(')', '')
+    getUsdVolume (quantity, price) {
+      return this.$numeral((quantity * parseFloat(price))).format('(0.00a)').replace('(', '- ').replace(')', '')
     },
-    getLineWidth (val) {
-      return { width: ((val * this.tickerPrice) * 100 / 1000000) + '%' }
+    getLineWidth (quantity, price) {
+      return { width: ((quantity * parseFloat(price)) * 100 / 1000000) + '%' }
     },
 
     reloadOrders () {
@@ -169,7 +173,7 @@ export default {
 <style lang="sass">
 .ticker-detail-orders
   background: $dark
-  height: 550px
+  height: 525px
   //border-radius: 15px
   padding: 10px
 

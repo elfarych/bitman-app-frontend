@@ -1,8 +1,8 @@
 <template>
-  <div class="ticker-detail-limit-orders-difference fit rounded-borders">
+  <div class="ticker-detail-limit-orders-difference fit rounded-borders-xl secondary-border secondary-shadow-inset">
     <div class="flex justify-between relative-position q-pr-lg">
       <div class="f-w-800" style="line-height: 1.2">Соотношение лимитных заявок
-        <span class=" block">Binance {{ futures ? 'Futures' : 'Spot' }}</span></div>
+        <span class="block text-warning">Binance {{ futures ? 'Futures' : 'Spot' }}</span></div>
       <q-btn
         icon="refresh"
         flat dense

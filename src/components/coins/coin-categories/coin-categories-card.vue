@@ -1,9 +1,6 @@
 <template>
-  <q-item
-    class="coin-domination-card bg-dark rounded-borders q-pa-sm column"
-    clickable
-  >
-    <div class="text-center" :title="category.name" style="height: 20px">
+  <q-item class="coin-domination-card bg-dark rounded-borders q-pa-sm column rounded-borders-xl secondary-shadow-inset">
+    <div class="text-center text-secondary f-w-800" :title="category.name" style="height: 35px; letter-spacing: 1px;">
       {{ category.name }}
     </div>
     <div class="q-mt-md flex justify-between">
@@ -13,8 +10,8 @@
           <div class="f-w-800 text-uppercase">
             {{ category.market_cap | bigNumberFormatter }}
           </div>
-          <div :class="category.market_cap_change_24h > 0 ? 'text-positive' : 'text-negative'" class="small-text">
-            <span v-if="category.market_cap_change_24h > 0"></span>{{ categoryMarketCapChangePercentage }}%
+          <div :class="category.market_cap_change_24h > 0 ? 'text-positive' : 'text-negative'" class="small-text q-pl-xs f-w-800">
+            <span v-if="category.market_cap_change_24h > 0">+</span>{{ categoryMarketCapChangePercentage }}%
           </div>
         </div>
 
@@ -69,5 +66,6 @@ export default {
 
 <style lang="sass">
 .coin-domination-card
-  height: 125px
+  border: 1px solid $secondary
+  height: 140px
 </style>

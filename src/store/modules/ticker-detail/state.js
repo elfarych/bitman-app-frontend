@@ -2,6 +2,7 @@
 export default function () {
   return {
     ticker: {},
+    coin: null,
     tickerInfo: {},
     tickerFuturesInfo: null,
     tickerCap: {},

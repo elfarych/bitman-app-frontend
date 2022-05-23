@@ -3,10 +3,10 @@
   <div class="flex justify-between" style="padding-right: 13px; ">
     <div>
       <q-btn
-        :label="ordersChartMode ? 'График по умолчанию' : 'Заявки на графике'"
+        :label="ordersChartMode ? 'По умолчанию' : 'Заявки на графике'"
         color="secondary"
-        flat dense no-caps
-        class="f-w-600"
+        flat dense
+        class="f-w-800 text-secondary-shadow"
         @click="changeChartMode"
       />
     </div>

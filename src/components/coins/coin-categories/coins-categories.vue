@@ -1,5 +1,6 @@
 <template>
-<div class="coins-domination q-mt-md">
+<div class="coins-domination q-mt-lg">
+<!--  <div class="text-subtitle1 text-uppercase f-w-800">Категории</div>-->
   <coin-categories-slider />
 </div>
 </template>

@@ -3,12 +3,11 @@
   <q-carousel
     animated
     v-model="slide"
-    arrows
     infinite
     keep-alive
     autoplay
     swipeable dark
-    class="rounded-borders"
+    class="rounded-borders home-slider-carousel rounded-borders-xl"
   >
     <q-carousel-slide
       v-for="(slide, index) in slides"
@@ -16,16 +15,18 @@
       :name="index"
       :img-src="slide.image"
     >
-        <div class="home-slider-meta q-pa-md">
-          <h1 class="text-h4 f-w-800" style="line-height: 1.1">{{ slide.title }}</h1>
-          <h2 class="text-subtitle1 q-mt-sm" style="line-height: 1.2">{{ slide.text }}</h2>
+        <div class="home-slider-meta">
+          <h2 class="text-subtitle2 f-w-600 q-mt-sm" style="line-height: 1.2">
+            <span v-html="slide.text"></span>
+          </h2>
           <q-btn
             v-if="slide.url"
             :label="slide.btn_text"
             :to="slide.url"
-            color="primary"
-            no-caps
-            class="q-mt-md q-px-sm f-w-800 rounded-borders"
+            flat
+            color="warning"
+            size="sm"
+            class="q-mt-md q-px-sm f-w-800 warning-btn"
           />
         </div>
     </q-carousel-slide>
@@ -55,4 +56,17 @@ export default {
   position: absolute
   bottom: 10px
   left: 10px
+
+.home-slider-carousel
+  height: 130px
+  position: relative
+
+  &:before
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: rgba(0,0,0,.22)
 </style>

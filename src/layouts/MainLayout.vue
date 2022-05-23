@@ -3,7 +3,7 @@
 
     <q-header elevated class="bg-dark text-white">
       <q-toolbar>
-        <q-btn dense unelevated icon="menu" @click="left = !left" color="primary" outline class="rounded-borders"/>
+        <q-btn dense unelevated icon="menu" @click="left = !left" color="secondary" outline class="rounded-borders"/>
 
         <div>
           <h1

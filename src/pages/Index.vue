@@ -8,72 +8,80 @@
     <div class="pages q-pa-sm">
 
       <div class="row q-col-gutter-sm items-center">
+
+        <!--        Slider-->
         <div class="col-12 col-sm-6">
-          <q-card class="shadow-0 rounded-borders bg-transparent q-py-lg">
-            <q-card-section class="q-pa-sm">
-              <h1 class="text-subtitle2">Информационно-аналитическая платформа<br> для криптовалютных трейдеров и инвесторов</h1>
-            </q-card-section>
-          </q-card>
+          <home-slider/>
         </div>
 
-        <div class="col-6 col-sm-3">
-          <coins-global-market-cap />
+        <!--        Cap-->
+        <div class="col-6 col-sm-3 full-height">
+          <coins-global-market-cap/>
         </div>
 
+        <!--        Global volume-->
         <div class="col-6 col-sm-3">
-          <coins-global-market-volume />
+          <coins-global-market-volume/>
         </div>
       </div>
 
-      <div class="q-pt-md">
-        <coin-categories />
+      <!--      Market categories-->
+      <div>
+        <coin-categories/>
       </div>
 
-      <div class="q-mt-lg">
+      <!--      Top 25-->
+      <div class="q-mt-xl">
+        <top25/>
+      </div>
+
+<!--      Vix && Buy-long && Top-100 holders-->
+      <div class="q-mt-xl q-pt-lg">
         <div class="row q-col-gutter-md">
-          <div class="col-12 col-md-8">
-            <widget-week-top-coins />
+          <div class="col-12 col-sm-6">
+
+            <!--            Vix chart-->
+            <div style="height: 400px">
+              <widget-week-vix-chart class="fit" style="min-height: 350px"/>
+            </div>
+
+            <!--          Long and short -->
+            <div class="q-mt-xl">
+              <widget-long-short-positions :diagram-height="150"/>
+            </div>
           </div>
-          <div class="col-12 col-md-4">
-            <widget-long-short-positions :diagram-height="130"/>
+
+<!--          Top 100 holders-->
+          <div class="col-12 col-sm-6">
+            <top100-wallets/>
           </div>
         </div>
       </div>
 
-<!--      <home-slider/>-->
-    </div>
-    <div class="q-px-sm">
-      <base-site-cards/>
+      <div class="q-mt-xl q-pt-lg">
+        <news-widget />
+      </div>
+
     </div>
 
-    <!--    Widgets-->
-    <div class="q-px-sm q-mt-xl q-pt-lg">
+    <!--    Liders-->
+    <div class="q-px-sm q-mt-xl">
       <div class="row q-col-gutter-sm">
-        <div class="col-12">
-          <widget-week-vix-chart class="fit" style="min-height: 350px"/>
+
+        <div class="col-12 col-sm-6 q-mt-xl">
+          <div class="text-subtitle1 text-uppercase f-w-800">Лидеры роста</div>
+          <widgets-big-liders-tabs/>
         </div>
 
-        <div class="col-12 col-sm-6">
-          <widget-long-short-positions class="fit" :diagram-height="200"/>
-        </div>
-
-        <div class="col-12 col-sm-6">
-          <widget-liquidity />
+        <div class="col-12 col-sm-6 q-mt-xl">
+          <div class="text-subtitle1 text-uppercase f-w-800">Лидеры падения</div>
+          <widgets-big-liders-tabs :up="false"/>
         </div>
       </div>
     </div>
 
-    <div class="home-liders q-mt-xl q-px-sm">
-      <div class="row q-col-gutter-md">
-        <div class="col-12 col-md-6">
-          <h3 class="text-h5 f-w-800 text-center q-pt-xl">Лидеры роста</h3>
-          <widgets-big-liders-tabs key="home"/>
-        </div>
-        <div class="col-12 col-md-6">
-          <h3 class="text-h5 f-w-800 text-center q-pt-xl">Лидеры падения</h3>
-          <widgets-big-liders-tabs :up="false" key="home"/>
-        </div>
-      </div>
+    <div class="q-mt-xl q-px-sm">
+      <widget-liquidity />
     </div>
 
     <div class="q-px-sm q-mt-xl">
@@ -91,8 +99,6 @@
 </template>
 
 <script>
-import BaseSiteCards from 'components/base-site-cards'
-import WidgetsBigLidersTabs from 'components/binance-market/widgets/widgets-big-liders-tabs'
 import PostsList from 'components/blog/posts-list'
 import BasePageTopTitle from 'components/base-page-top-title'
 import Roadmap from 'components/roadmap/roadmap'
@@ -103,12 +109,20 @@ import WidgetLiquidity from 'components/binance-market/widgets/widget-liquidity'
 import CoinsGlobalMarketCap from 'components/coins/coins-global-market-cap'
 import CoinsGlobalMarketVolume from 'components/coins/coins-global-market-volume'
 import CoinCategories from 'components/coins/coin-categories/coins-categories'
-import WidgetWeekTopCoins from 'components/coins/widget-week-top-coins/widget-week-top-coins'
+import HomeSlider from 'components/sliders/home-slider'
+import WidgetsBigLidersTabs from 'components/binance-market/widgets/widgets-big-liders-tabs'
+import Top100Wallets from 'components/binance-market/widgets/top-100-wallets/top-100-wallets'
+import Top25 from 'components/binance-market/top-25/top-25'
+import NewsWidget from 'components/news/news-widget/news-widget'
 
 export default {
   name: 'PageIndex',
   components: {
-    WidgetWeekTopCoins,
+    NewsWidget,
+    Top25,
+    Top100Wallets,
+    WidgetsBigLidersTabs,
+    HomeSlider,
     CoinCategories,
     CoinsGlobalMarketVolume,
     CoinsGlobalMarketCap,
@@ -117,9 +131,7 @@ export default {
     WidgetWeekVixChart,
     Roadmap,
     BasePageTopTitle,
-    PostsList,
-    WidgetsBigLidersTabs,
-    BaseSiteCards
+    PostsList
   },
   data () {
     return {

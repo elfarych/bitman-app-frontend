@@ -1,7 +1,7 @@
 <template>
   <div
     :key="`${fullscreen}`"
-    class="widget-week-vix-chart rounded-borders q-pt-md relative-position q-pb-lg bg-dark"
+    class="widget-week-vix-chart rounded-borders relative-position q-pb-lg"
     :style="fullscreen ? '' : 'height: 300px'"
     :class="fullscreen ? 'widget-week-vix-chart-full-screen' : ''"
   >
@@ -12,7 +12,7 @@
       color="secondary"
       @click="setScreen"
     />
-    <div class="f-w-800 text-subtitle1 text-center q-pb-md">
+    <div class="f-w-800 text-subtitle1 text-uppercase q-pb-md">
       Индекс страха и жадности
     </div>
 
@@ -44,12 +44,16 @@ export default {
   data () {
     return {
       fullscreen: false,
-      chart: null
+      chart: null,
+      createChartTimer: null
     }
   },
   methods: {
     createChart (id = 'vix-week-chart') {
       const vm = this
+
+      if (vm.chart) return
+
       const element = document.getElementById(id)
       vm.chart = createChart(element, {
         width: element.offsetWidth - 10,
@@ -104,7 +108,7 @@ export default {
       btcSeries.setData(vm.weekVixData.map(item => {
         return {
           time: Number(item.time),
-          value: item.btcValue
+          value: parseInt(item.btcValue)
         }
       }))
 
@@ -120,10 +124,15 @@ export default {
       this.fullscreen = !this.fullscreen
     }
   },
+  beforeDestroy () {
+    this.chart = null
+    if (this.createChartTimer) clearTimeout(this.createChartTimer)
+  },
   mounted () {
-    setTimeout(() => {
+    if (this.createChartTimer) clearTimeout(this.createChartTimer)
+    this.createChartTimer = setTimeout(() => {
       if (!this.chart) this.createChart()
-    }, 1000)
+    }, 3000)
   },
   watch: {
     weekVixData () {
@@ -146,5 +155,5 @@ export default {
   right: 0
   bottom: 0
   z-index: 9999
-  background: rgba(0,0,0,.95)
+  background: rgba(0,0,0,.9)
 </style>

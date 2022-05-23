@@ -80,8 +80,21 @@ export async function loadTickerCap ({ commit, dispatch }) {
         }
       })
       .then(res => {
-        commit('mutationTickerCap', res.data.data)
+        const data = res?.data?.data || {}
+        commit('mutationTickerCap', data)
+        if (Object.values(data).length) dispatch('loadCoinCoinGeckoInfo', data.slug)
       })
+  } catch (e) {
+    errorHandler(e)
+  }
+}
+
+export async function loadCoinCoinGeckoInfo ({ commit }, slug) {
+  commit('mutationCoin', null)
+  try {
+    await axios.get(`https://api.coingecko.com/api/v3/coins/${slug}`).then(res => {
+      commit('mutationCoin', res.data)
+    })
   } catch (e) {
     errorHandler(e)
   }
@@ -89,20 +102,51 @@ export async function loadTickerCap ({ commit, dispatch }) {
 
 export async function loadTickerOrders ({ commit }) {
   const vm = this
+  const symbol = vm.$router.currentRoute.params.symbol
+  const asks = []
+  const bids = []
   commit('mutationsTickerAskOrders', [])
   commit('mutationsTickerBidOrders', [])
+
   try {
-    await axios
-      .get('https://api.binance.com/api/v3/depth', {
-        params: {
-          limit: 5000,
-          symbol: vm.$router.currentRoute.params.symbol + 'USDT'
-        }
-      })
-      .then(res => {
-        commit('mutationsTickerAskOrders', res.data.asks)
-        commit('mutationsTickerBidOrders', res.data.bids)
-      })
+    // Binance USDT
+    try {
+      await axios
+        .get('https://api.binance.com/api/v3/depth', {
+          params: {
+            limit: 5000,
+            symbol: symbol + 'USDT'
+          }
+        })
+        .then(res => {
+          asks.push(...res.data.asks)
+          bids.push(...res.data.bids)
+        })
+    } catch (e) {
+      errorHandler(e)
+    }
+
+    // Binance BUSD
+    try {
+      await axios
+        .get('https://api.binance.com/api/v3/depth', {
+          params: {
+            limit: 5000,
+            symbol: symbol + 'BUSD'
+          }
+        })
+        .then(res => {
+          if (res?.data) {
+            asks.push(...res.data.asks)
+            bids.push(...res.data.bids)
+          }
+        })
+    } catch (e) {
+      errorHandler(e)
+    }
+
+    commit('mutationsTickerAskOrders', asks)
+    commit('mutationsTickerBidOrders', bids)
   } catch (e) {
     errorHandler(e)
   }

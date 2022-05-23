@@ -4,7 +4,7 @@
     flat dense
     padding="3px"
     class="rounded-borders text-white-shadow-light"
-    :color="symbolInWishlist ? 'primary' : ''"
+    :color="symbolInWishlist ? 'warning' : ''"
     @click.stop="addToWish($event)"
   >
     <q-icon :name="starIcon" :size="size || '25px'"/>

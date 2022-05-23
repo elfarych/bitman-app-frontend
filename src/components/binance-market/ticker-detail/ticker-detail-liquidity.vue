@@ -6,7 +6,7 @@
       <q-btn-group>
         <q-btn
           label="1h"
-          color="primary"
+          color="secondary"
           :text-color="interval === '1h' ? 'dark' : ''"
           :outline="interval !== '1h'"
           class="f-w-800"
@@ -15,7 +15,7 @@
         />
         <q-btn
           label="4h"
-          color="primary"
+          color="secondary"
           :text-color="interval === '4h' ? 'dark' : ''"
           :outline="interval !== '4h'"
           class="f-w-800"
@@ -24,7 +24,7 @@
         />
         <q-btn
           label="24h"
-          color="primary"
+          color="secondary"
           size="sm"
           :text-color="interval === '24h' ? 'dark' : ''"
           :outline="interval !== '24h'"

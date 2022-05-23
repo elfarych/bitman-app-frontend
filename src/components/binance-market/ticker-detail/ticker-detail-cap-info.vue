@@ -1,37 +1,24 @@
 <template>
-<div class="ticker-detail-cap-info" style="height: 60px">
-  <div v-if="tickerCap" class="flex items-center justify-between no-wrap">
+<div class="ticker-detail-cap-info-card" style="height: 100px">
+  <div v-if="tickerCap">
     <div>
       <div v-if="tickerCap && tickerCap.marketCap">
-        <div class="text-center full-height flex items-center">
-          <div class="small-text">Рыночная капитализация:</div>
-          <div class="text-uppercase f-w-800 q-ml-sm flex">
-            {{ tickerCap.marketCap | tickerVolumeFormatter }}
-
-<!--            <div-->
-<!--              v-if="tickerCapUSDInfo.market_cap_change_24h"-->
-<!--              :class="tickerCapUSDInfo.market_cap_change_24h > 0 ? 'bg-positive' : 'bg-negative'"-->
-<!--              class="rounded-borders q-ml-xs q-px-xs"-->
-<!--            >-->
-<!--              <span v-if="tickerCapUSDInfo.market_cap_change_24h > 0">+</span>{{ tickerCapUSDInfo.market_cap_change_24h }}%-->
-<!--            </div>-->
-          </div>
-
-          <div class="f-w-800 q-ml-sm bg-warning q-px-xs rounded-borders text-dark">
-            Ранг {{ tickerCap.rank }}
-          </div>
+        <div>
+          <span class="">Рыночная капитализация:</span>
+          <span class="text-uppercase f-w-800 q-ml-sm">{{ tickerCap.marketCap | tickerVolumeFormatter }}</span>
+          <span class="f-w-800 q-ml-sm bg-warning q-px-xs rounded-borders text-dark">Ранг {{ tickerCap.rank }}</span>
         </div>
       </div>
 
       <div v-if="tickerCap.circulatingSupply">
-        <div class="rounded-borders text-center flex items-center q-mt-xs">
-          <div class="small-text q-mt-xs">{{ tickerCap.maxSupply ? 'Циркулирующее / максимальное предложение' : 'Циркулирующее предложение' }}
+        <div class="q-mt-xs">
+          <div class="q-mt-xs">{{ tickerCap.maxSupply ? 'Циркулирующее / максимальное предложение' : 'Циркулирующее предложение' }}
             <span>{{ tickerCap.name }}</span></div>
 
           <div
-            class="relative-position rounded-borders text-uppercase q-mt-xs q-ml-xs"
+            class="relative-position rounded-borders text-uppercase q-mt-xs"
             :class="tickerCap.maxSupply ? 'bg-grey-7' : ''"
-            style="height: 22px; overflow: hidden; width: 250px"
+            style="height: 22px; overflow: hidden; width: 100%"
           >
             <div class="orders-len text-subtitle2 f-w-800">
               <div v-if="tickerCap.maxSupply" class="absolute-left bg-positive buys-width-len transition-1" :style="`width: ${circularSupplyWidth}%`"></div>
@@ -116,7 +103,6 @@ export default {
 
 <style lang="sass">
 .ticker-detail-cap-info-card
-  background: transparent
   padding: 10px
 
 </style>

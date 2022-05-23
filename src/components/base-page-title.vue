@@ -3,7 +3,7 @@
     <h2 class="text-bold text-white market-title block" style="line-height: 1.2 !important">{{ screenerName }}</h2>
     <q-btn
       v-if="screenerLink"
-      label="Регистрация на бирже"
+      label="Регистрация на бирже Binance"
       outline no-caps flat dense
       size="sm"
       style="margin-top: -5px"

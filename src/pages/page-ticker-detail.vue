@@ -20,7 +20,7 @@
     </div>
 
     <!--    Chart & Limit orders-->
-    <div v-if="!ordersChartMode" class="q-mt-sm">
+    <div v-if="!ordersChartMode" class="q-mt-lg">
       <div class="row q-col-gutter-sm">
         <!--      Chart-->
         <div class="col-sm-7 col-12 ticker-detail-chart" :class="$mobile ? 'col-md-7' : 'col-md-8'">
@@ -93,24 +93,6 @@
       </div>
     </div>
 
-    <!--    Widgets-->
-    <div class="q-mt-xl">
-      <div class="text-subtitle1 text-uppercase f-w-800 q-mb-lg">Общие данные</div>
-      <div class="row q-col-gutter-sm">
-        <div class="col-12 col-sm-12">
-          <widget-week-vix-chart class="fit" style="min-height: 350px"/>
-        </div>
-
-        <div class="col-12 col-sm-6">
-          <widget-long-short-positions class="fit" :diagram-height="200"/>
-        </div>
-
-        <div class="col-12 col-sm-6">
-          <widget-liquidity />
-        </div>
-      </div>
-    </div>
-
   </q-page>
 </template>
 
@@ -131,17 +113,10 @@ import WishlistBtn from 'components/wishlist/wishlist-btn'
 import MobileChartPopupBtn from 'components/chart/mobile-chart-popup-btn'
 import TickerDetailOrdersChart from 'components/binance-market/ticker-detail/ticker-detail-orders-chart'
 import TickerDetailChartControls from 'components/binance-market/ticker-detail/ticker-detail-chart-controls'
-import WidgetWeekVixChart from 'components/binance-market/widgets/widget-week-vix-chart'
-import WidgetLongShortPositions
-from 'components/binance-market/widgets/widget-long-short-positions/widget-long-short-positions'
-import WidgetLiquidity from 'components/binance-market/widgets/widget-liquidity'
 
 export default {
   name: 'page-ticker-detail',
   components: {
-    WidgetLiquidity,
-    WidgetLongShortPositions,
-    WidgetWeekVixChart,
     TickerDetailChartControls,
     TickerDetailOrdersChart,
     MobileChartPopupBtn,

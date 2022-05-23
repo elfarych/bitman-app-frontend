@@ -1,20 +1,20 @@
 <template>
-  <div class="coins-domination-slider q-mt-md">
-    <swiper v-if="coinCategories" class="swiper" :options="swiperOptions">
+  <div class="top-25-slider q-mt-md">
+    <swiper v-if="topCoins && topCoins.length" class="swiper" :options="swiperOptions">
       <swiper-slide
-        v-for="category in categories"
-        :key="category.id"
+        v-for="coin in topCoins"
+        :key="coin.marketCap"
       >
-        <coin-categories-card :category="category"/>
+        <top25-card :coin="coin"/>
       </swiper-slide>
     </swiper>
 
     <swiper v-else class="swiper" :options="swiperOptions">
       <swiper-slide
-        v-for="category in 10"
-        :key="category"
+        v-for="coin in 10"
+        :key="coin"
       >
-        <q-skeleton class="rounded-borders-xl full-width" style="height: 125px" />
+        <q-skeleton class="rounded-borders-xl full-width" style="height: 220px" />
       </swiper-slide>
     </swiper>
   </div>
@@ -24,12 +24,12 @@
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.min.css'
 import { mapState } from 'vuex'
-import CoinCategoriesCard from 'components/coins/coin-categories/coin-categories-card'
+import Top25Card from 'components/binance-market/top-25/top-25-card'
 
 export default {
-  name: 'coin-categories-slider',
+  name: 'top-25-slider',
   components: {
-    CoinCategoriesCard,
+    Top25Card,
     Swiper,
     SwiperSlide
   },
@@ -37,7 +37,13 @@ export default {
     swiper: directive
   },
   computed: {
-    ...mapState('coins', ['coinCategories']),
+    ...mapState('binanceMarket', ['symbols']),
+    topCoins () {
+      const coins = [...this.symbols]
+      return coins
+        .filter(item => item.marketCap)
+        .sort((a, b) => Number(a.marketCap) < Number(b.marketCap) ? 1 : -1).slice(0, 25)
+    },
     categories () {
       return this.coinCategories || []
     }
@@ -46,9 +52,10 @@ export default {
     return {
       swiperOptions: {
         spaceBetween: 7.5,
+        freeMode: !this.$mobile,
         breakpoints: {
           1600: {
-            slidesPerView: 6.5
+            slidesPerView: 7.5
           },
           1400: {
             slidesPerView: 5.5
@@ -62,8 +69,8 @@ export default {
           750: {
             slidesPerView: 3.3
           },
-          330: {
-            slidesPerView: 2.3
+          300: {
+            slidesPerView: 2.1
           }
         }
       }

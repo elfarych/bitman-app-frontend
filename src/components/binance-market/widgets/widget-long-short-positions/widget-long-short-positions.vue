@@ -1,7 +1,7 @@
 <template>
-  <div class="widget-btc-long-short-positions q-px-md q-pb-lg q-pt-lg">
+  <div class="widget-btc-long-short-positions q-pb-lg">
 
-    <div class="f-w-800 text-subtitle1">
+    <div class="f-w-800 text-subtitle1 text-uppercase">
       Настроения рынка
     </div>
 

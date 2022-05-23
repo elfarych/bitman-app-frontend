@@ -1,12 +1,23 @@
 <template>
 <div class="widget-week-top-coins q-pt-lg">
-  <div class="text-subtitle1 f-w-800">В тренде за неделю</div>
-  <coin-card
-    v-for="coin in topCoins"
-    :key="coin.item.id"
-    :coin-id="coin.item.id"
-    class="q-mt-sm"
-  />
+  <div class="text-subtitle1 f-w-800">В тренде</div>
+  <div v-if="topCoinsWithData.length">
+    <coin-card
+      v-for="coin in topCoinsWithData"
+      :key="coin.id"
+      :coin="coin"
+      class="q-mt-sm"
+    />
+  </div>
+  <div v-else>
+    <q-skeleton
+      v-for="index in 5"
+      :key="index"
+      width="100%"
+      height="60px"
+      class="rounded-borders q-mt-sm"
+    />
+  </div>
 </div>
 </template>
 
@@ -15,30 +26,59 @@ import errorHandler from 'src/utils/error-handler'
 import axios from 'axios'
 import config from 'src/config'
 import CoinCard from 'components/coins/coin-card/coin-card'
+let coinReloader
 
 export default {
   name: 'widget-week-top-coins',
   components: { CoinCard },
   data () {
     return {
-      topCoins: []
+      topCoins: [],
+      topCoinsWithData: []
     }
   },
   methods: {
-    async loadTopCoins () {
+    async loadTopCoinsFromCoinGecko () {
       try {
         await axios
-          .get(`${config.nodeServerURI}/info/top-week-coins`)
+          .get(`${config.coinGeckoAPI}/search/trending`)
           .then(res => {
-            this.topCoins = res.data.data.coins
+            this.topCoins = res.data.coins.map(item => item.item.id)
+          })
+      } catch (e) {
+        errorHandler(e)
+      }
+    },
+
+    async loadTopCoins () {
+      const vm = this
+      try {
+        await axios
+          .get(`${config.coinGeckoBackend}/coins`, {
+            params: {
+              symbols: vm.topCoins.join(',')
+            }
+          })
+          .then(res => {
+            vm.topCoinsWithData = res.data.coins
           })
       } catch (e) {
         errorHandler(e)
       }
     }
   },
-  mounted () {
-    this.loadTopCoins()
+  async mounted () {
+    await this.loadTopCoinsFromCoinGecko()
+    if (this.topCoins.length) {
+      await this.loadTopCoins()
+    }
+    coinReloader = setInterval(() => {
+      this.loadTopCoins()
+    }, 10000)
+  },
+  beforeRouteLeave (to, from, next) {
+    clearInterval(coinReloader)
+    next()
   }
 }
 

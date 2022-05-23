@@ -45,7 +45,7 @@ export default {
   bottom: 0
   left: 50%
   margin-left: -25px
-  width: 40px
+  width: 50px
   border-top-left-radius: 4px
   border-top-right-radius: 4px
 </style>

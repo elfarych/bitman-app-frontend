@@ -4,7 +4,7 @@
     <q-item
       v-if="!$mobile"
       clickable
-      class="q-pa-none full-width binance-orders-ticker binance-orders-ticker-card rounded-borders overflow-hidden binance-market-ticker"
+      class="q-pa-none full-width binance-orders-ticker binance-orders-ticker-card rounded-borders-xl overflow-hidden binance-market-ticker"
       :to="{ name: 'market-ticker-detail', params: { symbol: slicedSymbol } }"
     >
 

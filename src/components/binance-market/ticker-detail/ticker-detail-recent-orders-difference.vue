@@ -1,5 +1,5 @@
 <template>
-<div class="ticker-detail-limit-orders-difference fit rounded-borders">
+<div class="ticker-detail-limit-orders-difference fit rounded-borders-xl secondary-shadow-inset secondary-border">
   <div class="flex justify-between relative-position q-pr-lg">
     <div class="f-w-800" style="line-height: 1.2">Соотношение исполненых ордеров
       <span class="block">Binance {{ futures ? 'Futures' : 'Spot' }}</span>

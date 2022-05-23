@@ -1,19 +1,20 @@
 <template>
 <div class="binance-market-widgets-panel">
-  <div class="market-right-panel">
-    <widget-week-vix-chart :key="`${$route.query.market}`"/>
+  <div>
+    <top100-wallets />
   </div>
-  <div class="q-mt-sm">
+
+  <div class="q-mt-lg">
+    <widget-week-vix-chart :key="`${$route.query.market}`" style="min-height: 350px"/>
+  </div>
+  <div class="q-mt-lg">
     <widget-long-short-positions :key="`${$route.query.market}`"/>
   </div>
 
-  <div class="q-mt-sm">
+  <div class="q-mt-lg">
     <widget-liquidity :key="`${$route.query.market}`"/>
   </div>
 
-  <div class="q-mt-sm">
-    <widget-week-top-coins :key="`${$route.query.market}`"/>
-  </div>
 </div>
 </template>
 
@@ -21,11 +22,11 @@
 import WidgetWeekVixChart from 'components/binance-market/widgets/widget-week-vix-chart'
 import WidgetLongShortPositions
 from 'components/binance-market/widgets/widget-long-short-positions/widget-long-short-positions'
-import WidgetWeekTopCoins from 'components/coins/widget-week-top-coins/widget-week-top-coins'
 import WidgetLiquidity from 'components/binance-market/widgets/widget-liquidity'
+import Top100Wallets from 'components/binance-market/widgets/top-100-wallets/top-100-wallets'
 export default {
   name: 'binance-market-widgets-panel',
-  components: { WidgetLiquidity, WidgetWeekTopCoins, WidgetLongShortPositions, WidgetWeekVixChart }
+  components: { Top100Wallets, WidgetLiquidity, WidgetLongShortPositions, WidgetWeekVixChart }
 }
 </script>
 

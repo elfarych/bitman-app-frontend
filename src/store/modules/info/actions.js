@@ -65,13 +65,13 @@ export async function loadCashFlow ({ commit }) {
         const data = []
         const resData = res.data.data.fund_time_flow_dtl
 
-        if (resData && resData[0]) {
+        if (resData?.[0]?.data?.[0]) {
           for (let i = 0; i < 14; i++) {
             const dataObj = {}
-            dataObj.time = resData[0].data[i][0]
-            dataObj.inFlow = parseInt(resData[1].data[i][0])
-            dataObj.outFlow = parseInt(resData[2].data[i][0])
-            dataObj.netInflow = parseInt(resData[3].data[i][0])
+            dataObj.time = resData[0].data[i]?.[0]
+            dataObj.inFlow = parseInt(resData[1].data[i]?.[0])
+            dataObj.outFlow = parseInt(resData[2].data[i]?.[0])
+            dataObj.netInflow = parseInt(resData[3].data[i]?.[0])
 
             data.push(dataObj)
           }
@@ -84,23 +84,23 @@ export async function loadCashFlow ({ commit }) {
   }
 }
 
-export async function loadHodlers ({ commit }) {
-  const symbol = this.$router.currentRoute.params.symbol
+export async function loadHodlers ({ commit }, symbol = null) {
+  if (!symbol) symbol = this.$router.currentRoute.params.symbol
   try {
     axios
       .get(`https://api.gatebigdata.com/v3/data/cash/coin_type/${symbol}?url=cash/coin_type`)
       .then(res => {
         const data = []
         const resData = res.data.data.cash_dist_dtl
-        if (resData && resData[0]) {
+        if (resData?.[0]?.data[0]) {
           for (let i = 0; i < 100; i++) {
             const dataObj = {}
-            dataObj.rating = resData[0].data[i][0]
-            dataObj.tokens = parseInt(resData[1].data[i][0])
-            dataObj.percent = parseFloat(resData[2].data[i][0])
-            dataObj.oneDayChange = parseInt(resData[3].data[i][0])
-            dataObj.weeklyChange = parseInt(resData[3].data[i][1])
-            dataObj.address = resData[4].data[i][0]
+            dataObj.rating = resData[0].data[i]?.[0]
+            dataObj.tokens = parseInt(resData[1].data[i]?.[0])
+            dataObj.percent = parseFloat(resData[2].data[i]?.[0])
+            dataObj.oneDayChange = parseInt(resData[3].data[i]?.[0])
+            dataObj.weeklyChange = parseInt(resData[3].data[i]?.[1])
+            dataObj.address = resData[4].data[i]?.[0]
 
             data.push(dataObj)
           }

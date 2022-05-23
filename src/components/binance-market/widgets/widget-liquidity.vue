@@ -1,8 +1,8 @@
 <template>
 <div
-  class="widget-liquidity rounded-borders q-py-md relative-position q-pb-xl q-pt-md bg-dark"
+  class="widget-liquidity rounded-borders q-py-md relative-position q-pb-xl q-pt-md"
   :key="`${fullscreen}` "
-  :style="fullscreen ? '' : 'height: 370px'"
+  :style="fullscreen ? '' : 'height: 500px'"
   :class="fullscreen ? 'widget-liquidity-chart-full-screen' : ''"
 >
   <div class="absolute-top-right q-ma-md">
@@ -22,7 +22,7 @@
     />
   </div>
 
-  <div class="text-subtitle1 f-w-800 text-center">Ликвидации</div>
+  <div class="text-subtitle1 f-w-800 text-center text-uppercase">Ликвидации</div>
   <div class="text-center">по данным топовых бирж</div>
   <div
     :id="chartId"
@@ -81,7 +81,8 @@ export default {
       activeTotal: 0,
       activeDate: 'текущий день',
       dataFormat: '($0.0a)',
-      disableReload: false
+      disableReload: false,
+      createChartTimer: null
     }
   },
   methods: {
@@ -149,7 +150,7 @@ export default {
         },
         timeScale: {
           visible: true,
-          barSpacing: element.offsetWidth / (vm.liquidationData.longs?.length + 4),
+          barSpacing: element.offsetWidth / (vm.liquidationData.longs?.length + 1),
           tickMarkFormatter: (time) => {
             return `${time?.day < 10 ? '0' + time?.day : time?.day}.${time?.month < 10 ? '0' + time?.month : time?.month}`
           }
@@ -177,7 +178,7 @@ export default {
           drawTicks: false,
           mode: PriceScaleMode.Normal,
           scaleMargins: {
-            top: 0.59,
+            top: 0.09,
             bottom: 0.2
           }
         },
@@ -232,10 +233,15 @@ export default {
     }
 
   },
+  beforeDestroy () {
+    this.chart = null
+    if (this.createChartTimer) clearTimeout(this.createChartTimer)
+  },
   mounted () {
     const vm = this
-    setTimeout(() => {
-      if (!this.chart) {
+    if (vm.createChartTimer) clearTimeout(vm.createChartTimer)
+    vm.createChartTimer = setTimeout(() => {
+      if (!vm.chart) {
         vm.loadLiquidations().then(() => {
           vm.createChart()
         })

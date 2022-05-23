@@ -2,7 +2,7 @@
   <div class="">
     <q-item
       clickable
-      class="q-pa-none full-width binance-orders-ticker binance-orders-ticker-card rounded-borders overflow-hidden"
+      class="q-pa-none full-width binance-orders-ticker binance-orders-ticker-card rounded-borders-xl overflow-hidden"
       :to="{ name: 'market-ticker-detail', params: { symbol: slicedSymbol } }"
     >
 
@@ -34,11 +34,13 @@
                     <div>
                       {{ slicedSymbol }}
                     </div>
-                    <small class="f-w-400 inline-block" style="font-size: 8px; margin-left: 3px" title="Ранг">{{
-                        ticker.rank
-                      }}</small>
                   </div>
-                  <small class="small-text text-grey-5 block f-w-400" style="line-height: 1">{{ ticker.fullName }}</small>
+                  <div class="small-text text-grey-5 block f-w-400" style="line-height: 1">
+                    <span class="f-w-400 inline-block text text-warning" title="Ранг">{{
+                        ticker.rank
+                      }}</span>
+                    {{ ticker.fullName }}
+                  </div>
 
                   <div :class="priceClass" class="small-text flex items-center q-mt-xs">
                     ${{ ticker.lastPrice | tickerPriceFormatter }}
@@ -69,7 +71,7 @@
                 style="margin: 3px 0"
               />
 
-              <div class="full-height absolute-right" style="right: -10px; top: 5px">
+              <div class="full-height absolute-right" style="right: -10px; top: 0">
                 <div :class="changePercentValue > 0 ? 'text-positive' : 'text-negative'" class="f-w-800 small-text"
                      style="line-height: 1 !important">
                   <span class="">{{ changePercentValue > 0 ? '+' : '' }}</span>{{ changePercent }}%
