@@ -5,7 +5,7 @@
       <!--      Market switcher-->
       <div class="flex items-center full-height justify-center">
         <q-btn
-          label="Спот"
+          label="Spot"
           dense flat no-caps
           :color="market === 'Spot' ? 'primary' : ''"
           class="f-w-800 transition-1"
@@ -13,7 +13,7 @@
         />
 
         <q-btn
-          label="Фьючерсы"
+          label="Futures"
           :color="market === 'Futures' ? 'primary' : ''"
           class="f-w-800 q-ml-sm transition-1"
           dense flat no-caps
@@ -44,7 +44,7 @@
 
     <div class="row items-center">
       <div class="col-6 col-sm-4 q-pb-sm">
-        <base-page-title screener-name="Рынок" screener-link="https://accounts.binance.com/ru/register?ref=368026154"
+        <base-page-title :screener-name="$t('markets')" screener-link="https://accounts.binance.com/ru/register?ref=368026154"
                          screener-text="" :real-time-text="false"/>
       </div>
 
@@ -67,7 +67,7 @@
         :class="$mobile ? 'justify-between' : 'justify-end'"
       >
         <q-btn
-          label="Спот"
+          label="Spot"
           dense flat no-caps
           :color="market === 'Spot' ? 'primary' : ''"
           class="f-w-800 transition-1"
@@ -75,7 +75,7 @@
         />
 
         <q-btn
-          label="Фьючерсы"
+          label="Futures"
           :color="market === 'Futures' ? 'primary' : ''"
           class="f-w-800 q-ml-sm transition-1"
           dense flat no-caps
@@ -88,7 +88,7 @@
           dense flat no-wrap no-caps
           @click="market = 'Wishlist'"
         >
-          <span class="f-w-800 q-ml-xs">Избранное</span>
+          <span class="f-w-800 q-ml-xs">Watchlist</span>
         </q-btn>
 
         <q-btn
@@ -97,7 +97,7 @@
           dense flat no-caps
           @click="market = 'Metrics'"
         >
-          <span class="f-w-800 q-ml-xs">Метрики</span>
+          <span class="f-w-800 q-ml-xs">Metrics</span>
         </q-btn>
       </div>
 
@@ -112,14 +112,14 @@
           size="sm"
           :color="sortField === 'cap' ? 'primary' : ''"
           dense flat no-caps
-          title="Капитализация"
+          title="Market cap"
           @click="setSort('cap')"
         />
       </div>
 
       <div class="relative-position q-ml-sm flex no-wrap items-center cursor-pointer">
         <q-btn
-          label="Объем"
+          label="Volume"
           :icon-right="sortField === 'volume' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
           size="sm"
           :color="sortField === 'volume' ? 'primary' : ''"
@@ -128,7 +128,7 @@
         />
 
         <q-btn
-          label="Цена"
+          label="Price"
           :icon-right="sortField === 'price' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
           size="sm"
           :color="sortField === 'price' ? 'primary' : ''"
@@ -140,7 +140,7 @@
 
       <div class="relative-position q-ml-sm flex no-wrap items-center cursor-pointer">
         <q-btn
-          label="Изм. цены"
+          label="Price change"
           :icon-right="sortField === 'change' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
           size="sm"
           :color="sortField === 'change' ? 'primary' : ''"
@@ -185,7 +185,7 @@
       </div>
 
       <div v-if="slicedData.length < sortedTickers.length" class="text-center q-mt-lg">
-        Загрузка...
+        Loading...
       </div>
 
     </div>

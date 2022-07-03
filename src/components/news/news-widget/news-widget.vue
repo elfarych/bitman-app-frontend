@@ -1,7 +1,7 @@
 <template>
 <div class="news-widget">
   <div class="text-uppercase text-subtitle1 f-w-800 flex">
-    <div>События</div>
+    <div>Events</div>
     <a
       class="small-text text-uppercase text-warning inline-block q-pl-xs"
       style="margin-top: -3px"

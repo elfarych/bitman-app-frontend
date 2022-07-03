@@ -1,7 +1,7 @@
 <template>
   <div class="coins-global-market-volume bg-dark rounded-borders-xl q-pa-sm relative-position">
       <div class="f-w-800 text-subtitle1">
-        Объем за сутки
+        {{ $t('volume24h') }}
       </div>
 
       <div

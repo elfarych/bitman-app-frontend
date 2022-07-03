@@ -54,7 +54,7 @@
 
         <!--    Change-->
         <div class="col-2 text-right">
-          <small class="block f-w-400 small-text text-grey-5">изм. 24 часа</small>
+          <small class="block f-w-400 small-text text-grey-5">24h change</small>
           <div :class="changePercentValue > 0 ? 'text-positive' : 'text-negative'" class="f-w-800 text-subtitle1"
                style="line-height: 1 !important">
             <span class="">{{ changePercentValue > 0 ? '+' : '' }}</span>{{ changePercent }}%
@@ -75,7 +75,7 @@
           </div>
 
           <!--        Volume-->
-          <small class="block f-w-400 small-text q-mt-xs text-grey-5">объем 24ч</small>
+          <small class="block f-w-400 small-text q-mt-xs text-grey-5">volume 24h</small>
           <div class="f-w-800" style="line-height: 1 !important">
             <span v-if="ticker.volume" class="text-uppercase">{{ ticker.volume | tickerVolumeFormatter }}</span>
             <span v-else class="text-grey-5">No data</span>

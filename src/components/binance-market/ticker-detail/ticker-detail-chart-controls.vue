@@ -3,7 +3,7 @@
   <div class="flex justify-between" style="padding-right: 13px; ">
     <div>
       <q-btn
-        :label="ordersChartMode ? 'По умолчанию' : 'Заявки на графике'"
+        :label="ordersChartMode ? $t('default') : $t('ordersOnChart')"
         color="secondary"
         flat dense
         class="f-w-800 text-secondary-shadow"
@@ -13,7 +13,7 @@
       <div>
         <q-btn
           v-if="!ordersChartMode"
-          label="На весь экран"
+          :label="$t('fullScreen')"
           icon="fullscreen"
           color="secondary"
           flat dense no-caps

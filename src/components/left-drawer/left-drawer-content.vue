@@ -11,7 +11,7 @@
         title="Главная страница"
       >
         <q-icon name="home" size="22px" class="q-mr-sm"/>
-        Главная
+        {{ $t('homePage') }}
       </q-item>
 
       <q-item
@@ -22,37 +22,37 @@
         title="Полная информация о монетах"
       >
         <q-icon name="bar_chart" size="22px" class="q-mr-sm"/>
-        Рынок
+        {{ $t('markets') }}
       </q-item>
 
-      <q-item
-        clickable
-        :to="{ name: 'Binance-Vol' }"
-        class="items-center"
-        tag="a"
-        title="Скринер волатильности монет"
-      >
-        <q-icon name="percent" size="22px" class="q-mr-sm"/>
-        Скринер волатильности
-      </q-item>
+<!--      <q-item-->
+<!--        clickable-->
+<!--        :to="{ name: 'Binance-Vol' }"-->
+<!--        class="items-center"-->
+<!--        tag="a"-->
+<!--        title="Скринер волатильности монет"-->
+<!--      >-->
+<!--        <q-icon name="percent" size="22px" class="q-mr-sm"/>-->
+<!--        Скринер волатильности-->
+<!--      </q-item>-->
 
       <q-item
         class="items-center text-grey-7"
         style="background: #131722"
       >
-        О проекте
+        {{ $t('project') }}
       </q-item>
 
-      <q-item
-        clickable
-        :to="{ name: 'Blog' }"
-        class="items-center"
-        tag="a"
-        title="Новости проекта Bitman"
-      >
-        <q-icon name="newspaper" size="22px" class="q-mr-sm"/>
-        Наш блог
-      </q-item>
+<!--      <q-item-->
+<!--        clickable-->
+<!--        :to="{ name: 'Blog' }"-->
+<!--        class="items-center"-->
+<!--        tag="a"-->
+<!--        title="Новости проекта Bitman"-->
+<!--      >-->
+<!--        <q-icon name="newspaper" size="22px" class="q-mr-sm"/>-->
+<!--        Наш блог-->
+<!--      </q-item>-->
 
       <q-item
         clickable
@@ -62,7 +62,18 @@
         title="Дорожная карта проекта Bitman"
       >
         <q-icon name="signpost" size="22px" class="q-mr-sm"/>
-        Дорожная карта
+        Roadmap
+      </q-item>
+
+      <q-item
+        clickable
+        :to="{ name: 'Donat' }"
+        class="items-center"
+        tag="a"
+        title="Помощь проекту Bitman"
+      >
+        <q-icon name="currency_bitcoin" size="22px" class="q-mr-sm"/>
+        {{ $t('donate') }}
       </q-item>
 
       <q-item
@@ -73,7 +84,7 @@
         title="Наши контакты"
       >
         <q-icon name="alternate_email" size="22px" class="q-mr-sm"/>
-        Контакты
+        {{ $t('contacts') }}
       </q-item>
 
 <!--      <q-item-->
@@ -106,34 +117,34 @@
 <!--        <small class="block text-warning absolute-top-right q-pr-xs">Рекомендуем</small>-->
 <!--      </q-item>-->
 
-      <q-item
-        class="items-center text-grey-7"
-        style="background: #131722"
-      >
-        Дополнительно
-      </q-item>
+<!--      <q-item-->
+<!--        class="items-center text-grey-7"-->
+<!--        style="background: #131722"-->
+<!--      >-->
+<!--        {{ $t('additionally') }}-->
+<!--      </q-item>-->
 
-      <q-item
-        clickable
-        :to="{ name: 'Donat' }"
-        class="items-center"
-        tag="a"
-        title="Помощь проекту Bitman"
-      >
-        <q-icon name="currency_bitcoin" size="22px" class="q-mr-sm"/>
-        Помощь проекту
-      </q-item>
+<!--      <q-item-->
+<!--        clickable-->
+<!--        :to="{ name: 'Donat' }"-->
+<!--        class="items-center"-->
+<!--        tag="a"-->
+<!--        title="Помощь проекту Bitman"-->
+<!--      >-->
+<!--        <q-icon name="currency_bitcoin" size="22px" class="q-mr-sm"/>-->
+<!--        {{ $t('donate') }}-->
+<!--      </q-item>-->
 
-      <q-item
-        clickable
-        :to="{ name: 'New-fitch' }"
-        class="items-center"
-        tag="a"
-        title="Прадлагайте новые интересные фичи и мы добавим их в нашу платформу"
-      >
-        <q-icon name="addchart" size="22px" class="q-mr-sm"/>
-        Предложить фичу
-      </q-item>
+<!--      <q-item-->
+<!--        clickable-->
+<!--        :to="{ name: 'New-fitch' }"-->
+<!--        class="items-center"-->
+<!--        tag="a"-->
+<!--        title="Прадлагайте новые интересные фичи и мы добавим их в нашу платформу"-->
+<!--      >-->
+<!--        <q-icon name="addchart" size="22px" class="q-mr-sm"/>-->
+<!--        Предложить фичу-->
+<!--      </q-item>-->
 
     </q-list>
   </nav>

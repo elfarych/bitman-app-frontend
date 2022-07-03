@@ -53,7 +53,7 @@
         <div class="row q-col-gutter-xs ">
           <div class="col-6">
             <q-btn
-              label="Источник"
+              label="Source"
               no-caps outline flat
               class="l-h-12 fit"
               color="warning"
@@ -65,7 +65,7 @@
 
           <div class="col-6">
             <q-btn
-              label="О монете"
+              label="Coin"
               no-caps flat
               class="l-h-12 fit"
               outline

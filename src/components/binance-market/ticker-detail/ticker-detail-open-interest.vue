@@ -2,7 +2,7 @@
   <div class="ticker-detail-open-interest f-w-800 fit ">
     <div v-if="openInterest.totalSum">
       <div class="flex justify-between items-center ">
-        <div class="text-uppercase text-subtitle1 f-w-800 q-mt-lg">Открытый интерес 24H</div>
+        <div class="text-uppercase text-subtitle1 f-w-800 q-mt-lg">{{ $t('openInterest') }} 24H</div>
         <div class="flex items-center">
           <div class="text-primary q-mr-sm"></div>
 <!--          <q-btn-->
@@ -28,7 +28,7 @@
     </div>
 
     <div v-else class="text-h5 text-grey fit flex flex-center f-w-800">
-      <div >Нет данных</div>
+      <div >No data</div>
     </div>
 
   </div>

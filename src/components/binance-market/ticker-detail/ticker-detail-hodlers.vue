@@ -2,7 +2,7 @@
   <div class="ticker-detail-hodlers rounded-borders">
     <div>
       <div class="f-w-800 text-uppercase q-mt-lg text-subtitle1 flex justify-between items-center">
-        <span class="block">ТОП-100 холдеров</span>
+        <span class="block">{{ $t('top100holders') }}</span>
         <q-btn
           icon="refresh"
           flat dense
@@ -13,7 +13,7 @@
         />
       </div>
       <div>
-        Балансы и транзакции топ-100 холдеров монеты {{ ticker.symbol }}
+        {{ $t('top100holdersDescription') }}
       </div>
       <div v-if="hodlers && hodlers.length">
         <!--      Header-->
@@ -22,13 +22,13 @@
             № / %
           </div>
           <div class="col-3 text-left">
-            Кол-во {{ tokenName }}
+            Qty {{ tokenName }}
           </div>
           <div class="col-3 q-pl-sm">
-            Изм. 1 / 7 дней
+            1 / 7 {{ $t('days') }}
           </div>
           <div class="col-3 text-center">
-            Адрес
+            {{ $t('address') }}
           </div>
         </div>
 
@@ -74,7 +74,7 @@
                   flat size="sm"
                   @click="copy(hodler.address)"
                 >
-                  <q-tooltip>Коопировать адрес</q-tooltip>
+                  <q-tooltip>Copy address</q-tooltip>
                 </q-btn>
 
               </div>
@@ -87,7 +87,7 @@
         <div>
           <div class="row q-mt-md bg-dark q-pa-sm rounded-borders">
             <div class="col-12 col-sm-6">
-              <div class="f-w-800">Итого за день:
+              <div class="f-w-800">{{ $t('totalPerDay') }}:
                 <span
                   class="text-uppercase"
                   :class="dailySummary > 0 ? 'text-positive' : 'text-negative'">
@@ -98,7 +98,7 @@
             </div>
 
             <div class="col-12 col-sm-6 ">
-              <div class="f-w-800">За неделю:
+              <div class="f-w-800">{{ $t('perWeek') }}:
                 <span
                   class="text-uppercase"
                   :class="weeklySummary > 0 ? 'text-positive' : 'text-negative'">
@@ -113,7 +113,7 @@
       </div>
 
       <div v-else class="text-h5 text-grey fit flex flex-center f-w-800 q-py-xl">
-        <div>Нет данных</div>
+        <div>No data</div>
       </div>
 
     </div>

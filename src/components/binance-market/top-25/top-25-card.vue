@@ -34,7 +34,7 @@
         </div>
         <div class="small-text text-grey-5 flex justify-between" style="flex-grow: 1">
           <div class="">{{ coinSlicedSymbol }}</div>
-          <div class="bg-warning text-dark q-px-sm rounded-borders q-ml-sm f-w-600">ранг {{ coin.rank }}</div>
+          <div class="bg-warning text-dark q-px-sm rounded-borders q-ml-sm f-w-600">rank {{ coin.rank }}</div>
         </div>
       </div>
     </div>
@@ -42,12 +42,12 @@
 <!--    Price & change-->
     <div class="flex q-mt-sm justify-between q-px-sm">
       <div>
-        <div class="small-text text-grey-5">цена</div>
+        <div class="small-text text-grey-5">{{ $t('price') }}</div>
         <div class="f-w-800" :class="priceClass">${{ coin.lastPrice | tickerPriceFormatter }}</div>
       </div>
 
       <div class="text-right">
-        <div class="small-text text-grey-5">изм. 24ч</div>
+        <div class="small-text text-grey-5">{{ $t('change24') }}</div>
         <div class="f-w-800" :class="coin.priceChange >= 0 ? 'text-positive' : 'text-negative'">
           <span class="">{{ coin.priceChange > 0 ? '+' : '' }}</span>{{ changePercentFormattedValue }}%
         </div>
@@ -57,12 +57,12 @@
 <!--    Cap info-->
     <div class="flex q-mt-sm justify-between q-px-sm">
       <div>
-        <div class="small-text text-grey-5">капитализация</div>
+        <div class="small-text text-grey-5">{{ $t('marketCapSmall') }}</div>
         <div class="f-w-800 text-uppercase">{{ coin.marketCap | bigNumberFormatter }}</div>
       </div>
 
       <div class="text-right">
-        <div class="small-text text-grey-5">объем. 24ч</div>
+        <div class="small-text text-grey-5">{{ $t('volume24h') }}</div>
         <div class="f-w-800 text-uppercase">{{ coin.volume | bigNumberFormatter }}</div>
       </div>
 

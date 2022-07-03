@@ -1,7 +1,7 @@
 <template>
   <div class="ticker-detail-limit-orders-difference fit rounded-borders-xl secondary-border secondary-shadow-inset">
     <div class="flex justify-between relative-position q-pr-lg">
-      <div class="f-w-800" style="line-height: 1.2">Соотношение лимитных заявок
+      <div class="f-w-800" style="line-height: 1.2">{{ $t('limitOrdersRatio') }}
         <span class="block text-warning">Binance {{ futures ? 'Futures' : 'Spot' }}</span></div>
       <q-btn
         icon="refresh"
@@ -15,12 +15,12 @@
       </q-btn>
     </div>
 
-    <div class="small-text q-mt-sm">Данные основаны на последних {{ futures ? '2 000' : '10 000' }}<br> лимитных ордерах
-      биржи Binance<br> в диапазоне
-      <span class="f-w-800 text-primary">{{ percent }}%</span> от текущей цены
-    </div>
+<!--    <div class="small-text q-mt-sm">Данные основаны на последних {{ futures ? '2 000' : '10 000' }}<br> лимитных ордерах-->
+<!--      биржи Binance<br> в диапазоне-->
+<!--      <span class="f-w-800 text-primary">{{ percent }}%</span> от текущей цены-->
+<!--    </div>-->
 
-    <div class="">
+    <div class="q-mt-md">
       <q-slider
         color="secondary"
         v-model="percent"

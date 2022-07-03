@@ -4,19 +4,19 @@
     <span v-if="startEndDifference" :class="startEndDifference > 0 ? 'text-positive' : 'text-negative'" class="f-w-800 q-mr-xs">
       {{ startEndDifference > 0 ? '+' : '' }}{{ startEndDifference.toFixed(2) }}%
     </span>
-    за {{ intervalName }}
+    {{ intervalName }}
   </small>
 
   <div class="absolute-bottom-right q-mr-xs flex no-wrap text-right" style="z-index: 1000; bottom: -3px">
-    <small>мин <span class="f-w-800">{{ periodMinValue || '' }}</span></small>
-    <small class="q-ml-md">макс <span class="f-w-800">{{ periodMaxValue || '' }}</span></small>
+    <small>min <span class="f-w-800">{{ periodMinValue || '' }}</span></small>
+    <small class="q-ml-md">max <span class="f-w-800">{{ periodMaxValue || '' }}</span></small>
   </div>
   <div
     class="binance-market-ticker-chart-overlay"
     @click="showChartPopup($event)"
   >
     <q-tooltip v-if="!$mobile">
-      Быстрый просмотр
+      Quick view
     </q-tooltip>
   </div>
 
@@ -56,7 +56,7 @@ export default {
       days: 0,
       candlesCount: 53,
       candlesInterval: '1w',
-      intervalName: '1 год',
+      intervalName: '1 year',
       firstCandle: null,
       lastCandle: null,
       candles: [],

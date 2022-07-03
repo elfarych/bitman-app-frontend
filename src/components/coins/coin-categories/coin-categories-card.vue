@@ -5,7 +5,7 @@
     </div>
     <div class="q-mt-md flex justify-between">
       <div class="">
-        <span class="block small-text">капитализация</span>
+        <span class="block small-text">{{ $t('marketCapSmall') }}</span>
         <div class="flex">
           <div class="f-w-800 text-uppercase">
             {{ category.market_cap | bigNumberFormatter }}
@@ -16,7 +16,7 @@
         </div>
 
         <div class="q-mt-sm">
-          <span class="block small-text">объем 24ч</span>
+          <span class="block small-text">{{ $t('volume24h') }}</span>
           <span class="f-w-800 text-uppercase l-h-12">
       {{ category.volume_24h | bigNumberFormatter }}
     </span>

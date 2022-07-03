@@ -22,8 +22,7 @@
     />
   </div>
 
-  <div class="text-subtitle1 f-w-800 text-center text-uppercase">Ликвидации</div>
-  <div class="text-center">по данным топовых бирж</div>
+  <div class="text-subtitle1 f-w-800 text-center text-uppercase">{{ $t('liquidations') }}</div>
   <div
     :id="chartId"
     class="transition-1 fit"
@@ -31,20 +30,20 @@
   ></div>
 
   <div class="q-mt-sm   absolute-bottom-left q-pa-md">
-    <div>Дата: {{ activeDate }}</div>
+    <div>Date: {{ activeDate }}</div>
 
     <div class="flex q-mt-sm">
       <div class="flex  items-center">
         <span class="block q-mr-xs bg-positive" style="width: 10px; height: 10px; border-radius: 4px; margin-top: -1px"></span>
-        Длинные <span class="f-w-800 q-ml-xs">{{ activeLongFormatted }}</span>
+        Longs <span class="f-w-800 q-ml-xs">{{ activeLongFormatted }}</span>
       </div>
       <div class="flex  items-center q-ml-md">
         <span class="block q-mr-xs bg-negative q-ml-sm" style="width: 10px; height: 10px; border-radius: 4px; margin-top: -1px"></span>
-        Короткие <span class="f-w-800 q-ml-xs">{{ activeShortFormatted }}</span>
+        Shorts <span class="f-w-800 q-ml-xs">{{ activeShortFormatted }}</span>
       </div>
       <div class="flex  items-center q-ml-md">
         <span class="block q-mr-xs bg-secondary" style="width: 10px; height: 10px; border-radius: 4px; margin-top: -1px"></span>
-        Всего <span class="f-w-800 q-ml-xs">{{ activeTotalFormatted }}</span>
+        Total <span class="f-w-800 q-ml-xs">{{ activeTotalFormatted }}</span>
       </div>
     </div>
 
@@ -79,7 +78,7 @@ export default {
       activeLong: 0,
       activeShort: 0,
       activeTotal: 0,
-      activeDate: 'текущий день',
+      activeDate: this.$dayjs().format('YYYY-MM-DD'),
       dataFormat: '($0.0a)',
       disableReload: false,
       createChartTimer: null
@@ -178,7 +177,7 @@ export default {
           drawTicks: false,
           mode: PriceScaleMode.Normal,
           scaleMargins: {
-            top: 0.09,
+            top: 0.6,
             bottom: 0.2
           }
         },

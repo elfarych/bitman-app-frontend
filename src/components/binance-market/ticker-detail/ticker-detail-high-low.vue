@@ -5,7 +5,7 @@
         :low-price="dayMinHigh.low"
         :high-price="dayMinHigh.high"
         :last-price="dayMinHigh.lastPrice"
-        title="24 часа"
+        :title="$t('hour24')"
         show-meta
         styles="height: 5px"
       />

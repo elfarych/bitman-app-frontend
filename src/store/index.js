@@ -13,6 +13,7 @@ import blog from './modules/blog'
 import traderCase from './modules/trader-case'
 import news from './modules/news'
 import volatility from 'src/store/modules/volatility'
+import wallet from 'src/components/wallet/store'
 
 Vue.use(Vuex)
 
@@ -39,7 +40,8 @@ export default function (/* { ssrContext } */) {
       blog,
       traderCase,
       news,
-      volatility
+      volatility,
+      wallet
     },
 
     // enable strict mode (adds overhead!)

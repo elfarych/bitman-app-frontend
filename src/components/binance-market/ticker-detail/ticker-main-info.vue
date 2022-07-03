@@ -60,7 +60,7 @@
           style="line-height: 1.2"
         >
           <small class="f-w-400 small-text block text-right">
-            изм. 24h
+            24h change
           </small>
           <div v-if="ticker.e" :class="ticker.P > 0 ? 'text-positive' : 'text-negative'" class="text-h6 f-w-800 l-h-12">
             {{ ticker.P > 0 ? '+' : '' }}{{ changePercent || '' }}%
@@ -73,7 +73,7 @@
         <!--        Volume-->
         <div class="text-subtitle1 f-w-800 text-right q-mt-sm" style="line-height: 1.2">
           <small class="f-w-400 small-text block">
-            объем 24h
+            Volume 24h
           </small>
           <div v-if="ticker.e" class="text-uppercase no-wrap text-h6 f-w-800 l-h-12">
             {{ volume | tickerVolumeFormatter }}

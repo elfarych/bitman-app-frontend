@@ -1,11 +1,11 @@
 <template>
 <div class="top-25">
-  <div class="text-subtitle1 text-uppercase f-w-800">Топ 25</div>
+  <div class="text-h6 text-uppercase f-w-800">{{ $t('top25') }}</div>
   <div>
     <top25-slider />
   </div>
   <q-btn
-    label="Обзор рынка Binance"
+    :label="$t('binanceMarketsSee')"
     color="warning"
     unelevated flat
     class="q-mt-lg f-w-800 q-pa-xs warning-btn"

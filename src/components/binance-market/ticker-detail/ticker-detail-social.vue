@@ -53,19 +53,19 @@
           <!--      Development-->
           <div class="col-12 col-sm-6">
             <div class="rounded-borders-xl q-pa-md secondary-border secondary-shadow-inset">
-              <div class="f-w-800 text-center">Активность разработки проекта</div>
-              <div class="q-mt-sm">Кол-во звезд: <span class="text-uppercase">{{ countFormatter(coin.developer_data.stars) }}</span></div>
-              <div class="q-mt-sm">Кол-во форков: <span class="text-uppercase">{{ countFormatter(coin.developer_data.forks) }}</span></div>
-              <div class="q-mt-sm">Кол-во подписчиков: <span class="text-uppercase">{{ countFormatter(coin.developer_data.subscribers) }}</span></div>
-              <div class="q-mt-sm">Кол-во коммитов за последний месяц: {{ coin.developer_data.commit_count_4_weeks || 'нет данных' }}</div>
+              <div class="f-w-800 text-center">Development</div>
+              <div class="q-mt-sm">Stars: <span class="text-uppercase">{{ countFormatter(coin.developer_data.stars) }}</span></div>
+              <div class="q-mt-sm">Forks: <span class="text-uppercase">{{ countFormatter(coin.developer_data.forks) }}</span></div>
+              <div class="q-mt-sm">Followers: <span class="text-uppercase">{{ countFormatter(coin.developer_data.subscribers) }}</span></div>
+              <div class="q-mt-sm">Last month commits: {{ coin.developer_data.commit_count_4_weeks || 'нет данных' }}</div>
               <div class="q-mt-sm">Pull requests: <span class="text-uppercase">{{ countFormatter(coin.developer_data.pull_requests_merged) }}</span></div>
-              <div class="q-mt-sm">Задачи (всего / выполнено): {{ coin.developer_data.total_issues || 'нет данных' }} / {{ coin.developer_data.closed_issues || 'нет данных' }}</div>
+              <div class="q-mt-sm">Tasks (total / completed): {{ coin.developer_data.total_issues || 'нет данных' }} / {{ coin.developer_data.closed_issues || 'нет данных' }}</div>
             </div>
           </div>
 
           <div class="col-12 col-sm-6">
             <div class="rounded-borders-xl q-pa-md secondary-border secondary-shadow-inset fit">
-              <div class="f-w-800 text-center">Комьюнити</div>
+              <div class="f-w-800 text-center">Community</div>
 
               <div class="q-mt-sm">Twitter: <span class="text-uppercase">{{ countFormatter(coin.community_data.twitter_followers) }}</span></div>
               <div class="q-mt-sm">Reddit: <span class="text-uppercase">{{ countFormatter(coin.community_data.reddit_subscribers) }}</span></div>

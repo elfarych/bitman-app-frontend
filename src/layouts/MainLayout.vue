@@ -15,7 +15,7 @@
             <span class="vix-logo">
               {{ vix }}
               <q-tooltip>
-                Индекс страха и жадности биткоина
+                {{ $t('vixTitle') }}
               </q-tooltip>
             </span>
           </h1>
@@ -41,6 +41,8 @@
             @click="showFilters"
           />
         </q-slide-transition>
+
+        <lang-switcher v-if="showLangSwitcher" class="q-mr-xs"/>
         <portal-target name="top-bar-right"></portal-target>
         <div><trader-top-btn /></div>
 
@@ -81,9 +83,10 @@ import LeftDrawerTabs from 'components/left-drawer/left-drawer-tabs'
 import { mapState } from 'vuex'
 import SiteFooter from 'components/footer/site-footer'
 import TraderTopBtn from 'components/trader/trader-top-btn'
+import LangSwitcher from 'components/lang-switcher'
 
 export default {
-  components: { TraderTopBtn, SiteFooter, LeftDrawerTabs, ChartHover, ChartPopup, VolatilityTickersFilter },
+  components: { LangSwitcher, TraderTopBtn, SiteFooter, LeftDrawerTabs, ChartHover, ChartPopup, VolatilityTickersFilter },
   data () {
     return {
       left: false,
@@ -95,6 +98,16 @@ export default {
     ...mapState('info', ['vix']),
     showVolatilityFilter () {
       return this.$route.path.includes('volatility')
+    },
+    showLangSwitcher () {
+      let show = true
+      // if (this.$route.name === 'Binance-Market') {
+      //   show = false
+      // }
+      if (this.$route.name === 'market-ticker-detail') {
+        show = false
+      }
+      return show
     }
   },
   methods: {

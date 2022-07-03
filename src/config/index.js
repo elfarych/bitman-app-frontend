@@ -2,7 +2,8 @@ export default {
   pythonServerURI: 'https://api-py.bitman.trade',
   // socialServerURI: 'http://192.168.0.199:8000',
   socialServerURI: 'https://api-pys.bitman.trade',
-  nodeServerURI: 'https://api-node.bitman.trade',
+  // nodeServerURI: 'https://api-node.bitman.trade',
+  nodeServerURI: 'https://btm.viptourist.club',
   // nodeServerURI: 'http://192.168.0.109:5000',
   binanceAPIURI: 'https://api.binance.com',
   binanceTradeURI: 'https://www.binance.com/ru/trade',
@@ -14,5 +15,7 @@ export default {
   coinGeckoBackend: 'http://192.168.0.109:5050',
 
   coindarToken: '65579:MR05vgpgBGliAr44rqi',
-  coindarAPI: 'https://coindar.org/api/v2'
+  coindarAPI: 'https://coindar.org/api/v2',
+
+  walletServerURI: 'https://wallets.bitman.trade'
 }

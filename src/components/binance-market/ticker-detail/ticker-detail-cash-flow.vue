@@ -2,7 +2,7 @@
   <div class="ticker-detail-cash-flow rounded-borders q-mt-md">
     <div >
       <div class="f-w-800 text-subtitle1 f-w-800 q-mt-lg text-uppercase flex justify-between items-center">
-        <span class="block">Движение средств</span>
+        <span class="block">{{ $t('cashFlow') }}</span>
         <q-btn
           icon="refresh"
           flat dense
@@ -16,16 +16,16 @@
       <div v-if="cashFlow && cashFlow.length">
         <div class="row q-mt-md items-center f-w-600">
           <div class="col-3">
-            Дата
+            {{ $t('date') }}
           </div>
           <div class="col-3 text-right">
-            Приток
+            {{ $t('in') }}
           </div>
           <div class="col-3 text-right">
-            Отток
+            {{ $t('out') }}
           </div>
           <div class="col-3 text-right">
-            Чистый приток
+            {{ $t('netInflow') }}
           </div>
         </div>
 
@@ -55,7 +55,7 @@
 
         <div class="row items-center q-pa-sm rounded-borders bg-dark">
           <div class="col-3 f-w-800">
-            Итого за 14 дней:
+            {{ $t('totalSum') }}:
           </div>
           <div class="col-3 f-w-800 text-positive text-right text-uppercase">
             {{ weeklyInFlow | tickerVolumeFormatter }}
@@ -70,7 +70,7 @@
       </div>
 
       <div v-else class="text-h5 text-grey fit flex flex-center f-w-800 q-py-xl">
-        <div>Нет данных</div>
+        <div>No data</div>
       </div>
     </div>
 

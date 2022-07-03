@@ -2,12 +2,16 @@
   <q-page>
 
     <portal to="title">
-      <base-page-top-title title="Главная"/>
+      <base-page-top-title :title="$t('homePage')"/>
     </portal>
 
     <div class="pages q-pa-sm">
 
       <div class="row q-col-gutter-sm items-center">
+
+        <div class="col-12">
+          <home-swap-wrapper />
+        </div>
 
         <!--        Slider-->
         <div class="col-12 col-sm-6">
@@ -31,12 +35,12 @@
       </div>
 
       <!--      Top 25-->
-      <div class="q-mt-xl">
+      <div v-if="top25Visible" class="q-mt-xl">
         <top25/>
       </div>
 
 <!--      Vix && Buy-long && Top-100 holders-->
-      <div class="q-mt-xl q-pt-lg">
+      <div v-if="secondBlockVisible" class="q-mt-xl q-pt-lg">
         <div class="row q-col-gutter-md">
           <div class="col-12 col-sm-6">
 
@@ -59,37 +63,37 @@
       </div>
 
       <div class="q-mt-xl q-pt-lg">
-        <news-widget />
+        <news-widget v-if="newsBlockVisible"/>
       </div>
 
     </div>
 
     <!--    Liders-->
-    <div class="q-px-sm q-mt-xl">
+    <div v-if="lidersBlockVisible" class="q-px-sm q-mt-xl">
       <div class="row q-col-gutter-sm">
 
         <div class="col-12 col-sm-6 q-mt-xl">
-          <div class="text-subtitle1 text-uppercase f-w-800">Лидеры роста</div>
+          <div class="text-subtitle1 text-uppercase f-w-800">{{ $t('gainers') }}</div>
           <widgets-big-liders-tabs/>
         </div>
 
         <div class="col-12 col-sm-6 q-mt-xl">
-          <div class="text-subtitle1 text-uppercase f-w-800">Лидеры падения</div>
+          <div class="text-subtitle1 text-uppercase f-w-800">{{ $t('losers') }}</div>
           <widgets-big-liders-tabs :up="false"/>
         </div>
       </div>
     </div>
 
-    <div class="q-mt-xl q-px-sm">
+    <div v-if="lidersBlockVisible" class="q-mt-xl q-px-sm">
       <widget-liquidity />
     </div>
 
-    <div class="q-px-sm q-mt-xl">
+    <div v-if="lidersBlockVisible" class="q-px-sm q-mt-xl">
       <posts-list top/>
     </div>
 
-    <div class="q-mt-xl q-px-sm  q-pt-lg">
-      <h3 class="text-h5 f-w-800 text-center">Дорожная карта проекта</h3>
+    <div v-if="lidersBlockVisible" class="q-mt-xl q-px-sm  q-pt-lg">
+      <h3 class="text-h5 f-w-800 text-center">Road map</h3>
       <div class="q-mt-xl">
         <roadmap/>
       </div>
@@ -114,10 +118,12 @@ import WidgetsBigLidersTabs from 'components/binance-market/widgets/widgets-big-
 import Top100Wallets from 'components/binance-market/widgets/top-100-wallets/top-100-wallets'
 import Top25 from 'components/binance-market/top-25/top-25'
 import NewsWidget from 'components/news/news-widget/news-widget'
+import HomeSwapWrapper from 'components/swap/home-swap-wrapper'
 
 export default {
   name: 'PageIndex',
   components: {
+    HomeSwapWrapper,
     NewsWidget,
     Top25,
     Top100Wallets,
@@ -166,8 +172,29 @@ export default {
           text: 'Скринер изменений стоимости монет на фьючерсном рынке биржи Gate',
           routeName: 'Gate-Futures-Vol'
         }
-      ]
+      ],
+      top25Visible: false,
+      newsBlockVisible: false,
+      lidersBlockVisible: false,
+      secondBlockVisible: false
     }
+  },
+  mounted () {
+    setTimeout(() => {
+      this.top25Visible = true
+    }, 3000)
+
+    setTimeout(() => {
+      this.secondBlockVisible = true
+    }, 5000)
+
+    setTimeout(() => {
+      this.newsBlockVisible = true
+    }, 7000)
+
+    setTimeout(() => {
+      this.lidersBlockVisible = true
+    }, 9000)
   }
 }
 </script>

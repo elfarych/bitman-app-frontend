@@ -2,7 +2,7 @@
 <div class="ticker-detail-liquidity f-w-800">
   <div v-if="liquidity.totalSum" >
     <div class="flex justify-between items-center q-mt-lg">
-      <div class="text-subtitle1 text-uppercase f-w-800 ">Ликвидации</div>
+      <div class="text-subtitle1 text-uppercase f-w-800 ">{{ $t('liquidations') }}</div>
       <q-btn-group>
         <q-btn
           label="1h"
@@ -34,7 +34,7 @@
       </q-btn-group>
     </div>
 
-    <div class="q-mt-xs">Общая сумма: <span class="text-uppercase text-subtitle1 f-w-800">{{ liquidity.totalSum | tickerVolumeFormatter }}</span></div>
+    <div class="q-mt-xs">{{ $t('totalSum') }}: <span class="text-uppercase text-subtitle1 f-w-800">{{ liquidity.totalSum | tickerVolumeFormatter }}</span></div>
 
     <div class="orders-len text-subtitle2 f-w-800">
       <div class="absolute-left bg-positive buys-width-len transition-1" :style="`width: ${liquidity.longs}%`"></div>
@@ -54,7 +54,7 @@
   </div>
 
   <div v-else class="text-h6 text-grey fit flex flex-center f-w-800">
-    <div >Нет данных</div>
+    <div >No data</div>
   </div>
 </div>
 </template>

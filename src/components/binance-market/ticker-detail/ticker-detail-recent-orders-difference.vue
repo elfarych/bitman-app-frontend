@@ -1,8 +1,8 @@
 <template>
 <div class="ticker-detail-limit-orders-difference fit rounded-borders-xl secondary-shadow-inset secondary-border">
   <div class="flex justify-between relative-position q-pr-lg">
-    <div class="f-w-800" style="line-height: 1.2">Соотношение исполненых ордеров
-      <span class="block">Binance {{ futures ? 'Futures' : 'Spot' }}</span>
+    <div class="f-w-800" style="line-height: 1.2">{{ $t('tradesOrdersRatio') }}
+      <span class="block text-warning">Binance {{ futures ? 'Futures' : 'Spot' }}</span>
     </div>
     <q-btn
       icon="refresh"
@@ -16,9 +16,9 @@
     </q-btn>
   </div>
 
-  <div class="small-text q-mt-sm">Данные основаны <br>на последних <span class="f-w-800 text-primary">{{ count }}</span><br> ордерах биржи Binance</div>
+<!--  <div class="small-text q-mt-sm">Данные основаны <br>на последних <span class="f-w-800 text-primary">{{ count }}</span><br> ордерах биржи Binance</div>-->
 
-  <div class="q-px-sm">
+  <div class="">
     <q-slider
       color="secondary"
       v-model="count"

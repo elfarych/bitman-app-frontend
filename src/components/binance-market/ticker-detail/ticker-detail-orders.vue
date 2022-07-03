@@ -2,12 +2,12 @@
 <div class="ticker-detail-orders rounded-borders-xl secondary-shadow-inset secondary-border">
   <div class="f-w-800 relative-position flex items-center justify-between">
     <div>
-      Лимитные заявки <span class="text-uppercase">Binance {{ market }}</span>
+      <span class="text-uppercase text-warning">Binance {{ market }}</span> {{ $t('limitOrders') }}
     </div>
   </div>
 
   <div class="flex justify-between">
-    <div class="q-mt-sm">от {{ formattedRange }}$</div>
+    <div class="q-mt-sm">min {{ formattedRange }}$</div>
     <q-btn
       icon="refresh"
       flat dense
@@ -30,10 +30,10 @@
 
   <div class="row q-col-gutter-md">
     <div class="col-6">
-      <div class="f-w-600 text-positive">Buy limit</div>
+      <div class="f-w-600 text-positive">Buy limits</div>
       <div class="orders-asks flex justify-between small-text q-pr-md">
-        <div>Цена</div>
-        <div>Объем $</div>
+        <div>{{ $t('price') }}</div>
+        <div>{{ $t('volume') }} $</div>
       </div>
       <q-separator class="q-mb-sm"/>
       <q-scroll-area style="height: 350px" class="q-pr-md" :thumb-style="thumbStyle">
@@ -52,10 +52,10 @@
     </div>
 
     <div class="col-6">
-      <div class="f-w-600 text-negative">Sell limit</div>
+      <div class="f-w-600 text-negative">Sell limits</div>
       <div class="orders-asks flex justify-between small-text q-pr-md">
-        <div>Цена</div>
-        <div>Объем $</div>
+        <div>{{ $t('price') }}</div>
+        <div>{{ $t('volume') }} $</div>
       </div>
       <q-separator class="q-mb-sm"/>
 

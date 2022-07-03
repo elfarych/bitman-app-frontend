@@ -1,7 +1,7 @@
 <template>
 <div class="coins-global-market-cap bg-dark rounded-borders-xl q-pa-sm relative-position ">
     <div class="f-w-800 text-subtitle1 l-h-12">
-      Капитализация рынка<br> криптовалют
+      {{ $t('marketCap') }}
     </div>
 
     <div v-if="globalData" class="absolute-bottom-right q-pa-sm flex items-baseline">

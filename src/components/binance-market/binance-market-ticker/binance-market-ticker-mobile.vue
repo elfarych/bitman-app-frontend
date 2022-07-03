@@ -80,7 +80,7 @@
             </div>
 
             <div class="col-5 text-right l-h-12 q-pr-xs" style="line-height: 1">
-              <small class="block small-text text-grey-5 f-w-400">объем 24h</small>
+              <small class="block small-text text-grey-5 f-w-400">volume 24h</small>
               <span v-if="ticker.volume" class="block text-uppercase f-w-800 fontsize-12">{{ ticker.volume | tickerVolumeFormatter }}</span>
               <span v-else class="block fontsize-12 text-grey-5">no data</span>
 

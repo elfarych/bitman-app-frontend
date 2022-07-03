@@ -1,69 +1,70 @@
 <template>
   <div class="ticker-detail-trade-button flex flex-center column fit q-py-sm">
 
-    <div v-if="formattedContracts.length" class="">
-      <div class="f-w-800 text-center">
-        {{ formattedContracts.length > 1 ? 'Адреса контрактов:' : 'Адрес контракта:' }}
-      </div>
+    <swap mini-mode/>
 
-      <div class="flex justify-center">
-        <q-btn
-          v-for="contract in formattedContracts"
-          :key="contract.chain"
-          icon-right="content_copy"
-          :label="contract.chain"
-          size="sm"
-          color="secondary"
-          outline no-caps
-          class="q-ml-sm q-mt-sm text-secondary-shadow"
-          title="Скопировать адрес"
-          @click="copy(contract.address)"
-        />
-      </div>
-    </div>
+    <!--    <div v-if="formattedContracts.length" class="">-->
+    <!--      <div class="f-w-800 text-center">-->
+    <!--        {{ formattedContracts.length > 1 ? 'Адреса контрактов:' : 'Адрес контракта:' }}-->
+    <!--      </div>-->
 
-    <div class="flex items-center q-mt-lg">
-      <logos-binance imgStyle="width: 20px; height: 20px"/>
-      <div class="text-subtitle1 f-w-800 text-uppercase q-ml-xs">Trade on Binance</div>
-    </div>
-    <div class="flex no-wrap">
-        <q-btn
-          label="Spot"
-          color="warning"
-          flat
-          size="sm"
-          class="rounded-borders f-w-800 q-mt-sm q-px-sm warning-btn"
-          type="a"
-          target="_blank"
-          :href="binanceSpotTradeURI + '?ref=368026154'"
-        />
+    <!--      <div class="flex justify-center">-->
+    <!--        <q-btn-->
+    <!--          v-for="contract in formattedContracts"-->
+    <!--          :key="contract.chain"-->
+    <!--          icon-right="content_copy"-->
+    <!--          :label="contract.chain"-->
+    <!--          size="sm"-->
+    <!--          color="secondary"-->
+    <!--          outline no-caps-->
+    <!--          class="q-ml-sm q-mt-sm text-secondary-shadow"-->
+    <!--          title="Скопировать адрес"-->
+    <!--          @click="copy(contract.address)"-->
+    <!--        />-->
+    <!--      </div>-->
+    <!--    </div>-->
 
-        <q-btn
-          v-if="tickerFuturesInfo"
-          label="Futures"
-          color="warning"
-          flat
-          class="rounded-borders f-w-800 q-mt-sm q-px-sm q-ml-sm warning-btn"
-          type="a"
-          size="sm"
-          target="_blank"
-          :href="binanceFuturesTradeURI + '?ref=368026154'"
-        />
-    </div>
+    <!--    <div class="flex items-center q-mt-lg">-->
+    <!--      <div class="text-subtitle1 f-w-800 text-uppercase q-ml-xs">Trade on Binance</div>-->
+    <!--    </div>-->
+    <!--    <div class="flex no-wrap">-->
+    <!--        <q-btn-->
+    <!--          label="Spot"-->
+    <!--          color="warning"-->
+    <!--          flat-->
+    <!--          size="sm"-->
+    <!--          class="rounded-borders f-w-800 q-mt-sm q-px-sm warning-btn"-->
+    <!--          type="a"-->
+    <!--          target="_blank"-->
+    <!--          :href="binanceSpotTradeURI + '?ref=368026154'"-->
+    <!--        />-->
+
+    <!--        <q-btn-->
+    <!--          v-if="tickerFuturesInfo"-->
+    <!--          label="Futures"-->
+    <!--          color="warning"-->
+    <!--          flat-->
+    <!--          class="rounded-borders f-w-800 q-mt-sm q-px-sm q-ml-sm warning-btn"-->
+    <!--          type="a"-->
+    <!--          size="sm"-->
+    <!--          target="_blank"-->
+    <!--          :href="binanceFuturesTradeURI + '?ref=368026154'"-->
+    <!--        />-->
+    <!--    </div>-->
 
   </div>
 </template>
 
 <script>
-import LogosBinance from 'components/logos/logos-binance'
 import config from 'src/config'
 import { mapState } from 'vuex'
 import { copyToClipboard } from 'quasar'
 import notifier from 'src/utils/notifier'
+import Swap from 'components/swap/swap'
 
 export default {
   name: 'ticker-detail-trade-button',
-  components: { LogosBinance },
+  components: { Swap },
   computed: {
     ...mapState('tickerDetail', ['tickerFuturesInfo', 'tickerInfo']),
     contracts () {

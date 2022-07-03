@@ -1,13 +1,11 @@
 <template>
-  <div class="widget-btc-long-short-positions q-pb-lg">
+  <div class="widget-btc-long-short-positions q-pb-lg relative-position">
 
     <div class="f-w-800 text-subtitle1 text-uppercase">
-      Настроения рынка
     </div>
 
     <div class="flex justify-between items-center">
       <div class="small-text">
-        по данным топовых бирж
       </div>
       <div class="q-pr-md q-mt-sm flex justify-end">
         <q-btn
@@ -53,6 +51,18 @@
       </div>
       <div class="col-4 text-center">
         BNB
+      </div>
+    </div>
+
+    <div class="q-mt-sm  f-w-800 flex justify-start q-pa-md">
+      <div class="flex  items-center">
+        <span class="block q-mr-xs" style="width: 10px; height: 10px; border-radius: 4px; background: #16cb85; margin-top: -1px"></span>
+        Longs
+      </div>
+
+      <div class="flex  items-center q-ml-lg">
+        <span class="block q-mr-xs" style="width: 10px; height: 10px; border-radius: 4px; background: #f6465d; margin-top: -1px"></span>
+        Shorts
       </div>
     </div>
 

@@ -4,15 +4,15 @@
     <div>
       <div v-if="tickerCap && tickerCap.marketCap">
         <div>
-          <span class="">Рыночная капитализация:</span>
+          <span class="">{{ $t('marketCapSmall') }}:</span>
           <span class="text-uppercase f-w-800 q-ml-sm">{{ tickerCap.marketCap | tickerVolumeFormatter }}</span>
-          <span class="f-w-800 q-ml-sm bg-warning q-px-xs rounded-borders text-dark">Ранг {{ tickerCap.rank }}</span>
+          <span class="f-w-800 q-ml-sm bg-warning q-px-xs rounded-borders text-dark">Rank {{ tickerCap.rank }}</span>
         </div>
       </div>
 
       <div v-if="tickerCap.circulatingSupply">
         <div class="q-mt-xs">
-          <div class="q-mt-xs">{{ tickerCap.maxSupply ? 'Циркулирующее / максимальное предложение' : 'Циркулирующее предложение' }}
+          <div class="q-mt-xs">{{ tickerCap.maxSupply ? $t('circulatingMaxSupply') : $t('circulatingSupply') }}
             <span>{{ tickerCap.name }}</span></div>
 
           <div

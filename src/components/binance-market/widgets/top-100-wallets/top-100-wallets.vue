@@ -2,7 +2,7 @@
 <div class="top-100-wallets rounded-borders-xl bg-dark q-px-md q-py-xs secondary-shadow-inset secondary-border">
   <div>
     <div class="f-w-800 text-uppercase q-mt-lg text-subtitle1 flex justify-between items-center">
-      <span class="block">ТОП-100 холдеров</span>
+      <span class="block">{{ $t('top100holders') }}</span>
       <q-btn
         icon="refresh"
         flat dense
@@ -13,7 +13,7 @@
       />
     </div>
     <div class="flex items-center">
-      <span class="q-mr-sm">Балансы и транзакции топ-100 холдеров</span>
+      <span class="q-mr-sm">{{ $t('top100holdersDescription') }}</span>
       <q-select
         :value="symbol"
         outlined
@@ -88,13 +88,13 @@
           № / %
         </div>
         <div class="col-3 text-left">
-          Кол-во <span class="text-warning f-w-800">{{ slicedSymbol }}</span>
+          Qty <span class="text-warning f-w-800">{{ slicedSymbol }}</span>
         </div>
         <div class="col-4 q-pl-sm">
-          Изм. 1 / 7 дн.
+          1 / 7 {{ $t('days') }}
         </div>
         <div class="col-3 text-center">
-          Адрес
+          {{ $t('address') }}
         </div>
       </div>
 
@@ -140,7 +140,7 @@
                 flat size="sm"
                 @click="copy(hodler.address)"
               >
-                <q-tooltip>Коопировать адрес</q-tooltip>
+                <q-tooltip>Copy address</q-tooltip>
               </q-btn>
 
             </div>
@@ -154,7 +154,7 @@
       <div>
         <div class="row q-my-md bg-dark q-pa-sm rounded-borders">
           <div class="col-12 col-sm-6">
-            <div class="f-w-800 text-uppercase">Итого за день:
+            <div class="f-w-800 text-uppercase">{{ $t('totalPerDay') }}:
               <span
                 class="text-uppercase"
                 :class="dailySummary > 0 ? 'text-positive' : 'text-negative'">
@@ -165,7 +165,7 @@
           </div>
 
           <div class="col-12 col-sm-6 ">
-            <div class="f-w-800 text-uppercase">За неделю:
+            <div class="f-w-800 text-uppercase">{{ $t('perWeek') }}:
               <span
                 class="text-uppercase"
                 :class="weeklySummary > 0 ? 'text-positive' : 'text-negative'">
@@ -180,7 +180,7 @@
     </div>
 
     <div v-else class="text-h5 text-grey fit flex flex-center f-w-800 q-py-xl">
-      <div>Нет данных</div>
+      <div>No data</div>
     </div>
 
   </div>

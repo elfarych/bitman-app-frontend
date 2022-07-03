@@ -1,15 +1,15 @@
 <template>
   <div class="page-description">
     <h2 class="text-bold text-white market-title block" style="line-height: 1.2 !important">{{ screenerName }}</h2>
-    <q-btn
-      v-if="screenerLink"
-      label="Регистрация на бирже Binance"
-      outline no-caps flat dense
-      size="sm"
-      style="margin-top: -5px"
-      color="warning"
-      type="a" :href="screenerLink" target="_blank"
-    />
+<!--    <q-btn-->
+<!--      v-if="screenerLink"-->
+<!--      label="Регистрация на бирже Binance"-->
+<!--      outline no-caps flat dense-->
+<!--      size="sm"-->
+<!--      style="margin-top: -5px"-->
+<!--      color="warning"-->
+<!--      type="a" :href="screenerLink" target="_blank"-->
+<!--    />-->
     <div v-if="screenerText" :class="screenerText ? 'q-my-sm' : ''">{{ screenerText }}</div>
     <div v-if="realTimeText" class="text-primary">Данные обновляются в режиме real-time</div>
   </div>

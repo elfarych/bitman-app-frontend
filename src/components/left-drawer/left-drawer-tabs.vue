@@ -11,8 +11,8 @@
     <q-tab name="menu">
       <template v-slot:default><q-icon name="home" size="16px"/></template>
     </q-tab>
-    <q-tab name="spot" label="Спот" no-caps/>
-    <q-tab name="futures" label="Фьючерсы" no-caps/>
+    <q-tab name="spot" label="Spot" no-caps/>
+    <q-tab name="futures" label="Futures" no-caps/>
     <q-tab name="wishlist">
       <template v-slot:default><q-icon name="star" size="16px"/></template>
     </q-tab>

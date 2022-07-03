@@ -13,7 +13,7 @@
       @click="setScreen"
     />
     <div class="f-w-800 text-subtitle1 text-uppercase q-pb-md">
-      Индекс страха и жадности
+      {{ $t('vixTitle') }}
     </div>
 
     <div class="q-mt-sm  f-w-800 flex justify-center absolute-bottom-left q-pa-md">
@@ -24,7 +24,7 @@
 
       <div class="flex  items-center q-ml-lg">
         <span class="block q-mr-xs" style="width: 10px; height: 10px; border-radius: 4px; background: #2760f8; margin-top: -1px"></span>
-        Индекс страха
+        {{ $t('fear') }}
       </div>
     </div>
 
