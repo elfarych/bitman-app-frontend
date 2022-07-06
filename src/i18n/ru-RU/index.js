@@ -52,5 +52,6 @@ export default {
   in: 'Приток',
   out: 'Отток',
   netInflow: 'Чистый приток',
-  days: 'дней'
+  days: 'дней',
+  connect: 'Подключение'
 }

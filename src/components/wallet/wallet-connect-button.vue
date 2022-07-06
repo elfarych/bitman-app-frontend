@@ -10,13 +10,14 @@
     icon-right="account_balance_wallet"
     unelevated
     :loading="swapLoading"
-    @click="connectWallet"
+    @click="onboardConnect"
   />
 </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import onboard from './onboard-connect'
 
 export default {
   name: 'wallet-connect-button',
@@ -24,11 +25,16 @@ export default {
     ...mapState('wallet', ['swapLoading'])
   },
   methods: {
-    ...mapActions('wallet', ['connectWallet'])
+    ...mapActions('wallet', ['setWallet']),
+    onboardConnect () {
+      onboard.connectWallet().then(wallet => {
+        this.setWallet(wallet)
+      })
+    }
   }
 }
 </script>
 
-<style scoped>
-
+<style lang="sass">
+.connect-logo-card
 </style>

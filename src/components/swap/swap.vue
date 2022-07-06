@@ -15,7 +15,7 @@
 
         <small
           v-if="wallet.address"
-          class="absolute-top-right"
+          class="absolute-top-left text-white-shadow-light f-w-800"
           :class="wallet.btmtBalance ? 'text-primary' : ''"
           style="top: -20px"
         >
@@ -78,15 +78,12 @@
     </q-slide-transition>
 
     <div class="text-center">
+      {{ wallet }}
       <wallet-connect-button v-if="!wallet.address || wallet.btmtBalance === null"/>
 
-      <div v-if="wallet.address && wallet.chainId !== '0x38'" class="text-subtitle1 f-w-800 text-negative q-mt-md">
-        {{ $t('onlyBSC') }}
-      </div>
+      <get-airdrop-btn v-if="wallet.btmtBalance !== null && !wallet.btmtBalance"/>
 
-      <get-airdrop-btn v-if="wallet.chainId === '0x38' && wallet.btmtBalance !== null && !wallet.btmtBalance"/>
-
-      <swap-button v-if="wallet.chainId === '0x38' && wallet.btmtBalance"/>
+      <swap-button v-if="wallet.btmtBalance"/>
 
     </div>
 

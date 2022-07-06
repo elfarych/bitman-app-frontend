@@ -7,7 +7,8 @@ export default function () {
       chainId: null,
       balance: null,
       coinName: '',
-      btmtBalance: null
+      btmtBalance: null,
+      provider: {}
     },
     dbWallet: null
   }

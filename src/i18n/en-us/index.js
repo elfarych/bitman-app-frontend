@@ -52,5 +52,6 @@ export default {
   in: 'In',
   out: 'Out',
   netInflow: 'Net inflow',
-  days: 'days'
+  days: 'days',
+  connect: 'Connect wallet'
 }

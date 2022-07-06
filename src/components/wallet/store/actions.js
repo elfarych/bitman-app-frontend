@@ -1,44 +1,20 @@
 import axios from 'axios'
 import Web3 from 'web3'
-import { Notify } from 'quasar'
 
 import server from 'src/config'
 import btmtContract from 'components/wallet/btmt-contract'
 import busdContract from 'components/wallet/busd-contract'
 
-const { ethereum } = window
+// const { ethereum } = window
 
-export async function connectWallet ({ commit, dispatch }) {
-  if (ethereum) {
-    const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
-    if (accounts.length > 0) {
-      commit('mutationWallet', { address: accounts[0], chainId: ethereum.chainId })
-      commit('mutationSwapLoading', true)
+export async function setWallet ({ commit, dispatch }, connectedWallet) {
+  const wallet = connectedWallet[0]
 
-      ethereum.on('chainChanged', async () => {
-        commit('mutationSwapLoading', true)
-        try {
-          await dispatch('getBalance')
-          await dispatch('getBTMTBalance')
-        } catch (e) {
-          console.log(e)
-        } finally {
-          commit('mutationSwapLoading', false)
-        }
-      })
+  commit('mutationWallet', { address: wallet.accounts?.[0]?.address, chainId: null })
 
-      await dispatch('getWalletFromDB', accounts[0])
-      await dispatch('getBalance')
-      await dispatch('getBTMTBalance')
-
-      commit('mutationSwapLoading', false)
-    }
-  } else {
-    Notify.create({
-      message: 'Please open this website in metamask app or on your desktop.',
-      position: 'top'
-    })
-  }
+  await dispatch('getWalletFromDB', wallet?.accounts?.[0]?.address)
+  await dispatch('getBalance')
+  await dispatch('getBTMTBalance')
 }
 
 export async function getWalletFromDB ({ commit, dispatch }, address) {
@@ -83,10 +59,10 @@ export async function getBalance ({ commit, state }) {
 }
 
 export async function getBTMTBalance ({ commit, dispatch, state }) {
-  const contract = await btmtContract.getContract()
+  const contract = await btmtContract.getContract(state.wallet)
+  const tx = contract.methods.balanceOf(state.wallet.address)
 
-  contract.methods.balanceOf(state.wallet.address)
-    .call()
+  tx.call({ from: state.wallet.address, gas: await tx.estimateGas() })
     .then(balance => {
       commit('mutationWallet', {
         btmtBalance: parseInt(balance) / 10000
@@ -96,11 +72,11 @@ export async function getBTMTBalance ({ commit, dispatch, state }) {
 }
 
 export async function getAirDrop ({ commit, dispatch, state }) {
-  const contract = await btmtContract.getContract()
-
+  const contract = await btmtContract.getContract(state.wallet)
   contract.methods.transfer(state.wallet.address, '19500000')
-    .send()
+    .send({ from: state.wallet.address, gasLimit: 100000 })
     .then(status => {
+      debugger
       dispatch('getBTMTBalance')
     })
     .catch(e => console.log(e))
