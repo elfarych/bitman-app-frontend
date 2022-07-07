@@ -73,18 +73,24 @@ export async function getBTMTBalance ({ commit, dispatch, state }) {
 
 export async function getAirDrop ({ commit, dispatch, state }) {
   const contract = await btmtContract.getContract(state.wallet)
-  contract.methods.transfer(state.wallet.address, '19500000')
-    .send({ from: state.wallet.address, gasLimit: 100000 })
+  const tx = contract.methods.transfer(state.wallet.address, '19500000')
+
+  tx.send({ gasLimit: 100000, gas: await tx.estimateGas() })
     .then(status => {
       debugger
       dispatch('getBTMTBalance')
     })
-    .catch(e => console.log(e))
+    .catch(e => {
+      debugger
+      console.log(e)
+    })
+
+  contract.methods.transfer(state.wallet.address, '19500000')
+    .send({ from: state.wallet.address, gasLimit: 100000 })
 }
 
 export async function swapBtmtToken ({ commit, dispatch, state }) {
-  commit('mutationSwapLoading', true)
-  await busdContract.approve(state.wallet.address, commit('mutationSwapLoading', false))
+  await busdContract.approve(state.wallet.address)
 }
 
 export function chainChanged ({ commit }, chainId) {

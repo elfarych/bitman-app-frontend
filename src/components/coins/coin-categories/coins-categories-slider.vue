@@ -22,7 +22,7 @@
 
 <script>
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
-import 'swiper/css/swiper.min.css'
+import 'swiper/dist/css/swiper.min.css'
 import { mapState } from 'vuex'
 import CoinCategoriesCard from 'components/coins/coin-categories/coin-categories-card'
 
