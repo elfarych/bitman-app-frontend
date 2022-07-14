@@ -1,3 +1,4 @@
+
 function getChainName (id) {
   switch (id) {
     case '0x1':
@@ -41,4 +42,20 @@ export function mutationdbWallet (state, data) {
 
 export function mutationSwapLoading (state, data) {
   state.swapLoading = data
+}
+
+export function mutationBusdBalance (state, data) {
+  if (data) state.busdBalance = parseInt(data)
+}
+
+export function mutationUsdcBalance (state, data) {
+  if (data) state.usdcBalance = parseInt(data)
+}
+
+export function mutationUsdtBalance (state, data) {
+  if (data) state.usdtBalance = parseInt(data)
+}
+
+export function mutationGameWallet (state, data) {
+  state.gameWallet = data
 }

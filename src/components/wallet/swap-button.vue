@@ -2,11 +2,12 @@
 <div class="swap-button">
   <q-btn
     :label="$t('swap')"
-    class="f-w-800 q-mt-lg q-pa-sm rounded-borders-xl full-width"
+    class="f-w-800 q-mt-lg q-pa-sm rounded-borders-xl full-width warning-btn"
     no-caps
+    flat
+    unelevated
     style="font-size: 18px"
-    color="primary"
-    text-color="dark"
+    color="warning"
     icon-right="sync"
     :loading="swapLoading"
     @click="swapBtmtToken"

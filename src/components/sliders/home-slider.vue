@@ -23,10 +23,9 @@
             v-if="slide.url"
             :label="slide.btn_text"
             :to="slide.url"
-            flat
-            color="warning"
+            color="primary"
             size="sm"
-            class="q-mt-md q-px-sm f-w-800 warning-btn"
+            class="q-mt-md q-px-sm f-w-800"
           />
         </div>
     </q-carousel-slide>

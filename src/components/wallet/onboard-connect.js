@@ -1,26 +1,46 @@
 import Onboard from '@web3-onboard/core'
 import injectedModule from '@web3-onboard/injected-wallets'
 import walletConnectModule from '@web3-onboard/walletconnect'
-
-const MAINNET_RPC_URL = 'https://mainnet.infura.io/v3/41ad9ed3e14d4eb8817675f8d48fe96b'
+import appIcon from 'src/assets/favicon.png'
+const MAINNET_RPC_URL = 'https://bsc-dataseed1.binance.org:443'
 
 const injected = injectedModule()
-const walletConnect = walletConnectModule()
+const walletConnect = walletConnectModule({
+  connectFirstChainId: true
+})
 
 const onboard = Onboard({
   wallets: [injected, walletConnect],
   chains: [
     {
-      id: '0x56',
+      id: '0x38',
       token: 'BNB',
       label: 'Smart Chain',
       rpcUrl: MAINNET_RPC_URL
     }
   ],
   appMetadata: {
-    name: 'My App',
-    icon: '<SVG_ICON_STRING>',
-    description: 'My app using Onboard'
+    name: 'Bitman',
+    icon: appIcon,
+    description: 'Bitman wallet connect',
+    gettingStartedGuide: 'Connect your wallet'
+  },
+  accountCenter: {
+    desktop: {
+      enabled: false
+    },
+    mobile: {
+      enabled: false
+    }
+  },
+  i18n: {
+    en: {
+      connect: {
+        selectingWallet: {
+          header: 'Connect your wallet'
+        }
+      }
+    }
   }
 })
 

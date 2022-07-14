@@ -1,6 +1,9 @@
 <template>
   <div class="left-drawer-market">
 
+    <div class="q-px-sm q-pb-md">
+      <cryptobox-btn in-menu/>
+    </div>
     <div class="q-px-md q-pb-md">
       <q-input
         v-model="searchText"
@@ -81,10 +84,11 @@
 <script>
 import { mapState } from 'vuex'
 import LeftDrawerMarketTicker from 'components/left-drawer/left-drawer-market-ticker'
+import CryptoboxBtn from 'components/wallet/cryptobox/cryptobox-btn'
 
 export default {
   name: 'left-drawer-market',
-  components: { LeftDrawerMarketTicker },
+  components: { CryptoboxBtn, LeftDrawerMarketTicker },
   props: {
     wishlistMode: {
       type: Boolean,

@@ -1,11 +1,12 @@
 <template>
   <q-btn
     :label="$t('getAirdrop')"
-    class="f-w-800 q-mt-lg q-pa-sm rounded-borders-xl full-width"
+    class="f-w-800 q-mt-lg q-pa-sm rounded-borders-xl full-width warning-btn"
     no-caps
+    color="warning"
+    flat
+    unelevated
     style="font-size: 18px"
-    color="primary"
-    text-color="dark"
     :loading="swapLoading"
     @click="getAirDrop"
   />

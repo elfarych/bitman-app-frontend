@@ -1,6 +1,5 @@
 <template>
   <div class="home-swap-wrapper">
-    <img v-if="!$mobile" :src="chainImg" class="home-swap-wrapper-img" contain/>
     <div class="row">
 
       <div class="col-12 col-md-6 q-pb-lg">
@@ -16,15 +15,11 @@
 
 <script>
 import HomeSwapLeftBlock from 'components/swap/home-swap-left-block'
-import chain from 'src/assets/2.png'
 import Swap from 'components/swap/swap'
 export default {
   name: 'home-swap-wrapper',
   components: { Swap, HomeSwapLeftBlock },
   computed: {
-    chainImg () {
-      return chain
-    }
   }
 }
 </script>

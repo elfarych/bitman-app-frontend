@@ -1,5 +1,5 @@
 <template>
-  <div class="swap bg-dark rounded-borders-xl secondary-shadow-inset secondary-border"
+  <div class="swap bg-dark rounded-borders-xl "
        :style="miniMode ? 'width: 100%' : ''">
 
     <div class="home-swap-left-block-title-2 f-w-800 text-uppercase">
@@ -30,11 +30,6 @@
           input-class="f-w-800"
           input-style="font-size: 30px"
         >
-          <template v-slot:prepend>
-            <div>
-              <q-img :src="btmtImage"/>
-            </div>
-          </template>
 
           <template v-slot:append>
             <q-btn
@@ -67,18 +62,12 @@
           input-class="f-w-800"
           input-style="font-size: 30px"
         >
-          <template v-slot:prepend>
-            <div>
-              <q-img :src="btmtImage"/>
-            </div>
-          </template>
 
         </q-input>
       </div>
     </q-slide-transition>
 
     <div class="text-center">
-      {{ wallet }}
       <wallet-connect-button v-if="!wallet.address || wallet.btmtBalance === null"/>
 
       <get-airdrop-btn v-if="wallet.btmtBalance !== null && !wallet.btmtBalance"/>
@@ -91,7 +80,6 @@
 </template>
 
 <script>
-import btmtImage from 'src/assets/coin.svg'
 import WalletConnectButton from 'components/wallet/wallet-connect-button'
 import { mapState } from 'vuex'
 import GetAirdropBtn from 'components/wallet/get-airdrop-btn'
@@ -113,15 +101,12 @@ export default {
     }
   },
   computed: {
-    ...mapState('wallet', ['wallet']),
+    ...mapState('wallet', ['wallet', 'provider', 'busdBalance']),
     showSwapInputs () {
       if (this.miniMode) {
         return !!this.wallet.address
       }
       return true
-    },
-    btmtImage () {
-      return btmtImage
     },
     btmtBalance () {
       return this.wallet.btmtBalance

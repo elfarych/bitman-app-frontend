@@ -1,5 +1,7 @@
 import Web3 from 'web3'
-// import { ethers } from 'ethers'
+import { getMyConnectedWallet } from 'components/wallet/store/actions'
+import { ethers } from 'ethers'
+import onboard from 'components/wallet/onboard-connect'
 
 const address = '0x199B49Dbf8096ef24EFFDa1d6e8dC1242446C030'
 const abi = [{ inputs: [], stateMutability: 'nonpayable', type: 'constructor' }, {
@@ -96,32 +98,18 @@ export default {
   abi
 }
 
-async function getContract (wallet) {
+async function getContract (wallet, provider) {
   const web3 = new Web3('https://bsc-dataseed1.binance.org:443')
-  const account = web3.eth.accounts.create()
-  const tx = {
-    from: '0xB99983713C7391F6c22f0D5990963b24FaA2EbC9',
-    to: '0x235601Ee6a81BE89CDf6281Dd05669EE166084d6',
-    chainId: web3.eth.net.getId(),
-    gas: 50000,
-    gasPrice: web3.utils.toWei('0.00000002', 'ether'),
-    value: 100,
-    gasLimit: 100000
+  const connectedWallet = await getMyConnectedWallet()
+  const myProvider = new ethers.providers.Web3Provider(connectedWallet.provider, 'any')
+  web3.eth.setProvider(myProvider.provider)
+
+  const chainId = await web3.eth.getChainId()
+  if (chainId !== 56) {
+    await onboard.setChain({ chainId: '0x38' })
   }
-  web3.eth.accounts.signTransaction(tx, account.privateKey)
-    .then(res => {
-      web3.eth.sendSignedTransaction(res.rawTransaction).then(res => {
-        debugger
-      }).catch(e => {
-        debugger
-      })
-    })
-    .catch(e => {
-      debugger
-    })
   return new web3.eth.Contract(abi, address, {
-    from: account.address,
-    accountId: account.address
+    from: wallet.address
   })
 }
 

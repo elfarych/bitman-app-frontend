@@ -53,5 +53,10 @@ export default {
   out: 'Out',
   netInflow: 'Net inflow',
   days: 'days',
-  connect: 'Connect wallet'
+  connect: 'Connect wallet',
+  openBox: 'Open cryptobox',
+  getBox: 'Get cryptobox',
+  gameLoserText: 'Try again later.',
+  claim: 'Claim',
+  youWin: 'You win'
 }

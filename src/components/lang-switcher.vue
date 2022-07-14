@@ -29,7 +29,7 @@ export default {
     }
   },
   created () {
-    this.$i18n.locale = localStorage.getItem('lang') || this.$route.query.lang || 'en-us'
+    this.$i18n.locale = this.$route.query.lang || localStorage.getItem('lang') || 'en-us'
     if (this.$route.query.lang) localStorage.setItem('lang', this.$route.query.lang)
   }
 }

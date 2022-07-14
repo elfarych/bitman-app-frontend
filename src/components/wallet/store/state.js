@@ -1,5 +1,8 @@
 export default function () {
   return {
+    busdBalance: null,
+    usdcBalance: null,
+    usdtBalance: null,
     provider: null,
     swapLoading: false,
     wallet: {
@@ -7,9 +10,15 @@ export default function () {
       chainId: null,
       balance: null,
       coinName: '',
-      btmtBalance: null,
-      provider: {}
+      btmtBalance: null
     },
-    dbWallet: null
+    dbWallet: null,
+
+    gameWallet: {
+      rawBalance: null,
+      balance: null,
+      workBalance: null,
+      formattedWorkBalance: null
+    }
   }
 }

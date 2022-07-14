@@ -53,6 +53,4 @@ export default {
 </script>
 
 <style lang="sass">
-onboard-v2
-  //display: none !important
 </style>

@@ -22,7 +22,8 @@
 
 <script>
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.min.css'
+// import 'swiper/dist/css/swiper.min.css'
+import 'swiper/css/swiper.min.css'
 import { mapState } from 'vuex'
 import Top25Card from 'components/binance-market/top-25/top-25-card'
 

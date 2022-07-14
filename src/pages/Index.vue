@@ -180,6 +180,15 @@ export default {
     }
   },
   mounted () {
+    if (this.$route.query.ref) {
+      localStorage.setItem('ref', this.$route.query.ref?.toString())
+      this.$router.replace({
+        query: {
+          ...this.$route.query,
+          ref: undefined
+        }
+      })
+    }
     setTimeout(() => {
       this.top25Visible = true
     }, 3000)

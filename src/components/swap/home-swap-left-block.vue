@@ -3,13 +3,19 @@
   <div>
     <h2 class="home-swap-left-block-title">Bitman <span class="text-primary">trade</span></h2>
     <h3 class="home-swap-left-block-title-2 q-mt-md">{{ $t('homeTitle') }}</h3>
+
+    <div class="q-my-md">
+      <cryptobox-btn />
+    </div>
   </div>
 </div>
 </template>
 
 <script>
+import CryptoboxBtn from 'components/wallet/cryptobox/cryptobox-btn'
 export default {
-  name: 'home-swap-left-block'
+  name: 'home-swap-left-block',
+  components: { CryptoboxBtn }
 }
 </script>
 
