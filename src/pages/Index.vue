@@ -9,9 +9,9 @@
 
       <div class="row q-col-gutter-sm items-center">
 
-        <div class="col-12">
-          <home-swap-wrapper />
-        </div>
+<!--        <div class="col-12">-->
+<!--          <home-swap-wrapper />-->
+<!--        </div>-->
 
         <!--        Slider-->
         <div class="col-12 col-sm-6">
@@ -118,12 +118,12 @@ import WidgetsBigLidersTabs from 'components/binance-market/widgets/widgets-big-
 import Top100Wallets from 'components/binance-market/widgets/top-100-wallets/top-100-wallets'
 import Top25 from 'components/binance-market/top-25/top-25'
 import NewsWidget from 'components/news/news-widget/news-widget'
-import HomeSwapWrapper from 'components/swap/home-swap-wrapper'
+// import HomeSwapWrapper from 'components/swap/home-swap-wrapper'
 
 export default {
   name: 'PageIndex',
   components: {
-    HomeSwapWrapper,
+    // HomeSwapWrapper,
     NewsWidget,
     Top25,
     Top100Wallets,
