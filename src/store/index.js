@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import chart from './modules/chart'
+import wallet from './modules/wallet'
 import coins from './modules/coins'
 import binanceMarket from './modules/binance-market'
 import tickerDetail from './modules/ticker-detail'
@@ -13,7 +15,6 @@ import blog from './modules/blog'
 import traderCase from './modules/trader-case'
 import news from './modules/news'
 import volatility from 'src/store/modules/volatility'
-import wallet from 'src/components/wallet/store'
 
 Vue.use(Vuex)
 
@@ -29,6 +30,8 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
+      chart,
+      wallet,
       trader,
       coins,
       binanceMarket,
@@ -40,8 +43,7 @@ export default function (/* { ssrContext } */) {
       blog,
       traderCase,
       news,
-      volatility,
-      wallet
+      volatility
     },
 
     // enable strict mode (adds overhead!)

@@ -14,18 +14,18 @@
   <q-dialog v-model="addCaseDialog">
     <q-card style="width: 555px; max-width: 100%">
       <q-toolbar>
-        <q-toolbar-title class="text-subtitle1 f-w-600">Новый портфель</q-toolbar-title>
+        <q-toolbar-title class="text-subtitle1 f-w-600">New case</q-toolbar-title>
         <q-btn icon="close" dense flat v-close-popup/>
       </q-toolbar>
 
       <q-card-section>
         <q-form @submit="caseFormSubmit">
-          <q-input v-model="caseForm.title" label="Название портфеля*" outlined dense :rules="rulesNoEmpty">
+          <q-input v-model="caseForm.title" label="Name*" outlined dense :rules="rulesNoEmpty">
             <template v-slot:prepend><q-icon name="business_center"/></template>
           </q-input>
-          <q-input v-model="caseForm.text" type="textarea" label="Описание (необязательно)" outlined dense/>
-          <q-checkbox v-model="caseForm.public" label="Публичный портфель" title="Ваш портфель смогут видеть все пользователи" class="q-mt-sm"/>
-          <q-btn type="submit" label="Создать" color="secondary" class="full-width q-mt-md f-w-800 q-py-sm text-white-shadow" unelevated/>
+          <q-input v-model="caseForm.text" type="textarea" label="Description (optional)" outlined dense/>
+          <q-checkbox v-model="caseForm.public" label="Public case" class="q-mt-sm"/>
+          <q-btn type="submit" label="Create" color="secondary" class="full-width q-mt-md f-w-800 q-py-sm text-white-shadow" unelevated/>
         </q-form>
       </q-card-section>
     </q-card>
@@ -41,11 +41,11 @@ export default {
   computed: {
     ...mapState('traderCase', ['cases']),
     addCaseTitle () {
-      return this.cases.length ? 'Добавить портфель' : 'Создать портфель'
+      return this.cases.length ? 'Add case' : 'New Case'
     },
     rulesNoEmpty () {
       return [
-        val => (!!val) || 'Это обязательное поле'
+        val => (!!val) || 'This is a required field'
       ]
     }
   },

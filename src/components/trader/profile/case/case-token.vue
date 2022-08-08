@@ -46,8 +46,8 @@
       v-touch-swipe dense no-caps
       class="q-mt-md q-mb-sm"
     >
-      <q-tab name="info" label="Информация" class="rounded-borders" icon="analytics"/>
-      <q-tab name="transactions" label="Транзакции" class="rounded-borders" icon="swap_horiz" ripple>
+      <q-tab name="info" label="Info" class="rounded-borders" icon="analytics"/>
+      <q-tab name="transactions" label="Transactions" class="rounded-borders" icon="swap_horiz" ripple>
         <template v-slot:default>
           <q-badge class="absolute-top-right" color="transparent" style="font-size: 10px">{{ token.orders.length || '' }}</q-badge>
         </template>
@@ -59,15 +59,15 @@
       <q-tab-panel name="info" class="q-pa-none">
         <!--      Token info-->
         <div class="q-mt-sm">
-          <div><span class="trader-case-list-item-token-field-title">Средняя цена покупки:</span>{{ tokenAverageBuyPrice || '' }} <span v-if="tokenAverageBuyPrice">$</span></div>
-          <div><span class="trader-case-list-item-token-field-title">Текущая цена:</span>{{ tokenMarketInfo.lastPrice }} $</div>
-          <div><span class="trader-case-list-item-token-field-title">Количество монет:</span>{{ tokenCoinsSummary }}</div>
-          <div><span class="trader-case-list-item-token-field-title">Сумма в обороте:</span> <span class="text-uppercase">{{ priceFormatter(tokenSummaryCoast) }}</span></div>
-          <div><span class="trader-case-list-item-token-field-title">Текущая стоимость:</span> <span class="text-uppercase">{{ priceFormatter(tokenCurrentSummaryPrice) }}</span></div>
-          <div><span class="trader-case-list-item-token-field-title">{{ tokenCoastDifference > 0 ? 'Текущая доходность' : 'Текущий убыток' }}:</span> <span :class="tokenCoastDifference > 0 ? 'text-positive' : 'text-negative'"  class="text-uppercase">{{ priceFormatter(tokenCoastDifference) }}</span></div>
+          <div><span class="trader-case-list-item-token-field-title">Average buy price:</span>{{ tokenAverageBuyPrice || '' }} <span v-if="tokenAverageBuyPrice">$</span></div>
+          <div><span class="trader-case-list-item-token-field-title">Current price:</span>{{ tokenMarketInfo.lastPrice }} $</div>
+          <div><span class="trader-case-list-item-token-field-title">Coin quantity:</span>{{ tokenCoinsSummary }}</div>
+          <div><span class="trader-case-list-item-token-field-title">Circulation amount:</span> <span class="text-uppercase">{{ priceFormatter(tokenSummaryCoast) }}</span></div>
+          <div><span class="trader-case-list-item-token-field-title">Current sum:</span> <span class="text-uppercase">{{ priceFormatter(tokenCurrentSummaryPrice) }}</span></div>
+          <div><span class="trader-case-list-item-token-field-title">{{ tokenCoastDifference > 0 ? 'Profit' : 'Loss' }}:</span> <span :class="tokenCoastDifference > 0 ? 'text-positive' : 'text-negative'"  class="text-uppercase">{{ priceFormatter(tokenCoastDifference) }}</span></div>
           <q-separator class="q-mt-sm"/>
-          <div><span class="trader-case-list-item-token-field-title q-mt-sm">Фикс. {{ tokenTotalFixedProfitSummary >= 0 ? 'прибыль' : 'убыток' }}:</span> <span :class="tokenTotalFixedProfitSummary >= 0 ? 'text-positive' : 'text-negative'" class="text-uppercase">{{ priceFormatter(tokenTotalFixedProfitSummary) }}</span></div>
-          <div><span class="trader-case-list-item-token-field-title">{{ tokenSummaryInvestmentProfit >= 0 ? 'Сумарная прибыль' : 'Сумарный убыток' }}:</span> <span :class="tokenSummaryInvestmentProfit >= 0 ? 'text-positive' : 'text-negative'" class="text-uppercase">{{ priceFormatter(tokenSummaryInvestmentProfit) }}</span></div>
+          <div><span class="trader-case-list-item-token-field-title q-mt-sm">Fixed {{ tokenTotalFixedProfitSummary >= 0 ? 'profit' : 'loss' }}:</span> <span :class="tokenTotalFixedProfitSummary >= 0 ? 'text-positive' : 'text-negative'" class="text-uppercase">{{ priceFormatter(tokenTotalFixedProfitSummary) }}</span></div>
+          <div><span class="trader-case-list-item-token-field-title">{{ tokenSummaryInvestmentProfit >= 0 ? 'Profit sum' : 'Loss sum' }}:</span> <span :class="tokenSummaryInvestmentProfit >= 0 ? 'text-positive' : 'text-negative'" class="text-uppercase">{{ priceFormatter(tokenSummaryInvestmentProfit) }}</span></div>
 
         </div>
       </q-tab-panel>

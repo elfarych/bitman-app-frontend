@@ -5,6 +5,11 @@ export default function () {
     usdtBalance: null,
     provider: null,
     swapLoading: false,
+    dogeBalance: null,
+    dogsBalance: null,
+    dogsPrice: 0.07,
+    defaultSwapCoin: 'BUSD',
+    defaultCoin: null,
     wallet: {
       address: null,
       chainId: null,
@@ -14,7 +19,7 @@ export default function () {
     },
     dbWallet: null,
 
-    gameWallet: {
+    bnbBalance: {
       rawBalance: null,
       balance: null,
       workBalance: null,

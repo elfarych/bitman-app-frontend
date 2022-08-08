@@ -2,7 +2,7 @@
 <div class="logout text-right">
   <q-btn
     icon-right="logout"
-    label="Выход"
+    label="Logout"
     no-caps
     flat
     dense
@@ -14,14 +14,14 @@
   <q-dialog v-model="logoutDialog" persistent>
     <q-card style="width: 555px; max-width: 100%">
       <q-toolbar>
-        <q-toolbar-title class="text-subtitle1 f-w-600">Выйти из профиля?</q-toolbar-title>
+        <q-toolbar-title class="text-subtitle1 f-w-600">Logout?</q-toolbar-title>
         <q-btn icon="close" dense flat v-close-popup/>
       </q-toolbar>
 
       <q-card-actions align="right">
         <q-btn
           icon-right="logout"
-          label="Выход"
+          label="Logout"
           color="negative"
           no-caps
           unelevated
@@ -30,7 +30,7 @@
         />
 
         <q-btn
-          label="Отмена"
+          label="Cancel"
           no-caps
           unelevated
           flat

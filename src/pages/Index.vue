@@ -9,10 +9,6 @@
 
       <div class="row q-col-gutter-sm items-center">
 
-<!--        <div class="col-12">-->
-<!--          <home-swap-wrapper />-->
-<!--        </div>-->
-
         <!--        Slider-->
         <div class="col-12 col-sm-6">
           <home-slider/>
@@ -33,6 +29,8 @@
       <div>
         <coin-categories/>
       </div>
+
+      <div class="q-mt-xl" style="width: 280px"><airdrop-widget/></div>
 
       <!--      Top 25-->
       <div v-if="top25Visible" class="q-mt-xl">
@@ -118,11 +116,13 @@ import WidgetsBigLidersTabs from 'components/binance-market/widgets/widgets-big-
 import Top100Wallets from 'components/binance-market/widgets/top-100-wallets/top-100-wallets'
 import Top25 from 'components/binance-market/top-25/top-25'
 import NewsWidget from 'components/news/news-widget/news-widget'
+import AirdropWidget from 'components/swap/airdrop-widget'
 // import HomeSwapWrapper from 'components/swap/home-swap-wrapper'
 
 export default {
   name: 'PageIndex',
   components: {
+    AirdropWidget,
     // HomeSwapWrapper,
     NewsWidget,
     Top25,

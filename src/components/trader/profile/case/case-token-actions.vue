@@ -4,7 +4,7 @@
   <div class="q-mt-md flex justify-between">
     <div>
       <q-btn
-        :label="showBuyCoinForm ? 'Отмена' : token.orders.length ? 'Докупить' : 'Купить'"
+        :label="showBuyCoinForm ? 'Cancel' : token.orders.length ? 'Buy' : 'Buy'"
         no-caps
         unelevated
         text-color="dark"
@@ -16,7 +16,7 @@
 
       <q-btn
         v-if="token.orders.length"
-        :label="showFixCoinForm ? 'Отмена' : 'Зафиксировать'"
+        :label="showFixCoinForm ? 'Cancel' : 'Fix'"
         no-caps
         outline
         color="white"
@@ -32,7 +32,6 @@
         flat
         padding="5px"
         size="sm"
-        title="Подробнее о монете"
         :to="{ name: 'market-ticker-detail', params: { symbol: token.symbol } }"
       />
       <q-btn
@@ -41,7 +40,7 @@
         size="sm"
         padding="5px"
         class="q-ml-xs"
-        title="Открыть график"
+        title="Chart"
         @click="showChartPopup"
       />
 
@@ -51,7 +50,6 @@
         size="sm"
         padding="5px"
         class="q-ml-xs"
-        title="Удалить монету из портфеля"
         @click="deleteDialog = true"
       />
     </div>
@@ -64,7 +62,7 @@
         <q-input
           type="number"
           v-model="buyCoinForm.quantity_base_asset"
-          label="Кол-во монет"
+          label="Coins qty"
           dense
         />
       </div>
@@ -73,7 +71,7 @@
         <q-input
           type="number"
           v-model="buyCoinForm.price"
-          label="Цена"
+          label="Price"
           dense
         >
           <template v-slot:prepend>
@@ -95,7 +93,7 @@
       </div>
 
       <div class="col-6 offset-4 q-pl-xs">
-        <small class="text-grey-5">Стоимость: {{ priceFormatter(addCoinSummary) }}</small>
+        <small class="text-grey-5">Sum: {{ priceFormatter(addCoinSummary) }}</small>
       </div>
     </div>
   </div>
@@ -107,7 +105,7 @@
         <q-input
           type="number"
           v-model="fixCoinForm.quantity_base_asset"
-          label="Кол-во монет"
+          label="Coins qty"
           dense
         />
         <q-btn label="max" dense flat size="sm" color="warning" @click="setMaxToFixQuantity"/>
@@ -117,14 +115,14 @@
         <q-input
           type="number"
           v-model="fixCoinForm.price"
-          label="Цена"
+          label="Price"
           dense
         >
           <template v-slot:prepend>
             <q-btn icon="refresh" flat dense size="sm" @click="updateFormPrice"/>
           </template>
         </q-input>
-        <small class="text-grey-5">Прибыль: {{ priceFormatter(fixCoinSummaryProfit) }}</small>
+        <small class="text-grey-5">Profit: {{ priceFormatter(fixCoinSummaryProfit) }}</small>
       </div>
       <div class="col-2 q-pl-xs text-center">
         <q-btn
@@ -145,14 +143,14 @@
   <q-dialog v-model="deleteDialog" persistent>
     <q-card style="width: 555px; max-width: 100%">
       <q-toolbar>
-        <q-toolbar-title class="text-subtitle1 f-w-600">Удалить монету {{ token.symbol }} из портфеля?</q-toolbar-title>
+        <q-toolbar-title class="text-subtitle1 f-w-600">Delete {{ token.symbol }}?</q-toolbar-title>
         <q-btn icon="close" dense flat v-close-popup/>
       </q-toolbar>
 
       <q-card-actions align="right">
         <q-btn
           icon="delete_forever"
-          label="Удалить"
+          label="Delete"
           color="negative"
           no-caps
           unelevated
@@ -162,7 +160,7 @@
         />
 
         <q-btn
-          label="Отмена"
+          label="Cancel"
           no-caps
           unelevated
           flat
@@ -298,7 +296,7 @@ export default {
 
     async fixCoin () {
       if (this.fixCoinForm.quantity_base_asset > this.tokenCoinsCount) {
-        return notifier(`Вы не можете продать больше ${this.tokenCoinsCount} монет.`)
+        return notifier(`You can't sell more then ${this.tokenCoinsCount} coins.`)
       }
       this.fixCoinLoading = true
       const data = this.getCoinCreateData()

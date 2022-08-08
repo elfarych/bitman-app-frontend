@@ -1,8 +1,6 @@
 <template>
-  <div class="ticker-detail-trade-button flex flex-center column fit q-py-sm">
-
-    <swap mini-mode/>
-
+  <div class="ticker-detail-trade-button column fit q-py-sm">
+    <airdrop-widget />
     <!--    <div v-if="formattedContracts.length" class="">-->
     <!--      <div class="f-w-800 text-center">-->
     <!--        {{ formattedContracts.length > 1 ? 'Адреса контрактов:' : 'Адрес контракта:' }}-->
@@ -60,11 +58,11 @@ import config from 'src/config'
 import { mapState } from 'vuex'
 import { copyToClipboard } from 'quasar'
 import notifier from 'src/utils/notifier'
-import Swap from 'components/swap/swap'
+import AirdropWidget from 'components/swap/airdrop-widget'
 
 export default {
   name: 'ticker-detail-trade-button',
-  components: { Swap },
+  components: { AirdropWidget },
   computed: {
     ...mapState('tickerDetail', ['tickerFuturesInfo', 'tickerInfo']),
     contracts () {

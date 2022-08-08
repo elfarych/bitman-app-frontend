@@ -1,12 +1,12 @@
 <template>
 <q-page class="q-pa-sm">
-  <base-page-title :real-time-text="false" screener-name="Авторизация"/>
+  <base-page-title :real-time-text="false" screener-name="Authorization"/>
   <div class="text-center q-mt-xl q-pt-lg">
     <q-card class="bg-transparent shadow-0 q-mt-xl" style="width: 100%; max-width: 500px; margin: auto">
       <q-card-section>
         <div class="flex items-center full-height justify-center">
           <q-btn
-            label="Вход"
+            label="Sign"
             no-caps unelevated flat
             :color="view === 'login' ? 'primary' : ''"
             class="f-w-800 transition-1"
@@ -14,7 +14,7 @@
           />
 
           <q-btn
-            label="Регистрация"
+            label="Sign up"
             :color="view === 'register' ? 'primary' : ''"
             class="f-w-800 q-ml-sm transition-1"
             no-caps unelevated flat

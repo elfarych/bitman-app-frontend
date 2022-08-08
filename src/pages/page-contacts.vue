@@ -1,10 +1,10 @@
 <template>
 <q-page class="q-pa-sm">
   <portal to="title">
-    <base-page-top-title title="Наши контакты"/>
+    <base-page-top-title title="Contacts"/>
   </portal>
 
-  <base-page-title :real-time-text="false" screener-name="Наши контакты"/>
+  <base-page-title :real-time-text="false" screener-name="Contacts"/>
 
   <div class="q-mt-lg">
     <q-item
@@ -24,29 +24,9 @@
       clickable
       class="rounded-borders items-center text-subtitle2"
     >
-      <span class="f-w-600 q-mr-sm">Telegram канал проекта: @Bitmanapp</span>
+      <span class="f-w-600 q-mr-sm">Telegram: @Bitmanapp</span>
     </q-item>
 
-    <q-item
-      tag="a"
-      target="_blank"
-      :href="`${siteInfo.self_tg_url}`"
-      clickable
-      class="rounded-borders items-center text-subtitle2"
-    >
-      <span class="f-w-600 q-mr-sm">Telegram чат: @Bitmancommunication</span>
-    </q-item>
-
-    <q-item
-      v-if="siteInfo.whatsapp"
-      tag="a"
-      target="_blank"
-      :href="`https://wa.me/${siteInfo.whatsapp.split(' ').join('')}`"
-      clickable
-      class="rounded-borders items-center text-subtitle2"
-    >
-      <span class="f-w-600 q-mr-sm">Whatsapp:</span> <span class=" text-uppercase">{{ siteInfo.whatsapp }}</span>
-    </q-item>
   </div>
 </q-page>
 </template>

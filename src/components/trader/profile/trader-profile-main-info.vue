@@ -13,10 +13,10 @@
 
     <div class="q-ml-md">
       <small>{{ user ? user.username : '' }}</small>
-      <div class="text-subtitle1 f-w-800 text-white-shadow">{{ trader ? trader.name : 'Аноним' }}</div>
+      <div class="text-subtitle1 f-w-800 text-white-shadow">{{ trader ? trader.name : 'Anonim' }}</div>
       <div>
         <q-btn
-          label="Редактировать"
+          label="Edit"
           icon="edit"
           size="sm"
           color="secondary"
@@ -33,7 +33,7 @@
   <q-dialog v-model="editDialog">
     <q-card style="width: 555px; max-width: 100%">
       <q-toolbar>
-        <q-toolbar-title class="text-subtitle1">Редактирование профиля</q-toolbar-title>
+        <q-toolbar-title class="text-subtitle1">Edit profile</q-toolbar-title>
         <q-btn icon="close" v-close-popup flat dense/>
       </q-toolbar>
 
@@ -51,7 +51,7 @@
               :loading="nameSaveLoading"
               :color="traderName !== trader.name ? 'positive' : ''"
               :disable="traderName === trader.name"
-              title="Сохранить"
+              title="Save"
               @click="saveForm"
             />
           </template>
@@ -59,7 +59,7 @@
       </q-card-section>
 
       <q-card-section>
-        <div class="q-mb-sm">Фото:</div>
+        <div class="q-mb-sm">Photo:</div>
         <q-uploader
           :url="imageUploadUrl"
           :headers="[{name: 'Authorization', value: `Bearer ${jwt}`}]"
@@ -103,7 +103,7 @@ export default {
     async rejected () {
       const vm = this
       await vm.getTrader()
-      notifier('Фото загружено', 'positive')
+      notifier('Photo uploaded', 'positive')
     },
     async saveForm () {
       const vm = this
@@ -111,9 +111,9 @@ export default {
 
       try {
         await vm.updateTrader({ name: vm.traderName })
-        notifier('Профиль обновлен.', 'positive')
+        notifier('Profile updated.', 'positive')
       } catch (e) {
-        notifier('Не удалось обновить профиль.', 'negative')
+        notifier('Error.', 'negative')
       } finally {
         vm.nameSaveLoading = false
       }

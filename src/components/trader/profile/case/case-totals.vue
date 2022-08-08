@@ -2,27 +2,27 @@
 <div class="case-totals">
   <div v-if="symbols.length" class="row f-w-400 q-col-gutter-md">
     <div class="case-totals-column column col-6 col-md-2 col-sm-4">
-      <small class="text-grey-5">Сумма в обороте</small>
+      <small class="text-grey-5">Circulation sum</small>
       <span class="f-w-800">{{ priceFormatter(caseSummaryCoast) }}</span>
     </div>
 
     <div class="case-totals-column column col-6 col-md-2 col-sm-4">
-      <small class="text-grey-5">Текушая стоимость</small>
+      <small class="text-grey-5">Current coast</small>
       <span class="f-w-800">{{ priceFormatter(caseCurrentSummaryPrice) }}</span>
     </div>
 
     <div class="case-totals-column column col-6 col-md-2 col-sm-4">
-      <small class="text-grey-5">{{ caseCoastDifference > 0 ? 'Текушая доходность' : 'Текущий убыток' }}</small>
+      <small class="text-grey-5">{{ caseCoastDifference > 0 ? 'Current profit' : 'Current loss' }}</small>
       <span class="f-w-800" :class="caseCoastDifference > 0 ? 'text-positive' : 'text-negative'" >{{ priceFormatter(caseCoastDifference) }}</span>
     </div>
 
     <div class="case-totals-column column col-6 col-md-2 col-sm-4">
-      <small class="text-grey-5">Фикс. {{ !caseTotalFixedProfitSummary || caseTotalFixedProfitSummary > 0 ? 'прибыль' : 'убыток' }}</small>
+      <small class="text-grey-5">Fixed {{ !caseTotalFixedProfitSummary || caseTotalFixedProfitSummary > 0 ? 'profit' : 'loss' }}</small>
       <span class="f-w-800" :class="!caseTotalFixedProfitSummary || caseTotalFixedProfitSummary > 0 ? 'text-positive' : 'text-negative'" >{{ priceFormatter(caseTotalFixedProfitSummary) }}</span>
     </div>
 
     <div class="case-totals-column column col-6 col-md-2 col-sm-4">
-      <small class="text-grey-5">{{ caseSummaryInvestmentProfit > 0 ? 'Суммарная прибыль' : 'Суммарный убыток' }}</small>
+      <small class="text-grey-5">{{ caseSummaryInvestmentProfit > 0 ? 'Summary profit' : 'Summary loss' }}</small>
       <span class="f-w-800" :class="caseSummaryInvestmentProfit > 0 ? 'text-positive' : 'text-negative'" >{{ priceFormatter(caseSummaryInvestmentProfit) }}</span>
     </div>
   </div>

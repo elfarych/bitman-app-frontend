@@ -19,7 +19,7 @@
               <div class="text-subtitle1 f-w-800 l-h-12">{{ traderCase.title }}</div>
               <div class="f-w-400 block l-h-12 q-mt-sm">{{ traderCase.text }}</div>
               <div>
-                <small class="f-w-200 l-h-12 block q-mt-sm">Создан: {{
+                <small class="f-w-200 l-h-12 block q-mt-sm">Created at: {{
                     traderCase ? $dayjs(traderCase.date).format('DD.MM.YYYY') : ''
                   }}</small>
               </div>
@@ -37,7 +37,7 @@
           </div>
 
           <q-separator />
-          <div class="text-subtitle1 q-mt-md">Активы <q-badge align="top" color="secondary">{{ traderCase.tokens.length }}</q-badge></div>
+          <div class="text-subtitle1 q-mt-md">Coins <q-badge align="top" color="secondary">{{ traderCase.tokens.length }}</q-badge></div>
         </div>
 
       </div>
@@ -47,7 +47,7 @@
     <div class="q-pa-md">
       <!--    Empty case-->
       <div v-if="!traderCase.tokens.length" class="">
-        Портфель пуст.
+        Case is empty.
       </div>
 
       <case-tokens :tokens="traderCase.tokens" :case-id="traderCase.id"/>

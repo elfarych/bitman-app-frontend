@@ -20,7 +20,7 @@
         dense
         v-model="user.password"
         type="password"
-        label="Пароль*"
+        label="Password*"
         :rules="rulesNoEmpty"
       >
         <template v-slot:prepend>
@@ -34,7 +34,7 @@
         dense
         type="password"
         v-model="user.passwordConfirm"
-        label="Пароль еще раз*"
+        label="Confirm password*"
         lazy-rules
         :rules="rulesComparePasswordConfirm"
       >
@@ -53,7 +53,7 @@
 
     <div class="q-mt-md">
       <q-btn
-        label="Регистрация"
+        label="Register"
         class="full-width q-py-sm f-w-800"
         color="primary"
         icon-right="person_add"
@@ -81,13 +81,13 @@ export default {
   computed: {
     rulesNoEmpty () {
       return [
-        val => (!!val) || 'Это обязательное поле'
+        val => (!!val) || 'This is a required field'
       ]
     },
     rulesComparePasswordConfirm () {
       const vm = this
       return [
-        val => (val === vm.user.password) || 'Пароли не совпадают'
+        val => (val === vm.user.password) || 'Passwords do not match'
       ]
     }
   },
@@ -127,7 +127,7 @@ export default {
             await createJWT(user)
             vm.mutationUser(user)
             await vm.createTrader()
-            notifier('Регистрация прошла успешно.', 'positive')
+            notifier('Success.', 'positive')
             await vm.$router.replace({
               name: 'Profile'
             })

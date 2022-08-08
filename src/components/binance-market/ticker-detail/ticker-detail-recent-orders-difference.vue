@@ -16,9 +16,11 @@
     </q-btn>
   </div>
 
-<!--  <div class="small-text q-mt-sm">Данные основаны <br>на последних <span class="f-w-800 text-primary">{{ count }}</span><br> ордерах биржи Binance</div>-->
+  <div class="small-text q-mt-sm">
+    <span class="f-w-800 text-white-shadow-light">{{ count }}</span> orders
+  </div>
 
-  <div class="">
+  <div class="q-mt-md">
     <q-slider
       color="secondary"
       v-model="count"

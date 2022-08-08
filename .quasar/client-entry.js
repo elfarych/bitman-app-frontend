@@ -65,7 +65,7 @@ import { addPreFetchHooks } from './client-prefetch.js'
 
 
 
-const publicPath = `/`
+const publicPath = ``
 
 
 async function start () {

@@ -26,7 +26,7 @@ export default {
         timezone: 'exchange',
         theme: 'dark',
         style: '1',
-        locale: 'ru',
+        locale: 'en',
         toolbar_bg: '#000000',
         enable_publishing: false,
         hide_side_toolbar: vm.$mobile,

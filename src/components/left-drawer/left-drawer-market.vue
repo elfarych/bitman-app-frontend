@@ -1,9 +1,6 @@
 <template>
   <div class="left-drawer-market">
 
-    <div class="q-px-sm q-pb-md">
-      <cryptobox-btn in-menu/>
-    </div>
     <div class="q-px-md q-pb-md">
       <q-input
         v-model="searchText"
@@ -28,7 +25,7 @@
           @click="sortField = ''"
         />
         <q-btn
-          label="Токен"
+          label="Coin"
           :icon-right="sortField === 'symbol' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
           size="sm"
           :color="sortField === 'symbol' ? 'primary' : ''"
@@ -39,7 +36,7 @@
 
       <div class="relative-position col-3 flex no-wrap items-center cursor-pointer justify-end">
         <q-btn
-          label="Цена"
+          label="Price"
           :icon-right="sortField === 'price' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
           size="sm"
           :color="sortField === 'price' ? 'primary' : ''"
@@ -50,7 +47,7 @@
 
       <div class="relative-position col-3 flex no-wrap items-center cursor-pointer justify-end">
         <q-btn
-          label="Изм."
+          label="Change"
           :icon-right="sortField === 'change' && this.sortUp ? 'expand_less' : 'keyboard_arrow_down'"
           size="sm"
           :color="sortField === 'change' ? 'primary' : ''"
@@ -84,11 +81,10 @@
 <script>
 import { mapState } from 'vuex'
 import LeftDrawerMarketTicker from 'components/left-drawer/left-drawer-market-ticker'
-import CryptoboxBtn from 'components/wallet/cryptobox/cryptobox-btn'
 
 export default {
   name: 'left-drawer-market',
-  components: { CryptoboxBtn, LeftDrawerMarketTicker },
+  components: { LeftDrawerMarketTicker },
   props: {
     wishlistMode: {
       type: Boolean,

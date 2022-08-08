@@ -3,43 +3,16 @@
   <q-separator />
   <div class="text-center q-mt-xl">
     <h5 class="text-h4 text-uppercase f-w-800 text-white-shadow">Bitman</h5>
-    <div class="q-mt-sm text-subtitle2 f-w-400" v-html="siteInfo.site_text"></div>
+    <div class="q-mt-sm text-subtitle2 f-w-400"></div>
   </div>
 
   <div class="q-mt-xl">
     <div class="row q-col-gutter-lg">
-      <!--    <div class="col-12 col-sm-4 text-center">-->
-      <!--      <router-link :to="{ name: 'home' }" class="text-secondary text-subtitle2 f-w-600 block">-->
-      <!--        Главная-->
-      <!--      </router-link>-->
-
-      <!--      <router-link :to="{ name: 'Binance-Market' }" class="text-secondary text-subtitle2 f-w-600 block q-mt-sm">-->
-      <!--        Рынок-->
-      <!--      </router-link>-->
-
-      <!--      <router-link :to="{ name: 'Binance-Vol' }" class="text-secondary text-subtitle2 f-w-600 block q-mt-sm">-->
-      <!--        Скринер волатильности-->
-      <!--      </router-link>-->
-
-      <!--      <router-link :to="{ name: 'Blog' }" class="text-secondary text-subtitle2 f-w-600 block q-mt-sm">-->
-      <!--        Блог-->
-      <!--      </router-link>-->
-
-      <!--      <router-link :to="{ name: 'Roadmap' }" class="text-secondary text-subtitle2 f-w-600 block q-mt-sm">-->
-      <!--        Дорожная карта-->
-      <!--      </router-link>-->
-
-      <!--      <router-link :to="{ name: 'Contacts' }" class="text-secondary text-subtitle2 f-w-600 block q-mt-sm">-->
-      <!--        Контакты-->
-      <!--      </router-link>-->
-      <!--    </div>-->
 
       <div class="col-12 col-sm-6 text-center">
-        <div class="">Принимайте участие в развитии проекта,<br> <span class="f-w-800">нам очень важно Ваше мнение.</span><br>
-          Мы будем <span class="f-w-800">обсуждать с Вами</span> все,<br> что планируем и делаем.
-        </div>
+        <div class="" style="max-width: 300px; margin: auto">{{ $t('footerText1') }}</div>
         <q-btn
-          label="Telegram канал"
+          label="Telegram"
           color="primary"
           icon="telegram"
           text-color="dark"
@@ -50,11 +23,10 @@
         />
       </div>
       <div class="col-12 col-sm-6 text-center">
-        <div class="">Мы создали <span class="f-w-800">полностью бесплатную платформу.<br></span>
-          Будем очень признательны,<br> если Вы решите <br><span class="f-w-800">поблагодарить нас. </span>
+        <div class="" style="max-width: 300px; margin: auto">{{ $t('footerText2') }}
         </div>
         <q-btn
-          label="Помощь проекту"
+          label="Donate"
           color="primary"
           icon="currency_bitcoin"
           text-color="dark"
@@ -66,7 +38,7 @@
   </div>
 
   <small class="q-py-lg q-mt-xl block text-center">
-    <span class="text-uppercase">Bitman</span> {{ year }}. Все права зашишены.
+    <span class="text-uppercase">Bitman</span> {{ year }}. All right reserved.
   </small>
 
 </div>

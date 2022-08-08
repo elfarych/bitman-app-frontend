@@ -4,7 +4,7 @@
     <base-page-top-title title="Roadmap"/>
   </portal>
 
-  <base-page-title :real-time-text="false" screener-name="Дорожная карта проекта"/>
+  <base-page-title :real-time-text="false" screener-name="Roadmap"/>
 
   <div class="q-mt-lg">
     <roadmap />

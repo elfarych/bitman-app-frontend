@@ -11,7 +11,7 @@ export default async function createJWT (data) {
         ...data
       })
       .then(res => res.data.access)
-      .catch(res => notifier(res.message || 'Произошла ошибка.', 'negative'))
+      .catch(res => notifier(res.message || 'Error.', 'negative'))
   } catch (e) {
     errorHandler(e)
   }

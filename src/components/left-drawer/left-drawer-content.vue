@@ -5,6 +5,19 @@
       <q-item
         clickable
         to="/"
+        class="items-center relative-position"
+        :class="$route.name === 'trade' ? 'text-primary' : 'text-white'"
+        tag="a"
+        title="Trade"
+      >
+        <q-icon name="swap_horiz" size="22px" class="q-mr-sm"/>
+        Trade
+
+        <div class="bg-warning absolute-bottom-right text-dark q-pa-xs rounded-borders small-text q-ma-xs"><q-icon name="crisis_alert" size="13px" style="margin-top: -2px"/> Big Airdrop</div>
+      </q-item>
+      <q-item
+        clickable
+        to="/home"
         class="items-center"
         :class="$route.name === 'home' ? 'text-primary' : 'text-white'"
         tag="a"

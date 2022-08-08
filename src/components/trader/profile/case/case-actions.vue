@@ -25,21 +25,21 @@
   <q-dialog v-model="editCaseDialog">
     <q-card style="width: 555px; max-width: 100%">
       <q-toolbar>
-        <q-toolbar-title class="text-subtitle1 f-w-600">Редактирование портфеля "{{ traderCase.title }}"</q-toolbar-title>
+        <q-toolbar-title class="text-subtitle1 f-w-600">Case edit "{{ traderCase.title }}"</q-toolbar-title>
         <q-btn icon="close" dense flat v-close-popup/>
       </q-toolbar>
 
       <q-card-section>
         <q-form @submit="caseFormSubmit">
-          <q-input v-model="caseForm.title" label="Название портфеля*" outlined dense :rules="rulesNoEmpty">
+          <q-input v-model="caseForm.title" label="Case name*" outlined dense :rules="rulesNoEmpty">
             <template v-slot:prepend>
               <q-icon name="business_center"/>
             </template>
           </q-input>
-          <q-input v-model="caseForm.text" type="textarea" label="Описание (необязательно)" outlined dense/>
-          <q-checkbox v-model="caseForm.public" label="Публичный портфель"
-                      title="Ваш портфель смогут видеть все пользователи" class="q-mt-sm"/>
-          <q-btn type="submit" label="Сохранить" color="secondary"
+          <q-input v-model="caseForm.text" type="textarea" label="Description (optional)" outlined dense/>
+          <q-checkbox v-model="caseForm.public" label="Public case"
+                      class="q-mt-sm"/>
+          <q-btn type="submit" label="Save" color="secondary"
                  class="full-width q-mt-md f-w-800 q-py-sm text-white-shadow" unelevated/>
         </q-form>
       </q-card-section>
@@ -50,14 +50,14 @@
   <q-dialog v-model="deleteDialog" persistent>
     <q-card style="width: 555px; max-width: 100%">
       <q-toolbar>
-        <q-toolbar-title class="text-subtitle1 f-w-600">Удалить портфель "{{ traderCase.title }}"?</q-toolbar-title>
+        <q-toolbar-title class="text-subtitle1 f-w-600">Delete case "{{ traderCase.title }}"?</q-toolbar-title>
         <q-btn icon="close" dense flat v-close-popup/>
       </q-toolbar>
 
       <q-card-actions align="right">
         <q-btn
           icon="delete_forever"
-          label="Удалить"
+          label="Delete"
           color="negative"
           no-caps
           unelevated
@@ -67,7 +67,7 @@
         />
 
         <q-btn
-          label="Отмена"
+          label="Cancel"
           no-caps
           unelevated
           flat
@@ -107,7 +107,7 @@ export default {
   computed: {
     rulesNoEmpty () {
       return [
-        val => (!!val) || 'Это обязательное поле'
+        val => (!!val) || 'This is a required field'
       ]
     }
   },

@@ -12,7 +12,7 @@
           :class="order.fix_order ? 'bg-negative' : 'bg-positive'"
           style="padding: 3px 5px 2px; width: 70px"
         >
-          {{ order.fix_order ? 'Продажа' : 'Покупка' }}
+          {{ order.fix_order ? 'Sell' : 'Buy' }}
         </div>
 
         <div class="f-w-600 q-ml-sm fontsize-12">
@@ -20,7 +20,7 @@
         </div>
 
         <div class="f-w-600 q-ml-sm fontsize-12">
-          <small class="f-w-400 text-grey-5">по цене: </small>
+          <small class="f-w-400 text-grey-5">price: </small>
           {{ order.price }}$
         </div>
       </div>
@@ -40,14 +40,14 @@
   <q-dialog v-model="deleteDialog" persistent>
     <q-card style="width: 555px; max-width: 100%">
       <q-toolbar>
-        <q-toolbar-title class="text-subtitle1 f-w-600">Удалить транзакцию?</q-toolbar-title>
+        <q-toolbar-title class="text-subtitle1 f-w-600">Delete transaction?</q-toolbar-title>
         <q-btn icon="close" dense flat v-close-popup/>
       </q-toolbar>
 
       <q-card-actions align="right">
         <q-btn
           icon="delete_forever"
-          label="Удалить"
+          label="Delete"
           color="negative"
           no-caps
           unelevated
@@ -57,7 +57,7 @@
         />
 
         <q-btn
-          label="Отмена"
+          label="Cancel"
           no-caps
           unelevated
           flat

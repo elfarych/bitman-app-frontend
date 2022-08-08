@@ -58,5 +58,14 @@ export default {
   getBox: 'Get cryptobox',
   gameLoserText: 'Try again later.',
   claim: 'Claim',
-  youWin: 'You win'
+  youWin: 'You win',
+  footerText1: '\n' +
+    'Take part in the development of the project,\n' +
+    'Your opinion is very important to us.\n' +
+    'We will discuss everything with you\n' +
+    'what we plan and do',
+  footerText2: 'We have created a completely free platform.\n' +
+    'We will be very grateful\n' +
+    'if you decide\n' +
+    'thank us.'
 }

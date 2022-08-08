@@ -1,7 +1,7 @@
 <template>
 <div class="add-case-token">
   <q-btn
-    label="Добавить монету"
+    label="Add coin"
     icon="add"
     color="secondary"
     no-caps
@@ -22,7 +22,7 @@
         <q-select
           v-model="coinForm.symbol"
           :options="options"
-          :label="selectedCoin ? 'Монета' : 'Выберите монету'"
+          :label="selectedCoin ? 'Coin' : 'Select coin'"
           use-input
           dense
           outlined
@@ -56,7 +56,7 @@
           type="number"
           v-model="coinForm.price"
           :disable="!coinForm.symbol"
-          label="Цена покупки $"
+          label="Buy price $"
           outlined
           dense
           class="q-mt-md"
@@ -77,7 +77,7 @@
               type="number"
               v-model="coinForm.quantity_base_asset"
               :disable="!coinForm.price || coinForm.price < 0"
-              :label="selectedSymbol ? `Количество ${selectedSymbol}` : 'Количество монет'"
+              :label="selectedSymbol ? `Quantity ${selectedSymbol}` : 'Coin quantity'"
               outlined
               dense
               class="q-mt-md"
@@ -87,7 +87,7 @@
             <q-input
               v-model="computedSumInUsd"
               disable
-              label="Сумма $" borderless
+              label="Sum $" borderless
               dense
               class="q-mt-md"
             />
@@ -97,7 +97,7 @@
         <!--        Add button-->
         <q-btn
           :disable="computedSumInUsd === '0.00' || computedSumInUsd.startsWith('-')"
-          label="Добавить монету"
+          label="Add coin"
           class="q-mt-lg q-py-sm text-white-shadow f-w-800 full-width"
           no-caps
           unelevated

@@ -19,7 +19,7 @@
           dense
           type="password"
           v-model="user.password"
-          label="Пароль"
+          label="Password"
           :rules="rulesNoEmpty"
         >
           <template v-slot:prepend>
@@ -34,7 +34,7 @@
 
       <div class="q-mt-md">
         <q-btn
-          label="Вход"
+          label="Login"
           class="full-width q-py-sm f-w-800"
           color="primary"
           icon-right="login"
@@ -61,7 +61,7 @@ export default {
   computed: {
     rulesNoEmpty () {
       return [
-        val => (!!val) || 'Это обязательное поле'
+        val => (!!val) || 'This is a required field'
       ]
     }
   },
@@ -101,7 +101,7 @@ export default {
               localStorage.setItem('jwt', jwt)
               await vm.loadUser()
               await vm.getTrader()
-              notifier('Авторизация прошла успешно.', 'positive')
+              notifier('Success.', 'positive')
               await vm.$router.replace({
                 name: 'Profile'
               })

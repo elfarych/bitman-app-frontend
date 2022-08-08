@@ -15,10 +15,9 @@
       </q-btn>
     </div>
 
-<!--    <div class="small-text q-mt-sm">Данные основаны на последних {{ futures ? '2 000' : '10 000' }}<br> лимитных ордерах-->
-<!--      биржи Binance<br> в диапазоне-->
-<!--      <span class="f-w-800 text-primary">{{ percent }}%</span> от текущей цены-->
-<!--    </div>-->
+    <div class="small-text q-mt-sm">{{ futures ? '2 000' : '10 000' }} orders
+      <span class="f-w-800 text-white-shadow-light q-ml-sm">{{ percent }}%</span> price range
+    </div>
 
     <div class="q-mt-md">
       <q-slider

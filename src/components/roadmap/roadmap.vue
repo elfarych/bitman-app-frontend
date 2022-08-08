@@ -12,9 +12,9 @@
     >
       <div v-html="item.text" class="q-pb-sm">
       </div>
-      <span v-if="item.in_work" class="bg-warning q-py-xs rounded-borders text-dark f-w-600 q-px-md">в работе</span>
-      <span v-else-if="item.completed" class="bg-positive q-py-xs rounded-borders text-dark f-w-600 q-px-md">выполнено</span>
-      <span v-else class="bg-secondary q-py-xs rounded-borders text-white f-w-600 q-px-md">планирование</span>
+      <span v-if="item.in_work" class="bg-warning q-py-xs rounded-borders text-dark f-w-600 q-px-md">In work</span>
+      <span v-else-if="item.completed" class="bg-positive q-py-xs rounded-borders text-dark f-w-600 q-px-md">Ready</span>
+      <span v-else class="bg-secondary q-py-xs rounded-borders text-white f-w-600 q-px-md">Planning</span>
 
     </q-timeline-entry>
 

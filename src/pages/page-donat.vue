@@ -2,25 +2,15 @@
 <q-page class="q-pa-sm">
 
   <portal to="title">
-  <base-page-top-title title="Помощь проекту"/>
+  <base-page-top-title title="Donate"/>
   </portal>
 
-  <base-page-title :real-time-text="false" screener-name="Помощь проекту"/>
+  <base-page-title :real-time-text="false" screener-name="Donate"/>
 
   <div class="q-mt-md f-w-600">
-    Вы можете перевести криптовалюту на любой кошелек из списка.<br>
-    Благодарим Вас за помощь проекту!
+    You can transfer cryptocurrency to any wallet from the list.<br>
+    Thank you!
   </div>
-
-  <q-input
-    class="q-my-md"
-    label="Поиск монеты"
-    style="max-width: 100%; width: 500px"
-    v-model="searchText"
-    outlined dense clearable
-    @clear="searchText = ''"
-  ><template v-slot:prepend><q-icon name="search"/></template>
-  </q-input>
 
   <div>
     <div>
@@ -36,11 +26,11 @@
           <div class="q-ml=md text-subtitle1 text-uppercase f-w-800 q-ml-sm">{{ wallet.token }}</div>
         </div>
 
-        <div class="text-grey-6 q-mt-sm">Сеть: <span class="text-primary f-w-600">{{ wallet.chain }}</span></div>
-        <div class="text-subtitle2 text-grey-6">Адрес: <span class="text-white f-w-600">{{ wallet.address }}</span> <q-icon name="content_copy" size="16px" style="margin-left: 5px; margin-top: -5px"/></div>
+        <div class="text-grey-6 q-mt-sm">Chain: <span class="text-primary f-w-600">{{ wallet.chain }}</span></div>
+        <div class="text-subtitle2 text-grey-6">Address: <span class="text-white f-w-600">{{ wallet.address }}</span> <q-icon name="content_copy" size="16px" style="margin-left: 5px; margin-top: -5px"/></div>
 
         <q-tooltip content-class="bg-primary text-dark f-w-600">
-          Скопировать адрес кошелька
+          Copy address
         </q-tooltip>
       </q-item>
     </div>
@@ -68,10 +58,10 @@ export default {
     copy (address) {
       copyToClipboard(address)
         .then(() => {
-          notifier('Адрес скопирован в буфер.', 'primary')
+          notifier('Copied.', 'primary')
         })
         .catch(() => {
-          notifier('Не удалось скопировать адрес.')
+          notifier('Some error.')
         })
     }
   },

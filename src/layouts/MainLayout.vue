@@ -100,14 +100,15 @@ export default {
       return this.$route.path.includes('volatility')
     },
     showLangSwitcher () {
-      let show = true
+      return false
+      // let show = true
       // if (this.$route.name === 'Binance-Market') {
       //   show = false
       // }
-      if (this.$route.name === 'market-ticker-detail') {
-        show = false
-      }
-      return show
+      // if (this.$route.name === 'market-ticker-detail') {
+      //   show = false
+      // }
+      // return show
     }
   },
   methods: {

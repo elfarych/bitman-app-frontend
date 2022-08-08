@@ -7,9 +7,9 @@
     align="justify"
     v-touch-swipe dense no-caps
   >
-    <q-tab name="case" label="Портфель" class="rounded-borders"/>
-    <q-tab name="wishlist" label="Избранное" class="rounded-borders"/>
-    <q-tab name="settings" label="Настройки" class="rounded-borders"/>
+    <q-tab name="case" label="Portfolio" class="rounded-borders"/>
+    <q-tab name="wishlist" label="Watchlist" class="rounded-borders"/>
+    <q-tab name="settings" label="Settings" class="rounded-borders"/>
   </q-tabs>
 
   <q-tab-panels  v-model="tab" animated class="text-white bg-transparent rounded-borders">
@@ -26,7 +26,7 @@
         <div class="text-subtitle1 f-w-800 text-center">
           <q-icon name="code" size="50px" color="warning"/>
           <div>
-            Данный раздел в разработке
+            In work
           </div>
         </div>
       </div>
