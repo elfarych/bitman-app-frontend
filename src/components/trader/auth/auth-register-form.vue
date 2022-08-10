@@ -47,6 +47,10 @@
       </q-input>
     </div>
 
+    <div class="text-left">
+      <q-checkbox v-model="news" color="secondary" label="Send me project news"/>
+    </div>
+
     <div style="height: 0; overflow: hidden">
       <q-checkbox v-model="botTest"/>
     </div>
@@ -95,6 +99,7 @@ export default {
     return {
       botTest: false,
       loading: false,
+      news: true,
       user: {
         username: '',
         email: '',

@@ -1,6 +1,9 @@
 <template>
 <q-page class="q-pa-sm">
-  <base-page-title :real-time-text="false" screener-name="Authorization"/>
+  <base-page-title :real-time-text="false" screener-name="Account"/>
+  <portal to="title">
+    <base-page-top-title title="Account"/>
+  </portal>
   <div class="text-center q-mt-xl q-pt-lg">
     <q-card class="bg-transparent shadow-0 q-mt-xl" style="width: 100%; max-width: 500px; margin: auto">
       <q-card-section>
@@ -36,9 +39,10 @@
 import BasePageTitle from 'components/base-page-title'
 import AuthLoginForm from 'components/trader/auth/auth-login-form'
 import AuthRegisterForm from 'components/trader/auth/auth-register-form'
+import BasePageTopTitle from 'components/base-page-top-title'
 export default {
   name: 'authorization',
-  components: { AuthRegisterForm, AuthLoginForm, BasePageTitle },
+  components: { BasePageTopTitle, AuthRegisterForm, AuthLoginForm, BasePageTitle },
   data () {
     return {
       view: 'login'
