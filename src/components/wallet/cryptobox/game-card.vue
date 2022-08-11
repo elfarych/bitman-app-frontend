@@ -23,7 +23,7 @@
     </div>
 
     <div v-else style="font-size: 30px; font-weight: 800; line-height: 1" class="text-center text-warning q-mt-xs">
-      {{ bnbBalance.formattedWorkBalance }}<span style="font-size: 20px" class=""> BNB</span>
+      {{ bnbBalance.formattedWorkBalance }}<span style="font-size: 20px" class=""> {{ coinName }}</span>
     </div>
 
     <div class="text-center q-pa-lg">
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import bnbImage from 'src/assets/bnbImage.png'
+import coinsImage from 'src/assets/win_coins.png'
 import { mapState } from 'vuex'
 import config from 'src/config'
 import Web3 from 'web3'
@@ -59,9 +59,14 @@ import axios from 'axios'
 export default {
   name: 'game-card',
   computed: {
-    ...mapState('wallet', ['wallet', 'bnbBalance']),
+    ...mapState('wallet', ['wallet', 'bnbBalance', 'chainId']),
+    coinName () {
+      if (this.chainId === 1) return 'ETH'
+      if (this.chainId === 3) return 'rETH'
+      return 'BNB'
+    },
     coinImage () {
-      return bnbImage
+      return coinsImage
     }
   },
   methods: {

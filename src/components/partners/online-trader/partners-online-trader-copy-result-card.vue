@@ -8,7 +8,7 @@
       <q-btn
         v-if="fullscreen"
         class="absolute-top-right q-ma-sm f-w-800"
-        label="Закрыть"
+        label="Close"
         outline
         icon-right="close"
         @click="fullscreen = false"

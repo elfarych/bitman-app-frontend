@@ -20,7 +20,7 @@
       />
       <q-btn
         icon-right="close"
-        label="Закрыть"
+        label="Close"
         flat dense no-caps
         class="rounded-borders"
         @click="closeChartPopup"
@@ -55,7 +55,7 @@ export default {
         timezone: 'exchange',
         theme: 'dark',
         style: '1',
-        locale: 'ru',
+        locale: 'en',
         toolbar_bg: '#000000',
         enable_publishing: false,
         hide_side_toolbar: true,

@@ -6,7 +6,7 @@
         <q-toolbar-title class="f-w-800">
           {{ symbol }}
         </q-toolbar-title>
-        <q-btn label="Закрыть" icon-right="close" @click="closeChartPopup" no-caps flat dense class="f-w-600 rounded-borders"/>
+        <q-btn label="Close" icon-right="close" @click="closeChartPopup" no-caps flat dense class="f-w-600 rounded-borders"/>
       </q-toolbar>
 
       <q-card-section id="popup-chart" style="height: calc(100vh - 50px)" class="q-px-sm q-pt-none">
@@ -39,7 +39,7 @@ export default {
         timezone: 'exchange',
         theme: 'dark',
         style: '1',
-        locale: 'ru',
+        locale: 'en',
         toolbar_bg: '#000000',
         enable_publishing: false,
         hide_side_toolbar: vm.$mobile,

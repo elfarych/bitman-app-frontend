@@ -164,9 +164,14 @@ import onboard from 'components/wallet/wallet-connect/onboard-connect'
 export default {
   name: 'swap-coins',
   computed: {
-    ...mapState('wallet', ['wallet', 'defaultSwapCoin', 'dogeBalance', 'dogsBalance', 'dogsPrice', 'busdBalance', 'usdtBalance', 'usdcBalance']),
+    ...mapState('wallet', ['wallet', 'defaultSwapCoin', 'dogeBalance', 'dogsBalance', 'dogsPrice', 'busdBalance', 'usdtBalance', 'usdcBalance', 'chainId']),
     coins () {
-      return coins
+      if (!this.chainId) return coins
+
+      return coins.filter(item => {
+        if (this.chainId !== 56) return item.name !== 'BUSD'
+        else return item
+      })
     },
     price () {
       const price = this.dogsPrice

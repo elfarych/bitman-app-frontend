@@ -191,19 +191,19 @@ export default {
     }
     setTimeout(() => {
       this.top25Visible = true
-    }, 3000)
+    }, 1500)
 
     setTimeout(() => {
       this.secondBlockVisible = true
-    }, 5000)
+    }, 3000)
 
     setTimeout(() => {
       this.newsBlockVisible = true
-    }, 7000)
+    }, 5000)
 
     setTimeout(() => {
       this.lidersBlockVisible = true
-    }, 9000)
+    }, 7000)
   }
 }
 </script>

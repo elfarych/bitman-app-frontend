@@ -3,8 +3,10 @@ import injectedModule from '@web3-onboard/injected-wallets'
 import walletConnectModule from '@web3-onboard/walletconnect'
 import appIcon from 'src/assets/app-logo.jpg'
 const MAINNET_RPC_URL = 'https://bsc-dataseed1.binance.org:443'
+const ETH_MAINNET_RPC_URL = 'https://mainnet.infura.io/v3/41ad9ed3e14d4eb8817675f8d48fe96b'
 
 const injected = injectedModule()
+
 const walletConnect = walletConnectModule({
   connectFirstChainId: true
 })
@@ -12,6 +14,12 @@ const walletConnect = walletConnectModule({
 const onboard = Onboard({
   wallets: [injected, walletConnect],
   chains: [
+    {
+      id: '0x1',
+      token: 'ETH',
+      label: 'Ethereum Mainnet',
+      rpcUrl: ETH_MAINNET_RPC_URL
+    },
     {
       id: '0x38',
       token: 'BNB',

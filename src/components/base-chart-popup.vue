@@ -19,7 +19,7 @@
         <q-toolbar-title class="f-w-800 text-primary">
           {{ chartSymbol }}/USDT
         </q-toolbar-title>
-        <q-btn label="Закрыть" icon-right="close" outline @click="closeChartPopup" no-caps class="f-w-600 rounded-borders"/>
+        <q-btn label="Close" icon-right="close" outline @click="closeChartPopup" no-caps class="f-w-600 rounded-borders"/>
       </q-toolbar>
 
       <q-card-section id="popup-chart" style="height: 80%" class="q-px-sm">
@@ -59,7 +59,7 @@ export default {
         timezone: 'exchange',
         theme: 'dark',
         style: '1',
-        locale: 'ru',
+        locale: 'en',
         toolbar_bg: '#000000',
         enable_publishing: false,
         hide_side_toolbar: vm.$mobile,

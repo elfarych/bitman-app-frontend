@@ -8,7 +8,7 @@
     @click.stop="showChartPopup($event)"
   >
     <q-icon :name="change > 0 ? 'trending_up' : 'trending_down'"/>
-    <q-tooltip>Быстрый просмотр</q-tooltip>
+    <q-tooltip>Quick view</q-tooltip>
   </q-btn>
 </div>
 </template>

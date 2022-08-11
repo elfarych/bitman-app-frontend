@@ -27,7 +27,7 @@ export default {
         bgColor: 'rgba(66, 66, 66, 1)',
         headerColor: 'rgba(0, 0, 0, 1)',
         borderColor: 'rgba(101, 101, 101, 1)',
-        locale: 'ru',
+        locale: 'en',
         sort: 'recent',
         stream: 'bitcoin',
         symbol: 'BINANCE:APEUSDT'

@@ -12,6 +12,10 @@ function getChainName (id) {
   }
 }
 
+export function mutationChainId (state, data) {
+  state.chainId = data
+}
+
 function getChainNativeCoin (chainId) {
   switch (chainId) {
     case '0x1':
@@ -50,6 +54,10 @@ export function mutationBusdBalance (state, data) {
 
 export function mutationUsdcBalance (state, data) {
   if (data) state.usdcBalance = data / 10 ** 18
+}
+
+export function mutationTusdBalance (state, data) {
+  if (data) state.tusdBalance = data / 10 ** 18
 }
 
 export function mutationUsdtBalance (state, data) {
@@ -96,9 +104,10 @@ export function mutationDefaultWallet (state) {
 }
 
 export function mutationDefaultSwapCoin (state) {
-  let coin = 'BUSD'
-  if (state.usdtBalance > state.busdBalance) coin = 'USDT'
+  let coin = 'USDT'
+  if (state.busdBalance > state.usdtBalance) coin = 'BUSD'
   if (state.usdcBalance > state.usdtBalance && state.usdcBalance > state.busdBalance) coin = 'USDC'
+  if (state.tusdBalance > state.usdtBalance && state.tusdBalance > state.busdBalance && state.tusdBalance > state.usdcBalance) coin = 'TUSD'
 
   state.defaultSwapCoin = coin
 }
