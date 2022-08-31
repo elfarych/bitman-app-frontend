@@ -67,5 +67,18 @@ export default {
   footerText2: 'We have created a completely free platform.\n' +
     'We will be very grateful\n' +
     'if you decide\n' +
-    'thank us.'
+    'thank us.',
+  arbitration: 'arbitration',
+  pair: 'Pair',
+  difference: 'Difference',
+  screenerWidgetTitle: 'Arbitration screener',
+  screenerWidgetText: 'Markets price difference screener',
+  airdropWidgetTitle: 'Big airdrop!',
+  airdropWidgetText: 'Connect wallet and get',
+  trade: 'Trade',
+  settings: 'Settings',
+  connectWalletText: 'Connect wallet and get airdrop',
+  reload: 'Reload',
+  events: 'Events',
+  upcoming: 'Upcoming'
 }

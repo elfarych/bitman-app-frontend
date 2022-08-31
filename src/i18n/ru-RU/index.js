@@ -66,5 +66,18 @@ export default {
   footerText2: 'Мы создали полностью бесплатную платформу.\n' +
     'Будем очень признательны,\n' +
     'если Вы решите\n' +
-    'поблагодарить нас.'
+    'поблагодарить нас.',
+  arbitration: 'арбитраж',
+  pair: 'Пара',
+  difference: 'Разница',
+  screenerWidgetTitle: 'Арбитраж',
+  screenerWidgetText: 'Скринер разницы курсов на крипто биржах',
+  airdropWidgetTitle: 'Big airdrop!',
+  airdropWidgetText: 'Подключи кошелек и получи',
+  trade: 'Торги',
+  settings: 'Настройки',
+  connectWalletText: 'Подключи кошелек и получи аирдроп',
+  reload: 'Обновить',
+  events: 'События',
+  upcoming: 'Скоро'
 }

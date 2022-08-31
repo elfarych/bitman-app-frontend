@@ -30,7 +30,15 @@
         <coin-categories/>
       </div>
 
-      <div class="q-mt-xl" style="width: 280px"><airdrop-widget/></div>
+      <div class="q-mt-xl flex q-col-gutter-md" >
+        <div style="width: 320px">
+          <airdrop-widget />
+        </div>
+        <div style="width: 450px; max-width: 100%">
+          <arbitration-widget />
+        </div>
+
+      </div>
 
       <!--      Top 25-->
       <div v-if="top25Visible" class="q-mt-xl">
@@ -117,11 +125,13 @@ import Top100Wallets from 'components/binance-market/widgets/top-100-wallets/top
 import Top25 from 'components/binance-market/top-25/top-25'
 import NewsWidget from 'components/news/news-widget/news-widget'
 import AirdropWidget from 'components/swap/airdrop-widget'
+import ArbitrationWidget from 'components/arbitration/arbitration-widget'
 // import HomeSwapWrapper from 'components/swap/home-swap-wrapper'
 
 export default {
   name: 'PageIndex',
   components: {
+    ArbitrationWidget,
     AirdropWidget,
     // HomeSwapWrapper,
     NewsWidget,

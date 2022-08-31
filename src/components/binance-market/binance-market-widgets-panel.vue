@@ -2,6 +2,7 @@
 <div class="binance-market-widgets-panel">
   <div>
     <airdrop-widget />
+    <arbitration-widget class="q-mt-md"/>
   </div>
   <div class="q-mt-md">
     <top100-wallets />
@@ -28,9 +29,10 @@ from 'components/binance-market/widgets/widget-long-short-positions/widget-long-
 import WidgetLiquidity from 'components/binance-market/widgets/widget-liquidity'
 import Top100Wallets from 'components/binance-market/widgets/top-100-wallets/top-100-wallets'
 import AirdropWidget from 'components/swap/airdrop-widget'
+import ArbitrationWidget from 'components/arbitration/arbitration-widget'
 export default {
   name: 'binance-market-widgets-panel',
-  components: { AirdropWidget, Top100Wallets, WidgetLiquidity, WidgetLongShortPositions, WidgetWeekVixChart }
+  components: { ArbitrationWidget, AirdropWidget, Top100Wallets, WidgetLiquidity, WidgetLongShortPositions, WidgetWeekVixChart }
 }
 </script>
 

@@ -9,6 +9,18 @@
   <div class="q-mt-xl">
     <div class="row q-col-gutter-lg">
 
+      <div class="col-12 col-sm-6 text-center flex justify-center">
+        <div style="width: 450px; max-width: 100%">
+          <arbitration-widget />
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 text-center flex justify-center">
+        <div style="width: 450px; max-width: 100%">
+          <airdrop-widget />
+        </div>
+      </div>
+
       <div class="col-12 col-sm-6 text-center">
         <div class="" style="max-width: 300px; margin: auto">{{ $t('footerText1') }}</div>
         <q-btn
@@ -47,9 +59,12 @@
 <script>
 
 import { mapState } from 'vuex'
+import ArbitrationWidget from 'components/arbitration/arbitration-widget'
+import AirdropWidget from 'components/swap/airdrop-widget'
 
 export default {
   name: 'site-footer',
+  components: { AirdropWidget, ArbitrationWidget },
   computed: {
     ...mapState('siteInfo', ['siteInfo']),
     year () {

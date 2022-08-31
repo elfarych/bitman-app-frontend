@@ -15,6 +15,8 @@ import blog from './modules/blog'
 import traderCase from './modules/trader-case'
 import news from './modules/news'
 import volatility from 'src/store/modules/volatility'
+import arbitration from './modules/arbitration'
+import events from './modules/events'
 
 Vue.use(Vuex)
 
@@ -33,6 +35,7 @@ export default function (/* { ssrContext } */) {
       chart,
       wallet,
       trader,
+      arbitration,
       coins,
       binanceMarket,
       tickerDetail,
@@ -43,7 +46,8 @@ export default function (/* { ssrContext } */) {
       blog,
       traderCase,
       news,
-      volatility
+      volatility,
+      events
     },
 
     // enable strict mode (adds overhead!)

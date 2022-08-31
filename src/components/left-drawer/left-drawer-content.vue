@@ -2,26 +2,13 @@
 <div class="left-drawer-content">
   <nav>
     <q-list separator class="f-w-800 text-uppercase ">
-      <q-item
-        clickable
-        to="/"
-        class="items-center relative-position"
-        :class="$route.name === 'trade' ? 'text-primary' : 'text-white'"
-        tag="a"
-        title="Trade"
-      >
-        <q-icon name="swap_horiz" size="22px" class="q-mr-sm"/>
-        Trade
 
-        <div class="bg-warning absolute-bottom-right text-dark q-pa-xs rounded-borders small-text q-ma-xs"><q-icon name="crisis_alert" size="13px" style="margin-top: -2px"/> Big Airdrop</div>
-      </q-item>
       <q-item
         clickable
-        to="/home"
+        :to="{ name: 'home' }"
         class="items-center"
         :class="$route.name === 'home' ? 'text-primary' : 'text-white'"
         tag="a"
-        title="Главная страница"
       >
         <q-icon name="home" size="22px" class="q-mr-sm"/>
         {{ $t('homePage') }}
@@ -32,22 +19,46 @@
         :to="{ name: 'Binance-Market' }"
         class="items-center"
         tag="a"
-        title="Полная информация о монетах"
       >
         <q-icon name="bar_chart" size="22px" class="q-mr-sm"/>
         {{ $t('markets') }}
       </q-item>
 
-<!--      <q-item-->
-<!--        clickable-->
-<!--        :to="{ name: 'Binance-Vol' }"-->
-<!--        class="items-center"-->
-<!--        tag="a"-->
-<!--        title="Скринер волатильности монет"-->
-<!--      >-->
-<!--        <q-icon name="percent" size="22px" class="q-mr-sm"/>-->
-<!--        Скринер волатильности-->
-<!--      </q-item>-->
+      <q-item
+        clickable
+        :to="{ name: 'Events' }"
+        class="items-center"
+        tag="a"
+      >
+        <q-icon name="event" size="22px" class="q-mr-sm"/>
+        {{ $t('events') }}
+      </q-item>
+
+      <q-item
+        clickable
+        :to="{ name: 'trade' }"
+        class="items-center relative-position"
+        :class="$route.name === 'trade' ? 'text-primary' : 'text-white'"
+        tag="a"
+        title="Trade"
+      >
+        <q-icon name="swap_horiz" size="22px" class="q-mr-sm"/>
+        {{ $t('trade') }}
+
+        <div class="bg-warning absolute-bottom-right text-dark q-pa-xs rounded-borders small-text q-ma-xs"><q-icon name="crisis_alert" size="13px" style="margin-top: -2px"/> Big Airdrop</div>
+      </q-item>
+
+      <q-item
+        clickable
+        :to="{ name: 'Arbitration' }"
+        class="items-center"
+        tag="a"
+      >
+        <q-icon name="ssid_chart" size="22px" class="q-mr-sm"/>
+        {{ $t('arbitration') }}
+
+        <div class="absolute-bottom-right text-dark q-pa-xs rounded-borders small-text q-ma-xs text-warning"><q-icon name="query_stats" size="13px" style="margin-top: -2px"/> Screener</div>
+      </q-item>
 
       <q-item
         class="items-center text-grey-7"

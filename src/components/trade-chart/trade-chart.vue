@@ -5,7 +5,7 @@
       DOGS <span :class="coinInfo.change > 0 ? 'text-positive' : 'text-negative'">
         <span v-if="coinInfo.change > 0"> +</span>{{ coinInfo.change }}%</span>
     </div>
-    <div class="text-bold q-ml-xl text-right">volume 24h<br> <span class="text-accent text-subtitle1">${{ coinInfo.volume | numberFormatter }}</span></div>
+    <div class="text-bold q-ml-xl text-right">{{ $t('volume') }} 24h<br> <span class="text-accent text-subtitle1">${{ coinInfo.volume | numberFormatter }}</span></div>
   </div>
 
   <div>

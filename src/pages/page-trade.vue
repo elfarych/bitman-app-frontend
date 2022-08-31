@@ -4,7 +4,7 @@
       <base-page-top-title title="Trade"/>
     </portal>
 
-    <div class="q-mt-sm" style="width: 280px">
+    <div class="q-mt-sm" style="width: 320px">
       <airdrop-widget trade-page/>
     </div>
 

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import dayjs from 'dayjs'
 
 require('dayjs/locale/ru')
-dayjs.locale('ru')
+dayjs.locale('en')
 
 // импортируем плагины
 import customParseFormat from 'dayjs/plugin/customParseFormat'

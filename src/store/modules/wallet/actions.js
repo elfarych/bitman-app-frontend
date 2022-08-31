@@ -8,6 +8,7 @@ import tusdContract from 'components/wallet/contracts/tusd-contract'
 import server from 'src/config'
 import babyDogeContract from 'components/wallet/contracts/baby-doge-contract'
 import notifier from 'src/utils/notifier'
+import onboard from 'components/wallet/wallet-connect/onboard-connect'
 
 let myConnectedWallet
 
@@ -23,7 +24,7 @@ export async function setWallet ({ commit, dispatch, state }, connectedWallet) {
     chainId: null
   })
 
-  await dispatch('getBalance')
+  await dispatch('getBalance', connectedWallet)
   dispatch('getWalletFromDB', wallet?.accounts?.[0]?.address)
   dispatch('getDogsBalance')
 
@@ -52,12 +53,15 @@ export async function getWalletFromDB ({ commit, dispatch }, address) {
   }
 }
 
-export async function getBalance ({ state, commit }) {
+export async function getBalance ({ state, commit, dispatch }, wallet) {
   const web3 = new Web3('https://bsc-dataseed1.binance.org:443') || new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/41ad9ed3e14d4eb8817675f8d48fe96b'))
   const connectedWallet = await getMyConnectedWallet()
   web3.eth.setProvider(connectedWallet.provider)
 
   const chainId = await web3.eth.getChainId()
+  if (chainId !== 56) {
+    await onboard.setChain({ chainId: '0x38' }).then(() => dispatch('setWallet', wallet))
+  }
   commit('mutationChainId', chainId)
 
   web3.eth.getBalance(state.wallet.address).then(rawBalance => {

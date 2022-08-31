@@ -96,7 +96,7 @@
     </div>
 
     <div v-if="!wallet.address" class="text-subtitle1 text-bold q-pt-lg text-center">
-      Connect wallet and get airdrop.
+      {{ $t('connectWalletText') }}
     </div>
 
 <!--    Swap-->
@@ -277,15 +277,16 @@ export default {
   width: 30px
   height: 30px
 
-.q-field--outlined .q-field__control
-  border-radius: 13px !important
-  padding: 0 18px !important
-  height: 80px
-  background: $dark !important
+.swap-coins
+  .q-field--outlined .q-field__control
+    border-radius: 13px !important
+    padding: 0 18px !important
+    height: 80px
+    background: $dark !important
 
-.q-field--dark .q-field__control:before
-  border-color: rgba(255, 255, 255, 0.1)
+  .q-field--dark .q-field__control:before
+    border-color: rgba(255, 255, 255, 0.1)
 
-.q-dialog__inner > div
-  border-radius: 24px !important
+  .q-dialog__inner > div
+    border-radius: 24px !important
 </style>

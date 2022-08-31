@@ -1,7 +1,7 @@
 
 const routes = [
   {
-    path: '/',
+    path: '/trade',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', name: 'trade', component: () => import('pages/page-trade') }
@@ -9,7 +9,7 @@ const routes = [
   },
 
   {
-    path: '/home',
+    path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', name: 'home', component: () => import('pages/Index.vue') }
@@ -74,6 +74,18 @@ const routes = [
   },
 
   {
+    path: '/arbitration',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Arbitration',
+        component: () => import('pages/page-arbitration')
+      }
+    ]
+  },
+
+  {
     path: '/volatility',
     component: () => import('layouts/MainLayout.vue'),
     meta: {
@@ -128,6 +140,18 @@ const routes = [
         path: '',
         name: 'Profile',
         component: () => import('pages/trader/profile')
+      }
+    ]
+  },
+
+  {
+    path: '/events',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Events',
+        component: () => import('pages/page-events')
       }
     ]
   },

@@ -1,6 +1,7 @@
 <template>
   <div class="ticker-detail-trade-button column fit q-py-sm">
     <airdrop-widget />
+    <arbitration-widget class="q-mt-md"/>
     <!--    <div v-if="formattedContracts.length" class="">-->
     <!--      <div class="f-w-800 text-center">-->
     <!--        {{ formattedContracts.length > 1 ? 'Адреса контрактов:' : 'Адрес контракта:' }}-->
@@ -59,10 +60,11 @@ import { mapState } from 'vuex'
 import { copyToClipboard } from 'quasar'
 import notifier from 'src/utils/notifier'
 import AirdropWidget from 'components/swap/airdrop-widget'
+import ArbitrationWidget from 'components/arbitration/arbitration-widget'
 
 export default {
   name: 'ticker-detail-trade-button',
-  components: { AirdropWidget },
+  components: { ArbitrationWidget, AirdropWidget },
   computed: {
     ...mapState('tickerDetail', ['tickerFuturesInfo', 'tickerInfo']),
     contracts () {
