@@ -157,6 +157,18 @@ const routes = [
   },
 
   {
+    path: '/news',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'News',
+        component: () => import('pages/page-news')
+      }
+    ]
+  },
+
+  {
     path: '/online-trader',
     component: () => import('layouts/MainLayout.vue'),
     children: [

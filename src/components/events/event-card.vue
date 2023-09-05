@@ -25,7 +25,6 @@
           <q-btn
             label="Proof"
             icon="search"
-            size="sm"
             outline
             no-caps
             dense
@@ -37,8 +36,7 @@
 
           <q-btn
             label="Coin on Coinmarketcap"
-            icon-right="call_made"
-            size="sm"
+            icon-right="open_in_new"
             outline
             no-caps
             dense
@@ -68,7 +66,7 @@
         </div>
 
         <div style="max-height: 80vh">
-          <q-img :src="this.event.proof" style="max-height: 90vh" contain/>
+          <q-img :src="event.proof" style="max-height: 90vh" contain/>
         </div>
 
       </q-card>

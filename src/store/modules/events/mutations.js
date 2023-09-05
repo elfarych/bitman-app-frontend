@@ -4,7 +4,7 @@ export function mutationEvents (state, data) {
     const now = new Date()
     return eventTime.getTime() >= now.getTime()
   })
-  state.upcomingEvents = upcomingEvents.sort((a, b) => new Date(a.event_date).getTime() > new Date(b.event_date).getTime() ? 1 : -1)
+  state.upcomingEvents = upcomingEvents.sort((a, b) => new Date(a.event_date).getTime() >= new Date(b.event_date).getTime() ? 1 : -1)
 
   const endedEvents = data.filter(item => {
     const eventTime = new Date(item.event_date)

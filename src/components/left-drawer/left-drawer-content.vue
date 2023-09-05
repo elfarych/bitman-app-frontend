@@ -36,6 +36,16 @@
 
       <q-item
         clickable
+        :to="{ name: 'News' }"
+        class="items-center"
+        tag="a"
+      >
+        <q-icon name="newspaper" size="22px" class="q-mr-sm"/>
+        {{ $t('news') }}
+      </q-item>
+
+      <q-item
+        clickable
         :to="{ name: 'trade' }"
         class="items-center relative-position"
         :class="$route.name === 'trade' ? 'text-primary' : 'text-white'"

@@ -1,5 +1,6 @@
 export default {
-  newsServerURI: 'http://192.168.0.109:8000',
+  // newsServerURI: 'http://192.168.0.109:8000',
+  newsServerURI: 'https://newspy.bitman.trade',
   // arbitrationServerURI: 'http://192.168.0.109:5550',
   arbitrationServerURI: 'https://arbitr.bitman.trade',
   pythonServerURI: 'https://api-py.bitman.trade',

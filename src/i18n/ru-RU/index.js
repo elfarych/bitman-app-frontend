@@ -1,6 +1,3 @@
-// This is just an example,
-// so you can safely delete all default props below
-
 export default {
   failed: 'Action failed',
   success: 'Action was successful',
@@ -79,5 +76,9 @@ export default {
   connectWalletText: 'Подключи кошелек и получи аирдроп',
   reload: 'Обновить',
   events: 'События',
-  upcoming: 'Скоро'
+  upcoming: 'Скоро',
+  news: 'Новости',
+  source: 'Источник',
+  eventsText: 'Все события в криптовалюте',
+  newsText: 'Новости из мира криптовалют'
 }

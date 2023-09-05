@@ -19,6 +19,14 @@
     <widget-liquidity :key="`${$route.query.market}`"/>
   </div>
 
+  <div class="q-mt-lg">
+    <events-banner/>
+  </div>
+
+  <div class="q-mt-lg">
+    <news-banner/>
+  </div>
+
 </div>
 </template>
 
@@ -30,9 +38,20 @@ import WidgetLiquidity from 'components/binance-market/widgets/widget-liquidity'
 import Top100Wallets from 'components/binance-market/widgets/top-100-wallets/top-100-wallets'
 import AirdropWidget from 'components/swap/airdrop-widget'
 import ArbitrationWidget from 'components/arbitration/arbitration-widget'
+import EventsBanner from 'components/events/events-banner'
+import NewsBanner from 'components/news/news-banner'
 export default {
   name: 'binance-market-widgets-panel',
-  components: { ArbitrationWidget, AirdropWidget, Top100Wallets, WidgetLiquidity, WidgetLongShortPositions, WidgetWeekVixChart }
+  components: {
+    NewsBanner,
+    EventsBanner,
+    ArbitrationWidget,
+    AirdropWidget,
+    Top100Wallets,
+    WidgetLiquidity,
+    WidgetLongShortPositions,
+    WidgetWeekVixChart
+  }
 }
 </script>
 

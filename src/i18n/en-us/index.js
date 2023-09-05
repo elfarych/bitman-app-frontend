@@ -80,5 +80,9 @@ export default {
   connectWalletText: 'Connect wallet and get airdrop',
   reload: 'Reload',
   events: 'Events',
-  upcoming: 'Upcoming'
+  upcoming: 'Upcoming',
+  news: 'News',
+  source: 'Source',
+  eventsText: 'All events in crypto',
+  newsText: 'All crypto news'
 }

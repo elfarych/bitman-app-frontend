@@ -30,14 +30,13 @@
         <coin-categories/>
       </div>
 
-      <div class="q-mt-xl flex q-col-gutter-md" >
+      <div class="q-mt-xl flex q-col-gutter-md">
         <div style="width: 320px">
-          <airdrop-widget />
+          <airdrop-widget/>
         </div>
         <div style="width: 450px; max-width: 100%">
-          <arbitration-widget />
+          <arbitration-widget/>
         </div>
-
       </div>
 
       <!--      Top 25-->
@@ -45,7 +44,7 @@
         <top25/>
       </div>
 
-<!--      Vix && Buy-long && Top-100 holders-->
+      <!--      Vix && Buy-long && Top-100 holders-->
       <div v-if="secondBlockVisible" class="q-mt-xl q-pt-lg">
         <div class="row q-col-gutter-md">
           <div class="col-12 col-sm-6">
@@ -61,17 +60,21 @@
             </div>
           </div>
 
-<!--          Top 100 holders-->
+          <!--          Top 100 holders-->
           <div class="col-12 col-sm-6">
             <top100-wallets/>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="q-mt-xl q-pt-lg">
-        <news-widget v-if="newsBlockVisible"/>
+    <div v-if="secondBlockVisible" class="row q-col-gutter-md q-px-sm q-mt-xl">
+      <div class="col-12 col-sm-6">
+        <events-banner />
       </div>
-
+      <div class="col-12 col-sm-6">
+        <news-banner />
+      </div>
     </div>
 
     <!--    Liders-->
@@ -91,7 +94,7 @@
     </div>
 
     <div v-if="lidersBlockVisible" class="q-mt-xl q-px-sm">
-      <widget-liquidity />
+      <widget-liquidity/>
     </div>
 
     <div v-if="lidersBlockVisible" class="q-px-sm q-mt-xl">
@@ -123,18 +126,18 @@ import HomeSlider from 'components/sliders/home-slider'
 import WidgetsBigLidersTabs from 'components/binance-market/widgets/widgets-big-liders-tabs'
 import Top100Wallets from 'components/binance-market/widgets/top-100-wallets/top-100-wallets'
 import Top25 from 'components/binance-market/top-25/top-25'
-import NewsWidget from 'components/news/news-widget/news-widget'
 import AirdropWidget from 'components/swap/airdrop-widget'
 import ArbitrationWidget from 'components/arbitration/arbitration-widget'
-// import HomeSwapWrapper from 'components/swap/home-swap-wrapper'
+import EventsBanner from 'components/events/events-banner'
+import NewsBanner from 'components/news/news-banner'
 
 export default {
   name: 'PageIndex',
   components: {
+    NewsBanner,
+    EventsBanner,
     ArbitrationWidget,
     AirdropWidget,
-    // HomeSwapWrapper,
-    NewsWidget,
     Top25,
     Top100Wallets,
     WidgetsBigLidersTabs,

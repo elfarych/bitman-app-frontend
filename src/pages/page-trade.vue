@@ -53,6 +53,15 @@
       </div>
     </div>
 
+    <div v-if="secondBlockVisible" class="row q-col-gutter-md q-px-sm q-mt-xl">
+      <div class="col-12 col-sm-6">
+        <events-banner />
+      </div>
+      <div class="col-12 col-sm-6">
+        <news-banner />
+      </div>
+    </div>
+
     <div v-if="secondBlockVisible" style="margin-top: 150px">
       <div class="text-h6 text-uppercase f-w-800 text-center">Roadmap</div>
       <roadmap class="q-mt-lg"/>
@@ -73,6 +82,8 @@ import WidgetLongShortPositions
 from 'components/binance-market/widgets/widget-long-short-positions/widget-long-short-positions'
 import CoinsGlobalMarketCap from 'components/coins/coins-global-market-cap'
 import CoinsGlobalMarketVolume from 'components/coins/coins-global-market-volume'
+import EventsBanner from 'components/events/events-banner'
+import NewsBanner from 'components/news/news-banner'
 
 export default {
   name: 'page-trade',
@@ -82,6 +93,8 @@ export default {
     }
   },
   components: {
+    NewsBanner,
+    EventsBanner,
     CoinsGlobalMarketVolume,
     CoinsGlobalMarketCap,
     WidgetLongShortPositions,
